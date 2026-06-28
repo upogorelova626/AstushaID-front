@@ -8,18 +8,36 @@
     </header>
 
     <main class="login-form__content">
-        <form class="login-form__form">
+        <form class="login-form__form" [formGroup]="loginForm">
             <tui-textfield iconStart="@tui.mail">
-                <label class="login-form__field-label" tuiLabel> Email </label>
+                <label class="login-form__field-label" tuiLabel>
+                    Email или логин
+                </label>
 
-                <input tuiInput type="email" placeholder="Введите email" />
+                <input
+                    tuiInput
+                    type="text"
+                    placeholder="Введите email или логин"
+                    formControlName="loginOrEmail"
+                />
             </tui-textfield>
+            <tui-error
+                formControlName="loginOrEmail"
+                [order]="['required', 'maxlength']"
+            />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
                 <label class="login-form__field-label" tuiLabel> Пароль </label>
 
-                <input tuiInput type="password" placeholder="Введите пароль" />
+                <input
+                    tuiInput
+                    type="password"
+                    placeholder="Введите пароль"
+                    formControlName="password"
+                />
+                <tui-icon tuiPassword />
             </tui-textfield>
+            <tui-error formControlName="password" [order]="['required']" />
 
             <div class="login-form__options">
                 <label class="login-form__remember">
@@ -39,7 +57,13 @@
                 </a>
             </div>
 
-            <button tuiButton class="login-form__submit" type="submit" size="l">
+            <button
+                tuiButton
+                class="login-form__submit"
+                type="button"
+                size="l"
+                (click)="login()"
+            >
                 Войти
             </button>
         </form>

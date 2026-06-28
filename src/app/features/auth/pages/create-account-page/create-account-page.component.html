@@ -8,7 +8,7 @@
     </header>
 
     <main class="create-account-form__content">
-        <form class="create-account-form__form">
+        <form class="create-account-form__form" [formGroup]="createAccountForm">
             <tui-textfield iconStart="@tui.user">
                 <label class="create-account-form__field-label" tuiLabel>
                     Логин
@@ -19,8 +19,13 @@
                     type="text"
                     autocomplete="username"
                     placeholder="Введите логин"
+                    formControlName="login"
                 />
             </tui-textfield>
+            <tui-error
+                formControlName="login"
+                [order]="['required', 'minlength', 'maxlength']"
+            />
 
             <tui-textfield iconStart="@tui.mail">
                 <label class="create-account-form__field-label" tuiLabel>
@@ -32,8 +37,13 @@
                     type="email"
                     autocomplete="email"
                     placeholder="Введите email"
+                    formControlName="email"
                 />
             </tui-textfield>
+            <tui-error
+                formControlName="email"
+                [order]="['required', 'email', 'maxlength']"
+            />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
                 <label class="create-account-form__field-label" tuiLabel>
@@ -43,10 +53,16 @@
                 <input
                     tuiInput
                     type="password"
-                    autocomplete="new-password"
                     placeholder="Введите пароль"
+                    formControlName="password"
                 />
+
+                <tui-icon tuiPassword />
             </tui-textfield>
+            <tui-error
+                formControlName="password"
+                [order]="['required', 'minlength', 'maxlength']"
+            />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
                 <label class="create-account-form__field-label" tuiLabel>
@@ -56,13 +72,29 @@
                 <input
                     tuiInput
                     type="password"
-                    autocomplete="new-password"
                     placeholder="Повторите пароль"
+                    formControlName="confirmPassword"
                 />
+
+                <tui-icon tuiPassword />
             </tui-textfield>
+            <tui-error
+                formControlName="confirmPassword"
+                [order]="[
+                    'passwordMismatch',
+                    'required',
+                    'minlength',
+                    'maxlength'
+                ]"
+            />
 
             <label class="create-account-form__agreement">
-                <input tuiCheckbox type="checkbox" size="m" />
+                <input
+                    tuiCheckbox
+                    type="checkbox"
+                    size="m"
+                    formControlName="agreement"
+                />
 
                 <span class="create-account-form__agreement-text">
                     Я принимаю условия использования и политику
@@ -73,8 +105,9 @@
             <button
                 tuiButton
                 class="create-account-form__submit"
-                type="submit"
+                type="button"
                 size="l"
+                (click)="createAccount()"
             >
                 Создать аккаунт
             </button>

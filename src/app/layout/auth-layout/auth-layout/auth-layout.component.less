@@ -1,13 +1,6 @@
 :host {
     display: block;
     min-height: 100dvh;
-}
-
-.auth-layout {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    min-height: 100dvh;
-
     background:
         radial-gradient(
             circle at top left,
@@ -20,6 +13,12 @@
             transparent 55%
         ),
         #f7f5ff;
+}
+
+.auth-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    min-height: 100dvh;
 
     &__illustration {
         display: flex;
