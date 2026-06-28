@@ -44,7 +44,7 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'app',
+        path: 'account',
         loadComponent: () =>
             import('./layout/app-layout/app-layout/app-layout.component').then(
                 m => m.AppLayoutComponent
@@ -54,6 +54,13 @@ export const routes: Routes = [
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'profile'
+            },
+            {
+                path: 'profile',
+                loadComponent: () =>
+                    import('./features/profile/pages/profile-page/profile-page.component').then(
+                        m => m.ProfilePageComponent
+                    )
             }
         ]
     },

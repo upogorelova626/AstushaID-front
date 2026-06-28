@@ -79,7 +79,7 @@ export class LoginPageComponent {
             .login(loginPayload)
             .pipe(
                 tap(() => {
-                    void this.router.navigate(['/']);
+                    void this.router.navigate(['/account/profile']);
                 }),
                 catchError(() => {
                     this.loginError.set(true);

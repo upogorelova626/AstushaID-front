@@ -1,0 +1,89 @@
+<div class="sidebar">
+    <div class="sidebar__header">
+        <div class="sidebar__logo">
+            <div class="sidebar__logo-icon">
+                <tui-icon icon="@tui.shield" />
+            </div>
+
+            <span class="sidebar__logo-text">Astusha ID</span>
+        </div>
+    </div>
+
+    <nav class="sidebar__nav">
+        <a
+            tuiButton
+            class="sidebar__nav-item"
+            routerLink="/account/profile"
+            appearance="flat"
+            size="m"
+        >
+            <tui-icon class="sidebar__nav-icon" icon="@tui.user" />
+            <span class="sidebar__nav-text">Профиль</span>
+        </a>
+
+        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+            <tui-icon class="sidebar__nav-icon" icon="@tui.shield-check" />
+            <span class="sidebar__nav-text">Безопасность</span>
+        </a>
+
+        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+            <tui-icon class="sidebar__nav-icon" icon="@tui.monitor" />
+            <span class="sidebar__nav-text">Сессии</span>
+        </a>
+
+        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+            <tui-icon class="sidebar__nav-icon" icon="@tui.layout-grid" />
+            <span class="sidebar__nav-text">Приложения</span>
+        </a>
+
+        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+            <tui-icon class="sidebar__nav-icon" icon="@tui.bell" />
+            <span class="sidebar__nav-text">Уведомления</span>
+        </a>
+
+        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+            <tui-icon class="sidebar__nav-icon" icon="@tui.lock-keyhole" />
+            <span class="sidebar__nav-text">Конфиденциальность</span>
+        </a>
+    </nav>
+
+    <div class="sidebar__footer">
+        <button
+            tuiButton
+            class="sidebar__logout"
+            type="button"
+            appearance="flat"
+            size="m"
+        >
+            <tui-icon class="sidebar__logout-icon" icon="@tui.log-out" />
+            <span class="sidebar__logout-text">Выйти</span>
+        </button>
+
+        <div class="sidebar__help">
+            <div class="sidebar__help-header">
+                <div class="sidebar__help-icon">
+                    <tui-icon icon="@tui.circle-help" />
+                </div>
+
+                <span class="sidebar__help-title">Нужна помощь?</span>
+            </div>
+
+            <p class="sidebar__help-text"> Перейдите в наш центр помощи </p>
+
+            <button
+                tuiButton
+                class="sidebar__help-button"
+                type="button"
+                appearance="outline"
+                size="s"
+            >
+                Открыть помощь
+            </button>
+        </div>
+
+        <div class="sidebar__copyright">
+            <span class="sidebar__copyright-text">© 2024 Astusha ID</span>
+            <span class="sidebar__copyright-text">Все права защищены</span>
+        </div>
+    </div>
+</div>

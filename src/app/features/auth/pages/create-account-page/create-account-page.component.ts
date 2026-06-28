@@ -116,7 +116,7 @@ export class CreateAccountPageComponent {
             .createAccount(createAccountPayload)
             .pipe(
                 tap(() => {
-                    void this.router.navigate(['/']);
+                    void this.router.navigate(['/account/profile']);
                 }),
                 catchError(() => {
                     this.registerError.set(true);
