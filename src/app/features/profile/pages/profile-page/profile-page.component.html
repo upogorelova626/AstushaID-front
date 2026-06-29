@@ -1,1 +1,10 @@
-<p>profile-page works!</p>
+<div class="profile-page__wrapper">
+    <div class="profile-page__left-column">
+        <app-edit-profile [user]="me()" [isLoading]="isLoading()" />
+    </div>
+    <div class="profile-page__right-column">
+        <app-profile-connected-services />
+        <app-profile-quick-actions />
+        <app-profile-security-banner />
+    </div>
+</div>

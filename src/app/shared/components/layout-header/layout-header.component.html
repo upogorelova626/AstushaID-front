@@ -1,1 +1,37 @@
-<p>layout-header works!</p>
+<header class="app-header">
+    <div class="app-header__left">
+        <span class="app-header__eyebrow"> Единый аккаунт Astusha </span>
+
+        <h1 class="app-header__title"> Настройки аккаунта </h1>
+    </div>
+
+    <div class="app-header__right">
+        <button
+            tuiButton
+            class="app-header__notification"
+            type="button"
+            appearance="flat"
+            size="m"
+            iconStart="@tui.bell"
+            aria-label="Уведомления"
+        ></button>
+
+        <button
+            tuiButton
+            class="app-header__profile"
+            type="button"
+            appearance="flat"
+            size="m"
+        >
+            <div class="app-header__avatar"> AS </div>
+
+            <div class="app-header__user-info">
+                <span class="app-header__user-name"> Astusha </span>
+
+                <span class="app-header__user-login"> testuser </span>
+            </div>
+
+            <tui-icon class="app-header__chevron" icon="@tui.chevron-down" />
+        </button>
+    </div>
+</header>

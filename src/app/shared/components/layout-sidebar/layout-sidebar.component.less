@@ -8,7 +8,7 @@
 
 .sidebar {
     box-sizing: border-box;
-    width: calc(100% - 20px);
+    width: calc(100% - 10px);
     height: calc(100vh - 20px);
     min-width: 0;
     margin: 10px;
@@ -49,9 +49,7 @@
 .sidebar__logo-text {
     overflow: hidden;
     color: var(--color-text-primary);
-    font-size: 22px;
-    line-height: 28px;
-    font-weight: 700;
+    font: var(--tui-typography-heading-h5);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -87,9 +85,7 @@
 .sidebar__logout-text {
     overflow: hidden;
     color: currentColor;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 600;
+    font: var(--tui-typography-body-l);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -139,9 +135,7 @@
 .sidebar__help-title {
     overflow: hidden;
     color: var(--color-primary);
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 700;
+    font: var(--tui-typography-heading-h6);
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -149,8 +143,7 @@
 .sidebar__help-text {
     margin: 0;
     color: var(--color-text-secondary);
-    font-size: 13px;
-    line-height: 18px;
+    font: var(--tui-typography-body-s);
 }
 
 .sidebar__help-button {

@@ -1,0 +1,289 @@
+<div class="profile-overview">
+    <section class="profile-overview__card profile-overview__card_hero">
+        <div
+            class="profile-overview__avatar-wrapper"
+            [tuiSkeleton]="isLoading()"
+        >
+            @if (user()?.avatarUrl) {
+                <img
+                    class="profile-overview__avatar-img"
+                    [src]="user()?.avatarUrl"
+                    alt="Аватар пользователя"
+                />
+            } @else {
+                <div class="profile-overview__avatar">
+                    {{ user()?.login?.slice(0, 2)?.toUpperCase() || 'ID' }}
+                </div>
+            }
+        </div>
+
+        <div class="profile-overview__hero-info">
+            <h2 class="profile-overview__name" [tuiSkeleton]="isLoading()">
+                {{
+                    user()?.firstName || user()?.lastName
+                        ? (user()?.firstName || '') +
+                          ' ' +
+                          (user()?.lastName || '')
+                        : user()?.login
+                }}
+            </h2>
+
+            <div class="profile-overview__meta-row">
+                <span
+                    class="profile-overview__login"
+                    [tuiSkeleton]="isLoading()"
+                >
+                    {{ user()?.login }}
+                </span>
+
+                <span class="profile-overview__dot"></span>
+
+                <span
+                    class="profile-overview__email"
+                    [tuiSkeleton]="isLoading()"
+                >
+                    {{ user()?.email }}
+                </span>
+            </div>
+
+            <div class="profile-overview__date" [tuiSkeleton]="isLoading()">
+                <tui-icon
+                    class="profile-overview__date-icon"
+                    icon="@tui.calendar"
+                />
+
+                <span class="profile-overview__date-text">
+                    Дата регистрации:
+                    {{ user()?.createdAt | date: 'd MMMM y, HH:mm' }}
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <section class="profile-overview__card">
+        <header class="profile-overview__header">
+            <div class="profile-overview__header-text">
+                <h2 class="profile-overview__title"> Основная информация </h2>
+
+                <p class="profile-overview__description">
+                    Данные аккаунта Astusha ID и публичная информация профиля
+                </p>
+            </div>
+        </header>
+
+        <div class="profile-overview__info-list">
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.user"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        Логин
+                    </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{ user()?.login }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.mail"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        Email
+                    </span>
+                </div>
+
+                <div
+                    class="profile-overview__info-value-wrapper"
+                    [tuiSkeleton]="isLoading()"
+                >
+                    <span class="profile-overview__info-value">
+                        {{ user()?.email }}
+                    </span>
+
+                    @if (user()?.emailVerifiedAt) {
+                        <span class="profile-overview__badge">
+                            Подтверждён
+                        </span>
+                    } @else {
+                        <span
+                            class="profile-overview__badge profile-overview__badge_muted"
+                        >
+                            Не подтверждён
+                        </span>
+                    }
+                </div>
+            </div>
+
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.user-round"
+                    />
+
+                    <span class="profile-overview__info-label-text"> Имя </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{ user()?.firstName || 'Не указано' }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.user-round"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        Фамилия
+                    </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{ user()?.lastName || 'Не указана' }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.briefcase"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        Должность
+                    </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{ user()?.position || 'Не указана' }}
+                    </span>
+                </div>
+            </div>
+
+            <div
+                class="profile-overview__info-row profile-overview__info-row_large"
+            >
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.message-circle"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        О себе
+                    </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value profile-overview__info-value_multiline"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{
+                            user()?.about ||
+                                'Пользователь пока ничего не рассказал о себе'
+                        }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.palette"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        Тема интерфейса
+                    </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{ user()?.theme === 'LIGHT' ? 'Светлая' : 'Тёмная' }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.calendar"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        Дата регистрации
+                    </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{ user()?.createdAt | date: 'd MMMM y, HH:mm' }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="profile-overview__info-row">
+                <div class="profile-overview__info-label">
+                    <tui-icon
+                        class="profile-overview__info-icon"
+                        icon="@tui.clock"
+                    />
+
+                    <span class="profile-overview__info-label-text">
+                        Последнее обновление
+                    </span>
+                </div>
+
+                <div class="profile-overview__info-value-wrapper">
+                    <span
+                        class="profile-overview__info-value"
+                        [tuiSkeleton]="isLoading()"
+                    >
+                        {{ user()?.updatedAt | date: 'd MMMM y, HH:mm' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

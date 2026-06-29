@@ -1,0 +1,41 @@
+:host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+.profile-page {
+    &__wrapper {
+        width: 100%;
+        min-width: 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 10px;
+        margin-right: 10px;
+    }
+
+    &__left-column,
+    &__right-column {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+app-edit-profile,
+app-profile-security-banner,
+app-profile-connected-services,
+app-profile-quick-actions {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 1024px) {
+    .profile-page {
+        &__wrapper {
+            grid-template-columns: 1fr;
+        }
+    }
+}

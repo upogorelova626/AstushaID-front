@@ -1,0 +1,119 @@
+<div class="profile-quick-actions">
+    <header class="profile-quick-actions__header">
+        <h2 class="profile-quick-actions__title">Быстрые действия</h2>
+    </header>
+
+    <div class="profile-quick-actions__items">
+        <button
+            tuiButton
+            class="profile-quick-actions__item"
+            routerLink="/account/security"
+            appearance="flat"
+        >
+            <div class="profile-quick-actions__icon-wrapper">
+                <tui-icon
+                    class="profile-quick-actions__icon"
+                    icon="@tui.key-round"
+                />
+            </div>
+
+            <div class="profile-quick-actions__content">
+                <p class="profile-quick-actions__item-title">
+                    Изменить пароль
+                </p>
+
+                <p class="profile-quick-actions__item-description">
+                    Обновите пароль для защиты вашего аккаунта
+                </p>
+            </div>
+
+            <tui-icon
+                class="profile-quick-actions__chevron"
+                icon="@tui.chevron-right"
+            />
+        </button>
+
+        <button
+            tuiButton
+            class="profile-quick-actions__item"
+            routerLink="/account/security"
+            appearance="flat"
+        >
+            <div class="profile-quick-actions__icon-wrapper">
+                <tui-icon
+                    class="profile-quick-actions__icon"
+                    icon="@tui.shield-check"
+                />
+            </div>
+
+            <div class="profile-quick-actions__content">
+                <p class="profile-quick-actions__item-title"> Безопасность </p>
+
+                <p class="profile-quick-actions__item-description">
+                    Настройте двухфакторную аутентификацию и другие параметры
+                </p>
+            </div>
+
+            <tui-icon
+                class="profile-quick-actions__chevron"
+                icon="@tui.chevron-right"
+            />
+        </button>
+
+        <button
+            tuiButton
+            class="profile-quick-actions__item"
+            routerLink="/account/sessions"
+            appearance="flat"
+        >
+            <div class="profile-quick-actions__icon-wrapper">
+                <tui-icon
+                    class="profile-quick-actions__icon"
+                    icon="@tui.monitor"
+                />
+            </div>
+
+            <div class="profile-quick-actions__content">
+                <p class="profile-quick-actions__item-title"> Сессии </p>
+
+                <p class="profile-quick-actions__item-description">
+                    Управляйте активными сессиями на устройствах
+                </p>
+            </div>
+
+            <tui-icon
+                class="profile-quick-actions__chevron"
+                icon="@tui.chevron-right"
+            />
+        </button>
+
+        <button
+            tuiButton
+            class="profile-quick-actions__item profile-quick-actions__item_danger"
+            type="button"
+            appearance="flat"
+        >
+            <div class="profile-quick-actions__icon-wrapper">
+                <tui-icon
+                    class="profile-quick-actions__icon"
+                    icon="@tui.trash-2"
+                />
+            </div>
+
+            <div class="profile-quick-actions__content">
+                <p class="profile-quick-actions__item-title">
+                    Удалить аккаунт
+                </p>
+
+                <p class="profile-quick-actions__item-description">
+                    Удалите свой аккаунт и все данные
+                </p>
+            </div>
+
+            <tui-icon
+                class="profile-quick-actions__chevron"
+                icon="@tui.chevron-right"
+            />
+        </button>
+    </div>
+</div>
