@@ -17,10 +17,6 @@
 
     &__header {
         margin-bottom: 18px;
-    }
-
-    &__title {
-        margin: 0;
         color: var(--color-text-primary);
         font: var(--tui-typography-heading-h5);
     }
@@ -42,17 +38,11 @@
         align-items: flex-start;
         gap: 12px;
         border: 1px solid var(--color-card-border);
-        border-radius: 12px;
+        border-radius: 5px;
         color: var(--color-text-primary);
         text-align: left;
         text-decoration: none;
         background: var(--color-card-bg-soft);
-        cursor: pointer;
-    }
-
-    &__item:hover {
-        border-color: var(--color-card-border-hover);
-        background: var(--color-card-bg);
     }
 
     &__icon {
@@ -94,8 +84,7 @@
         margin: 0;
         overflow: hidden;
         color: var(--color-text-primary);
-        font: var(--tui-typography-body-m);
-        font-weight: 700;
+        font: var(--tui-typography-heading-h6);
         text-overflow: ellipsis;
         white-space: nowrap;
     }
@@ -103,7 +92,7 @@
     &__description {
         margin: 0;
         color: var(--color-text-secondary);
-        font: var(--tui-typography-body-xs);
+        font: var(--tui-typography-body-s);
     }
 
     &__status {
@@ -111,13 +100,8 @@
         flex-shrink: 0;
         border-radius: 999px;
         color: var(--color-success);
-        font: var(--tui-typography-body-xs);
+        font: var(--tui-typography-body-s);
         background: var(--color-success-bg-soft);
-    }
-
-    &__status_soon {
-        color: var(--color-warning);
-        background: var(--color-warning-bg-soft);
     }
 
     &__bottom {
@@ -138,7 +122,7 @@
     &__meta-label {
         overflow: hidden;
         color: var(--color-text-muted);
-        font: var(--tui-typography-body-xs);
+        font: var(--tui-typography-body-s);
         text-overflow: ellipsis;
         white-space: nowrap;
     }
@@ -147,15 +131,6 @@
         overflow: hidden;
         color: var(--color-text-primary);
         font: var(--tui-typography-body-s);
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    &__chevron {
-        width: 20px;
-        height: 20px;
-        flex-shrink: 0;
-        color: var(--color-text-muted);
     }
 }
 
