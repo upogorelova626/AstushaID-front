@@ -4,7 +4,7 @@ import {
     AuthResponse,
     CreateAccountPayload,
     LoginPayload
-} from '../interfaces/auth.interfaces';
+} from '../../../shared/interfaces/interfaces/auth.interfaces';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,7 @@ import {Observable} from 'rxjs';
 export class AuthService {
     private readonly http = inject(HttpClient);
 
-    private readonly baseApiUrl = 'http://localhost:3000/auth';
+    private readonly baseApiUrl = 'http://localhost:3002/auth';
 
     createAccount(payload: CreateAccountPayload): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(

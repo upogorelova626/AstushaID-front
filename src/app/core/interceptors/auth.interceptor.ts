@@ -1,6 +1,6 @@
 import {HttpInterceptorFn} from '@angular/common/http';
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3002';
 
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
     const isApiRequest = request.url.startsWith(API_URL);

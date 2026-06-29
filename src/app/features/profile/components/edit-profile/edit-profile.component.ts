@@ -8,7 +8,7 @@ import {
     TuiTextfield
 } from '@taiga-ui/core';
 import {TuiSkeleton} from '@taiga-ui/kit';
-import {AstushaUser} from '../../../auth/interfaces/user.interface';
+import {AstushaUser} from '../../../../shared/interfaces/interfaces/user.interface';
 import {DatePipe} from '@angular/common';
 
 @Component({
