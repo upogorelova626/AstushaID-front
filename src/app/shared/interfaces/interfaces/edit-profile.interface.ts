@@ -5,7 +5,8 @@ export interface EditProfilePayload {
     lastName?: string;
     position?: string;
     about?: string;
-    avatarUrl?: string;
-    avatarKey?: string;
-    theme?: UserTheme;
+}
+
+export interface EditAppearancePayload {
+    theme: UserTheme;
 }

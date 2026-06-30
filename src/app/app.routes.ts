@@ -1,5 +1,4 @@
 import {Routes} from '@angular/router';
-import {ApplicationPageComponent} from './features/applications/pages/application-page/application-page.component';
 
 export const routes: Routes = [
     {
@@ -68,6 +67,13 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./features/applications/pages/application-page/application-page.component').then(
                         m => m.ApplicationPageComponent
+                    )
+            },
+            {
+                path: 'settings',
+                loadComponent: () =>
+                    import('./features/settings/pages/settings-page/settings-page.component').then(
+                        m => m.SettingsPageComponent
                     )
             }
         ]

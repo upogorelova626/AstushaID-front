@@ -1,0 +1,133 @@
+:host {
+    display: block;
+}
+
+.profile-settings-card {
+    padding: 28px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 5px;
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+
+    &__header-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        background: var(--color-primary-soft);
+        color: var(--astusha-color-primary);
+    }
+
+    &__header-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__title {
+        margin: 0;
+        color: var(--astusha-color-text-primary);
+        font: var(--tui-typography-heading-h5);
+    }
+
+    &__description {
+        max-width: 580px;
+        margin: 8px 0 0;
+        color: var(--astusha-color-text-secondary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__edit-button {
+        flex-shrink: 0;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 32px;
+    }
+
+    &__avatar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    &__avatar-preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 132px;
+        height: 132px;
+        border-radius: 50%;
+        background: var(--color-primary-soft);
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-width: 0;
+    }
+
+    &__row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--color-card-border);
+    }
+}
+
+@media (max-width: 900px) {
+    .profile-settings-card {
+        &__content {
+            grid-template-columns: 1fr;
+        }
+
+        &__avatar {
+            align-items: flex-start;
+        }
+    }
+}
+
+@media (max-width: 640px) {
+    .profile-settings-card {
+        padding: 24px;
+
+        &__header {
+            flex-direction: column;
+        }
+
+        &__edit-button {
+            width: 100%;
+        }
+
+        &__row {
+            grid-template-columns: 1fr;
+        }
+
+        &__footer {
+            flex-direction: column-reverse;
+        }
+
+        &__footer button {
+            width: 100%;
+        }
+    }
+}

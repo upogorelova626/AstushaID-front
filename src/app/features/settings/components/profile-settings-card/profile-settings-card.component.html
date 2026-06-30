@@ -1,0 +1,135 @@
+<section class="profile-settings-card">
+    <header class="profile-settings-card__header">
+        <div class="profile-settings-card__header-icon">
+            <tui-icon icon="@tui.user" />
+        </div>
+
+        <div class="profile-settings-card__header-content">
+            <h2 class="profile-settings-card__title">Профиль</h2>
+
+            <p class="profile-settings-card__description">
+                Эти данные будут отображаться в вашем профиле и других сервисах
+                Astusha.
+            </p>
+        </div>
+
+        <button
+            tuiButton
+            type="button"
+            iconStart="@tui.pencil"
+            appearance="flat"
+            class="profile-settings-card__edit-button"
+            [disabled]="isLoading() || isEditing()"
+            (click)="startEditing()"
+        >
+            Редактировать
+        </button>
+    </header>
+
+    <main class="profile-settings-card__content">
+        <div class="profile-settings-card__avatar" [tuiSkeleton]="isLoading()">
+            <tui-icon
+                icon="@tui.user"
+                class="profile-settings-card__avatar-preview"
+            />
+
+            <button
+                tuiButton
+                type="button"
+                appearance="flat"
+                iconStart="@tui.upload"
+                [disabled]="!isEditing()"
+            >
+                Изменить фото
+            </button>
+        </div>
+
+        <form class="profile-settings-card__form" [formGroup]="form">
+            <div class="profile-settings-card__row">
+                <tui-textfield>
+                    <label tuiLabel>Имя</label>
+
+                    <input
+                        tuiInput
+                        placeholder="Введите имя"
+                        formControlName="firstName"
+                        [tuiSkeleton]="isLoading()"
+                        [readOnly]="!isEditing()"
+                    />
+                </tui-textfield>
+
+                <tui-textfield>
+                    <label tuiLabel>Фамилия</label>
+
+                    <input
+                        tuiInput
+                        placeholder="Введите фамилию"
+                        formControlName="lastName"
+                        [tuiSkeleton]="isLoading()"
+                        [readOnly]="!isEditing()"
+                    />
+                </tui-textfield>
+            </div>
+
+            <div class="profile-settings-card__row">
+                <tui-textfield>
+                    <label tuiLabel>Email</label>
+
+                    <input
+                        tuiInput
+                        placeholder="example@mail.com"
+                        [tuiSkeleton]="isLoading()"
+                        [value]="currentUser()?.email"
+                        disabled
+                    />
+                </tui-textfield>
+
+                <tui-textfield>
+                    <label tuiLabel>Должность</label>
+
+                    <input
+                        tuiInput
+                        placeholder="Введите должность"
+                        formControlName="position"
+                        [tuiSkeleton]="isLoading()"
+                        [readOnly]="!isEditing()"
+                    />
+                </tui-textfield>
+            </div>
+
+            <tui-textfield>
+                <label tuiLabel>О себе</label>
+
+                <input
+                    tuiInput
+                    placeholder="Расскажите немного о себе"
+                    formControlName="about"
+                    [tuiSkeleton]="isLoading()"
+                    [readOnly]="!isEditing()"
+                />
+            </tui-textfield>
+        </form>
+    </main>
+
+    <footer class="profile-settings-card__footer">
+        <button
+            tuiButton
+            type="button"
+            iconStart="@tui.check"
+            [disabled]="!isEditing() || isSaving() || form.invalid"
+            (click)="saveEdits()"
+        >
+            Сохранить изменения
+        </button>
+
+        <button
+            tuiButton
+            type="button"
+            appearance="flat"
+            [disabled]="!isEditing() || isSaving()"
+            (click)="cancelEditing()"
+        >
+            Отменить
+        </button>
+    </footer>
+</section>
