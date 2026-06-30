@@ -13,7 +13,7 @@
         <a
             tuiButton
             class="sidebar__nav-item"
-            routerLink="/account/profile"
+            [routerLink]="['/account/profile']"
             appearance="flat"
             size="m"
         >
@@ -24,7 +24,7 @@
         <a
             tuiButton
             class="sidebar__nav-item"
-            routerLink="/account/profile"
+            [routerLink]="['/account/settings']"
             appearance="flat"
             size="m"
         >
@@ -37,7 +37,13 @@
             <span class="sidebar__nav-text">Безопасность</span>
         </a>
 
-        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+        <a
+            tuiButton
+            class="sidebar__nav-item"
+            appearance="flat"
+            size="m"
+            [routerLink]="['/account/applications']"
+        >
             <tui-icon class="sidebar__nav-icon" icon="@tui.layout-grid" />
             <span class="sidebar__nav-text">Приложения</span>
         </a>

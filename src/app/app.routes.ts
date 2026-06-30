@@ -1,4 +1,5 @@
 import {Routes} from '@angular/router';
+import {ApplicationPageComponent} from './features/applications/pages/application-page/application-page.component';
 
 export const routes: Routes = [
     {
@@ -61,9 +62,17 @@ export const routes: Routes = [
                     import('./features/profile/pages/profile-page/profile-page.component').then(
                         m => m.ProfilePageComponent
                     )
+            },
+            {
+                path: 'applications',
+                loadComponent: () =>
+                    import('./features/applications/pages/application-page/application-page.component').then(
+                        m => m.ApplicationPageComponent
+                    )
             }
         ]
     },
+
     {
         path: '**',
         redirectTo: 'auth/login'
