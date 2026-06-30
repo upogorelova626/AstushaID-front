@@ -23,27 +23,27 @@ function removeControlError(control: AbstractControl | null, errorKey: string) {
     control.setErrors(Object.keys(errors).length ? errors : null);
 }
 
-export function passwordMatchValidator(
-    passwordControlName = 'password',
-    confirmPasswordControlName = 'confirmPassword'
+export function samePasswordValidator(
+    currentPasswordControlName = 'currentPassword',
+    newPasswordControlName = 'newPassword'
 ): ValidatorFn {
     return (control: AbstractControl) => {
-        const passwordControl = control.get(passwordControlName);
-        const confirmPasswordControl = control.get(confirmPasswordControlName);
+        const currentPasswordControl = control.get(currentPasswordControlName);
+        const newPasswordControl = control.get(newPasswordControlName);
 
-        const password = passwordControl?.value;
-        const confirmPassword = confirmPasswordControl?.value;
+        const currentPassword = currentPasswordControl?.value;
+        const newPassword = newPasswordControl?.value;
 
-        if (!password || !confirmPassword) {
-            removeControlError(confirmPasswordControl, 'passwordMismatch');
+        if (!currentPassword || !newPassword) {
+            removeControlError(newPasswordControl, 'samePassword');
 
             return null;
         }
 
-        if (password !== confirmPassword) {
-            addControlError(confirmPasswordControl, 'passwordMismatch');
+        if (currentPassword === newPassword) {
+            addControlError(newPasswordControl, 'samePassword');
         } else {
-            removeControlError(confirmPasswordControl, 'passwordMismatch');
+            removeControlError(newPasswordControl, 'samePassword');
         }
 
         return null;
