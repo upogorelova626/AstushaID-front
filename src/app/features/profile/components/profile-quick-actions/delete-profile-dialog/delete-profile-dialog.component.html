@@ -1,0 +1,62 @@
+<div class="delete-account-dialog">
+    <header class="delete-account-dialog__header">
+        <div class="delete-account-dialog__icon-wrapper">
+            <tui-icon
+                class="delete-account-dialog__icon"
+                icon="@tui.triangle-alert"
+            />
+        </div>
+
+        <div class="delete-account-dialog__header-content">
+            <h2 class="delete-account-dialog__title"> Удаление аккаунта </h2>
+
+            <p class="delete-account-dialog__description">
+                Введите пароль, чтобы подтвердить удаление аккаунта. Это
+                действие нельзя будет отменить.
+            </p>
+        </div>
+    </header>
+
+    <div class="delete-account-dialog__content">
+        <tui-textfield iconStart="@tui.lock-keyhole">
+            <label tuiLabel class="delete-account-dialog__field-label">
+                Пароль
+            </label>
+
+            <input
+                tuiInput
+                type="password"
+                autocomplete="current-password"
+                placeholder="Введите пароль"
+                [formControl]="password"
+            />
+
+            <tui-icon tuiPassword />
+        </tui-textfield>
+        <tui-error [formControl]="password" [order]="['required']" />
+    </div>
+
+    <footer class="delete-account-dialog__actions">
+        <button
+            tuiButton
+            type="button"
+            appearance="flat"
+            size="m"
+            (click)="this.context.$implicit.complete()"
+        >
+            Отмена
+        </button>
+
+        <button
+            tuiButton
+            type="button"
+            appearance="accent"
+            size="m"
+            [disabled]="isDeleting()"
+            [loading]="isDeleting()"
+            (click)="deleteAccount()"
+        >
+            Удалить аккаунт
+        </button>
+    </footer>
+</div>

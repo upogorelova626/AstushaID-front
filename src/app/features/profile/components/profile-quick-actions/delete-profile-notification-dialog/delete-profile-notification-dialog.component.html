@@ -1,0 +1,43 @@
+<div class="delete-account-warning">
+    <div class="delete-account-warning__icon-wrapper">
+        <tui-icon
+            class="delete-account-warning__icon"
+            icon="@tui.triangle-alert"
+        />
+    </div>
+
+    <div class="delete-account-warning__content">
+        <h2 class="delete-account-warning__title"> Удалить аккаунт? </h2>
+
+        <p class="delete-account-warning__description">
+            Это действие нельзя будет отменить. Аккаунт, данные профиля и
+            активные сессии будут удалены.
+        </p>
+
+        <p class="delete-account-warning__hint">
+            Для подтверждения на следующем шаге нужно будет ввести пароль.
+        </p>
+    </div>
+
+    <div class="delete-account-warning__actions">
+        <button
+            tuiButton
+            type="button"
+            appearance="flat"
+            size="m"
+            (click)="context.$implicit.complete()"
+        >
+            Нет, оставить
+        </button>
+
+        <button
+            tuiButton
+            type="button"
+            appearance="accent"
+            size="m"
+            (click)="openDeleteProfileDialog()"
+        >
+            Да, удалить
+        </button>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+:host {
+    display: block;
+}
+
+.delete-account-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    &__icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 48px;
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+    }
+
+    &__icon {
+        color: #d92d20;
+        font-size: 24px;
+    }
+
+    &__header-content {
+        min-width: 0;
+    }
+
+    &__title {
+        margin: 0;
+        color: var(--color-danger);
+        font: var(--tui-typography-heading-h5);
+    }
+
+    &__description {
+        margin: 8px 0 0;
+        color: var(--astusha-color-text-secondary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__field-label {
+        font: var(--tui-typography-body-m);
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+}

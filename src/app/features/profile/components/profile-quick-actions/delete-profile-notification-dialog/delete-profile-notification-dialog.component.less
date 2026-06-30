@@ -1,0 +1,49 @@
+:host {
+    display: block;
+}
+
+.delete-account-warning {
+    &__icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        margin-bottom: 20px;
+        border-radius: 18px;
+        background: rgba(255, 76, 76, 0.12);
+    }
+
+    &__icon {
+        color: #d92d20;
+        font-size: 28px;
+    }
+
+    &__content {
+        margin-bottom: 28px;
+    }
+
+    &__title {
+        margin: 0;
+        color: var(--color-danger);
+        font: var(--tui-typography-heading-h5);
+    }
+
+    &__description {
+        margin: 12px 0 0;
+        color: var(--astusha-color-text-secondary);
+        font: var(--tui-typography-body-l);
+    }
+
+    &__hint {
+        margin: 12px 0 0;
+        color: var(--astusha-color-text-muted);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+}
