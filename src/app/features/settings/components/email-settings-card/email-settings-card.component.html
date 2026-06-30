@@ -1,1 +1,48 @@
-<p>email-settings-card works!</p>
+<div class="email-settings-card">
+    <header class="email-settings-card__header">
+        <div class="email-settings-card__icon-wrapper">
+            <tui-icon icon="@tui.mail" />
+        </div>
+
+        <div class="email-settings-card__header-content">
+            <h2 class="email-settings-card__title">Email</h2>
+
+            <p class="email-settings-card__description">
+                Ваш email используется для входа в аккаунт и получения
+                уведомлений.
+            </p>
+        </div>
+    </header>
+
+    <div class="email-settings-card__content">
+        <tui-textfield>
+            <label tuiLabel>Email</label>
+
+            <input
+                tuiInput
+                disabled
+                [value]="currentUser()?.email"
+                [tuiSkeleton]="isLoading()"
+                placeholder="example@mail.com"
+            />
+        </tui-textfield>
+
+        <div class="email-settings-card__notice">
+            <tui-icon
+                class="email-settings-card__notice-icon"
+                icon="@tui.circle-alert"
+            />
+
+            <div class="email-settings-card__notice-content">
+                <div class="email-settings-card__notice-title">
+                    Изменение email пока недоступно
+                </div>
+
+                <div class="email-settings-card__notice-text">
+                    Позже здесь появится подтверждение email и смена адреса
+                    через письмо.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,50 @@
-<p>appearance-settings-card works!</p>
+<div class="appearance-settings-card">
+    <header class="appearance-settings-card__header">
+        <div class="appearance-settings-card__icon-wrapper">
+            <tui-icon icon="@tui.monitor" />
+        </div>
+
+        <div class="appearance-settings-card__header-content">
+            <h2 class="appearance-settings-card__title">Внешний вид</h2>
+
+            <p class="appearance-settings-card__description">
+                Выберите тему для оформления интерфейса.
+            </p>
+        </div>
+    </header>
+
+    <div class="appearance-settings-card__buttons">
+        <button
+            tuiButton
+            type="button"
+            iconStart="@tui.sun"
+            appearance="outline"
+            size="l"
+            class="appearance-settings-card__button"
+        >
+            Светлая
+        </button>
+
+        <button
+            tuiButton
+            type="button"
+            iconStart="@tui.moon"
+            appearance="outline"
+            size="l"
+            class="appearance-settings-card__button"
+        >
+            Тёмная
+        </button>
+
+        <button
+            tuiButton
+            type="button"
+            iconStart="@tui.monitor"
+            appearance="outline"
+            size="l"
+            class="appearance-settings-card__button"
+        >
+            Системная
+        </button>
+    </div>
+</div>
