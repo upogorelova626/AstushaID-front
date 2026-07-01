@@ -5,7 +5,10 @@
     />
 
     <div class="settings-page__bottom">
-        <app-appearance-settings-card />
+        <app-appearance-settings-card
+            [currentUser]="currentUser()"
+            [isLoading]="isLoading()"
+        />
         <app-email-settings-card
             [currentUser]="currentUser()"
             [isLoading]="isLoading()"

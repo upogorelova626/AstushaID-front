@@ -8,7 +8,11 @@
     </header>
 
     <main class="login-form__content">
-        <form class="login-form__form" [formGroup]="loginForm">
+        <form
+            class="login-form__form"
+            [formGroup]="loginForm"
+            (ngSubmit)="login()"
+        >
             <tui-textfield iconStart="@tui.mail">
                 <label class="login-form__field-label" tuiLabel>
                     Email или логин
@@ -57,13 +61,7 @@
                 </a>
             </div>
 
-            <button
-                tuiButton
-                class="login-form__submit"
-                type="button"
-                size="l"
-                (click)="login()"
-            >
+            <button tuiButton class="login-form__submit" type="submit" size="l">
                 Войти
             </button>
         </form>

@@ -3,3 +3,4 @@ export * from './interfaces/change-password.interface';
 export * from './interfaces/delete-profile.interface';
 export * from './interfaces/edit-profile.interface';
 export * from './interfaces/user.interface';
+export * from './interfaces/change-theme.interface';

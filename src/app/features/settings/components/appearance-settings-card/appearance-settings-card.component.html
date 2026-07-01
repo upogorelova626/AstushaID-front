@@ -14,37 +14,24 @@
     </header>
 
     <div class="appearance-settings-card__buttons">
-        <button
-            tuiButton
-            type="button"
-            iconStart="@tui.sun"
-            appearance="outline"
-            size="l"
-            class="appearance-settings-card__button"
-        >
-            Светлая
-        </button>
-
-        <button
-            tuiButton
-            type="button"
-            iconStart="@tui.moon"
-            appearance="outline"
-            size="l"
-            class="appearance-settings-card__button"
-        >
-            Тёмная
-        </button>
-
-        <button
-            tuiButton
-            type="button"
-            iconStart="@tui.monitor"
-            appearance="outline"
-            size="l"
-            class="appearance-settings-card__button"
-        >
-            Системная
-        </button>
+        <div class="appearance-settings-card__buttons">
+            @for (theme of themes; track theme.theme) {
+                <button
+                    tuiButton
+                    type="button"
+                    [iconStart]="theme.icon"
+                    appearance="outline"
+                    size="l"
+                    class="appearance-settings-card__button"
+                    [class.appearance-settings-card__button_active]="
+                        selectedTheme() === theme.theme
+                    "
+                    [disabled]="isLoading() || !!changingTheme()"
+                    (click)="changeTheme(theme.theme)"
+                >
+                    {{ theme.label }}
+                </button>
+            }
+        </div>
     </div>
 </div>

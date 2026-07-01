@@ -13,7 +13,7 @@ import {
     TuiCheckbox,
     TuiNotificationService
 } from '@taiga-ui/core';
-import {Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {
     ReactiveFormsModule,
@@ -23,6 +23,7 @@ import {
 } from '@angular/forms';
 import {catchError, EMPTY, tap} from 'rxjs';
 import {TuiError} from '@taiga-ui/core';
+import {TuiPassword} from '@taiga-ui/kit';
 
 @Component({
     selector: 'app-login-page',
@@ -34,6 +35,7 @@ import {TuiError} from '@taiga-ui/core';
         TuiError,
         TuiIcon,
         TuiCheckbox,
+        TuiPassword,
         RouterLink,
         ReactiveFormsModule
     ],
@@ -44,6 +46,7 @@ import {TuiError} from '@taiga-ui/core';
 export class LoginPageComponent {
     private readonly authService = inject(AuthService);
     private readonly router = inject(Router);
+    private readonly route = inject(ActivatedRoute);
     private readonly alerts = inject(TuiNotificationService);
 
     protected readonly loginError = signal(false);
@@ -79,6 +82,13 @@ export class LoginPageComponent {
             .login(loginPayload)
             .pipe(
                 tap(() => {
+                    const returnUrl =
+                        this.route.snapshot.queryParamMap.get('returnUrl');
+
+                    if (returnUrl) {
+                        window.location.href = returnUrl;
+                    }
+
                     void this.router.navigate(['/account/profile']);
                 }),
                 catchError(() => {

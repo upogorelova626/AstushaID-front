@@ -8,7 +8,11 @@
     </header>
 
     <main class="create-account-form__content">
-        <form class="create-account-form__form" [formGroup]="createAccountForm">
+        <form
+            class="create-account-form__form"
+            [formGroup]="createAccountForm"
+            (submit)="createAccount()"
+        >
             <tui-textfield iconStart="@tui.user">
                 <label class="create-account-form__field-label" tuiLabel>
                     Логин
@@ -105,9 +109,8 @@
             <button
                 tuiButton
                 class="create-account-form__submit"
-                type="button"
+                type="submit"
                 size="l"
-                (click)="createAccount()"
             >
                 Создать аккаунт
             </button>

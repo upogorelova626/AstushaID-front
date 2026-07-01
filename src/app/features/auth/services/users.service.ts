@@ -4,7 +4,8 @@ import {
     EditProfilePayload,
     AstushaUser,
     ChangePasswordPayload,
-    DeleteAccountPayload
+    DeleteAccountPayload,
+    ChangeThemePayload
 } from '../../../shared/interfaces';
 import {Observable} from 'rxjs';
 
@@ -30,5 +31,12 @@ export class UsersService {
 
     deleteAccount(payload: DeleteAccountPayload): Observable<void> {
         return this.http.delete<void>(`${this.baseApiUrl}/me`, {body: payload});
+    }
+
+    changeTheme(payload: ChangeThemePayload): Observable<AstushaUser> {
+        return this.http.patch<AstushaUser>(
+            `${this.baseApiUrl}/me/theme`,
+            payload
+        );
     }
 }

@@ -1,4 +1,8 @@
-export type UserTheme = 'LIGHT' | 'DARK' | 'SYSTEM';
+export enum UserTheme {
+    Light = 'LIGHT',
+    Dark = 'DARK',
+    System = 'SYSTEM'
+}
 
 export interface AstushaUser {
     id: string;
