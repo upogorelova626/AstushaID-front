@@ -78,6 +78,13 @@ export const routes: Routes = [
                     import('./features/settings/pages/settings-page/settings-page.component').then(
                         m => m.SettingsPageComponent
                     )
+            },
+            {
+                path: 'security',
+                loadComponent: () =>
+                    import('./features/security-settings/pages/security-settings-page/security-settings-page.component').then(
+                        m => m.SecuritySettingsPageComponent
+                    )
             }
         ]
     },

@@ -32,7 +32,13 @@
             <span class="sidebar__nav-text">Настройки</span>
         </a>
 
-        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+        <a
+            tuiButton
+            class="sidebar__nav-item"
+            appearance="flat"
+            size="m"
+            [routerLink]="['/account/security']"
+        >
             <tui-icon class="sidebar__nav-icon" icon="@tui.shield-check" />
             <span class="sidebar__nav-text">Безопасность</span>
         </a>
