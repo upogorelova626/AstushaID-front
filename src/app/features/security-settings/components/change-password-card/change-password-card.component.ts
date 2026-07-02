@@ -1,4 +1,9 @@
-import {Component, inject, signal} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    inject,
+    signal
+} from '@angular/core';
 import {
     FormControl,
     FormGroup,
@@ -21,6 +26,7 @@ import {samePasswordValidator} from '../../../../core/validators/same-password.v
 import {AuthService} from '../../../auth/services/auth.service';
 import {UsersService} from '../../../auth/services/users.service';
 import {Router} from '@angular/router';
+import {TuiAvatar} from '@taiga-ui/kit';
 
 @Component({
     selector: 'app-change-password-card',
@@ -32,10 +38,12 @@ import {Router} from '@angular/router';
         TuiPassword,
         TuiIcon,
         TuiError,
+        TuiAvatar,
         ReactiveFormsModule
     ],
     templateUrl: './change-password-card.component.html',
-    styleUrl: './change-password-card.component.less'
+    styleUrl: './change-password-card.component.less',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordCardComponent {
     private readonly usersService = inject(UsersService);

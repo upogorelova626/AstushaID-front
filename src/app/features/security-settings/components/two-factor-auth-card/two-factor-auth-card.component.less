@@ -1,0 +1,156 @@
+:host {
+    display: block;
+}
+
+.two-factor-auth-card {
+    height: auto;
+    padding: 24px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 5px;
+    background: var(--color-card-background);
+
+    &__header {
+        display: flex;
+        gap: 16px;
+        min-width: 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    &__title {
+        margin: 0;
+        color: var(--color-text-primary);
+        font: var(--tui-typography-heading-h5);
+    }
+
+    &__description {
+        max-width: 320px;
+        margin: 6px 0 0;
+        color: var(--color-text-secondary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__content {
+        margin-top: 20px;
+    }
+
+    &__status {
+        display: grid;
+        grid-template-columns: 40px minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        border: 1px solid var(--color-card-border);
+        border-radius: 5px;
+        background: var(--color-card-bg-soft);
+    }
+
+    &__status-info {
+        min-width: 0;
+    }
+
+    &__status-title {
+        color: var(--color-success);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__status-description {
+        margin-top: 2px;
+        overflow: hidden;
+        color: var(--color-text-secondary);
+        font: var(--tui-typography-body-s);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__method {
+        margin-top: 18px;
+    }
+
+    &__method-title {
+        margin: 0 0 10px;
+        color: var(--color-text-primary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__method-item {
+        display: grid;
+        grid-template-columns: 36px minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        min-height: 58px;
+        padding: 12px 14px;
+        border: 1px solid var(--color-card-border);
+        border-radius: 5px;
+        background: var(--color-card-background);
+    }
+
+    &__method-icon {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        color: var(--color-text-secondary);
+    }
+
+    &__method-info {
+        min-width: 0;
+    }
+
+    &__method-name {
+        color: var(--color-text-primary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__method-description {
+        margin-top: 2px;
+        color: var(--color-text-secondary);
+        font: var(--tui-typography-body-s);
+    }
+
+    &__method-button {
+        min-width: 96px;
+    }
+
+    &__backup-button {
+        width: 100%;
+        margin-top: 12px;
+    }
+}
+
+@media (max-width: 760px) {
+    .two-factor-auth-card {
+        padding: 20px;
+
+        &__description {
+            max-width: none;
+        }
+
+        &__status {
+            grid-template-columns: 40px minmax(0, 1fr);
+        }
+
+        &__status input[tuiSwitch] {
+            grid-column: 2;
+            justify-self: flex-start;
+        }
+
+        &__status-description {
+            white-space: normal;
+        }
+
+        &__method-item {
+            grid-template-columns: 36px minmax(0, 1fr);
+        }
+
+        &__method-button {
+            grid-column: 2;
+            justify-self: flex-start;
+            margin-top: 4px;
+        }
+    }
+}

@@ -1,0 +1,78 @@
+<div class="active-sessions-card">
+    <header class="active-sessions-card__header">
+        <div
+            tuiAvatar="@tui.monitor-smartphone"
+            size="l"
+            appearance="positive"
+        ></div>
+
+        <div class="active-sessions-card__info">
+            <h2 class="active-sessions-card__title">Активные сессии</h2>
+
+            <p class="active-sessions-card__description">
+                Управляйте устройствами, на которых вы вошли в аккаунт.
+            </p>
+        </div>
+    </header>
+
+    <main class="active-sessions-card__content">
+        <div class="active-sessions-card__list">
+            @for (session of sessions; track session.id) {
+                <div class="active-sessions-card__session">
+                    <div
+                        class="active-sessions-card__session-icon"
+                        [tuiAvatar]="session.icon"
+                        size="m"
+                    ></div>
+
+                    <div class="active-sessions-card__session-info">
+                        <div class="active-sessions-card__session-title">
+                            {{ session.title }}
+
+                            @if (session.isCurrent) {
+                                <span class="active-sessions-card__badge">
+                                    Текущая сессия
+                                </span>
+                            }
+                        </div>
+
+                        <div class="active-sessions-card__session-meta">
+                            {{ session.meta }}
+                        </div>
+                    </div>
+
+                    @if (session.isCurrent) {
+                        <button
+                            tuiButton
+                            type="button"
+                            size="xs"
+                            appearance="flat"
+                            iconStart="@tui.chevron-right"
+                        ></button>
+                    } @else {
+                        <button
+                            tuiButton
+                            type="button"
+                            size="s"
+                            appearance="outline-destructive"
+                            (click)="terminateSession(session)"
+                        >
+                            Завершить
+                        </button>
+                    }
+                </div>
+            }
+        </div>
+
+        <button
+            class="active-sessions-card__terminate-all"
+            tuiButton
+            type="button"
+            size="s"
+            appearance="outline"
+            (click)="terminateOtherSessions()"
+        >
+            Завершить все другие сессии
+        </button>
+    </main>
+</div>

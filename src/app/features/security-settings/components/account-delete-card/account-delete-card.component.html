@@ -1,0 +1,39 @@
+<div class="account-delete-card">
+    <header class="account-delete-card__header">
+        <div tuiAvatar="@tui.trash-2" size="l" appearance="negative"></div>
+
+        <div class="account-delete-card__info">
+            <div class="account-delete-card__title-row">
+                <h2 class="account-delete-card__title">Удаление аккаунта</h2>
+
+                <span class="account-delete-card__badge">Опасная зона</span>
+            </div>
+
+            <p class="account-delete-card__description">
+                Удаление аккаунта необратимо. Все ваши данные, проекты, задачи и
+                настройки будут удалены навсегда.
+            </p>
+        </div>
+    </header>
+
+    <main class="account-delete-card__content">
+        <div class="account-delete-card__danger-list">
+            <ul tuiList>
+                <li>Все проекты, задачи и файлы</li>
+                <li>Интеграции и подключения</li>
+                <li>Справочники</li>
+                <li>Все сообщения в AstushaMessage</li>
+            </ul>
+        </div>
+    </main>
+
+    <button
+        tuiButton
+        type="button"
+        appearance="accent"
+        iconStart="@tui.trash-2"
+        class="account-delete-card__button"
+    >
+        Удалить аккаунт
+    </button>
+</div>

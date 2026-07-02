@@ -1,0 +1,111 @@
+:host {
+    display: block;
+}
+
+.recrent-activity-card {
+    padding: 24px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 5px;
+    background: var(--color-card-background);
+
+    &__header {
+        display: flex;
+        gap: 16px;
+        min-width: 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    &__title {
+        margin: 0;
+        color: var(--color-text-primary);
+        font: var(--tui-typography-heading-h5);
+    }
+
+    &__description {
+        max-width: 280px;
+        margin: 6px 0 0;
+        color: var(--color-text-secondary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__content {
+        margin-top: 20px;
+        overflow-x: auto;
+        border: 1px solid var(--color-card-border);
+        border-radius: 8px;
+        background: var(--color-card-background);
+    }
+
+    table {
+        width: 100%;
+        min-width: 720px;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background: var(--color-page-background);
+    }
+
+    th[tuiTh] {
+        padding: 12px 16px;
+        color: var(--color-text-secondary);
+        font: var(--tui-typography-body-s);
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    td[tuiTd] {
+        padding: 14px 16px;
+        color: var(--color-text-primary);
+        font: var(--tui-typography-body-m);
+        vertical-align: middle;
+        border-top: 1px solid var(--color-card-border);
+    }
+
+    tbody tr {
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: var(--color-page-background);
+        }
+    }
+
+    td[tuiTd]:first-child,
+    td[tuiTd]:last-child {
+        white-space: nowrap;
+    }
+
+    td[tuiTd]:nth-child(3) {
+        color: var(--color-primary);
+        font: var(--tui-typography-body-m);
+    }
+
+    td[tuiTd]:nth-child(4),
+    td[tuiTd]:nth-child(5) {
+        color: var(--color-text-secondary);
+    }
+}
+
+@media (max-width: 760px) {
+    .recrent-activity-card {
+        padding: 20px;
+
+        &__description {
+            max-width: none;
+        }
+
+        &__content {
+            margin-top: 16px;
+        }
+
+        th[tuiTh],
+        td[tuiTd] {
+            padding: 12px;
+        }
+    }
+}

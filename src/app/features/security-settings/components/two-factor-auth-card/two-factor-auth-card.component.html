@@ -1,0 +1,86 @@
+<div class="two-factor-auth-card">
+    <header class="two-factor-auth-card__header">
+        <div tuiAvatar="@tui.shield-check" size="l" appearance="warning"></div>
+
+        <div class="two-factor-auth-card__info">
+            <h2 class="two-factor-auth-card__title">
+                Двухфакторная аутентификация
+            </h2>
+
+            <p class="two-factor-auth-card__description">
+                Добавьте дополнительный уровень защиты для вашего аккаунта.
+            </p>
+        </div>
+    </header>
+
+    <main class="two-factor-auth-card__content">
+        <section class="two-factor-auth-card__status">
+            <div
+                tuiAvatar="@tui.lock-keyhole"
+                size="m"
+                appearance="positive"
+            ></div>
+
+            <div class="two-factor-auth-card__status-info">
+                <div class="two-factor-auth-card__status-title">
+                    2FA включена
+                </div>
+
+                <div class="two-factor-auth-card__status-description">
+                    Ваш аккаунт защищён дополнительным уровнем безопасности.
+                </div>
+            </div>
+
+            <input
+                tuiSwitch
+                type="checkbox"
+                [checked]="isTwoFactorEnabled()"
+                (change)="toggleTwoFactor()"
+            />
+        </section>
+
+        <section class="two-factor-auth-card__method">
+            <h3 class="two-factor-auth-card__method-title">
+                Метод аутентификации
+            </h3>
+
+            <div class="two-factor-auth-card__method-item">
+                <div class="two-factor-auth-card__method-icon">
+                    <tui-icon icon="@tui.smartphone" />
+                </div>
+
+                <div class="two-factor-auth-card__method-info">
+                    <div class="two-factor-auth-card__method-name">
+                        Приложение-аутентификатор
+                    </div>
+
+                    <div class="two-factor-auth-card__method-description">
+                        Google Authenticator
+                    </div>
+                </div>
+
+                <button
+                    tuiButton
+                    type="button"
+                    size="s"
+                    appearance="outline"
+                    class="two-factor-auth-card__method-button"
+                    (click)="setupAuthenticatorApp()"
+                >
+                    Настроить
+                </button>
+            </div>
+        </section>
+
+        <button
+            tuiButton
+            type="button"
+            size="s"
+            appearance="outline"
+            class="two-factor-auth-card__backup-button"
+            (click)="showBackupCodes()"
+        >
+            Показать резервные коды
+        </button>
+    </main>
+</div>

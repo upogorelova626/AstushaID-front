@@ -1,5 +1,13 @@
-<div>
+<div class="security-settings-page">
     <app-change-password-card />
-    <div></div>
-    <div></div>
+
+    <div class="security-settings-page__row security-settings-page__row_second">
+        <app-active-sessions-card />
+        <app-two-factor-auth-card />
+    </div>
+
+    <div class="security-settings-page__row security-settings-page__row_third">
+        <app-recent-activity-card />
+        <app-account-delete-card />
+    </div>
 </div>
