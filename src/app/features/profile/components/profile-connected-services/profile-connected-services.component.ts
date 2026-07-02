@@ -9,4 +9,12 @@ import {TuiButton} from '@taiga-ui/core';
     styleUrl: './profile-connected-services.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfileConnectedServicesComponent {}
+export class ProfileConnectedServicesComponent {
+    protected goToAstushaApp() {
+        window.location.href = 'http://localhost:4200/dashboard';
+    }
+
+    protected goToAstushaBook() {}
+
+    protected goToAstushaChat() {}
+}

@@ -65,8 +65,11 @@
                     appearance="flat"
                     iconStart="@tui.chevron-right"
                     class="astusha-applications-card__action"
-                    [disabled]="application.status === 'soon'"
-                    [attr.aria-label]="'Открыть ' + application.name"
+                    [disabled]="application.disabled"
+                    [attr.aria-label]="
+                        application.actionLabel + ' ' + application.name
+                    "
+                    (click)="openApplication(application)"
                 ></button>
             </article>
         }

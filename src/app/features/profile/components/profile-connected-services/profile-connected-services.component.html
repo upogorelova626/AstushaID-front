@@ -41,6 +41,7 @@
                         tuiButton
                         appearance="flat"
                         iconStart="@tui.chevron-right"
+                        (click)="goToAstushaApp()"
                     ></button>
                 </div>
             </div>
@@ -83,6 +84,7 @@
                         tuiButton
                         appearance="flat"
                         iconStart="@tui.chevron-right"
+                        (click)="goToAstushaBook()"
                     ></button>
                 </div>
             </div>
@@ -90,14 +92,14 @@
 
         <div class="profile-connected-services__item">
             <div class="profile-connected-services__icon">
-                <tui-icon icon="@tui.message-circle" />
+                <tui-icon icon="@tui.message-square-heart" />
             </div>
 
             <div class="profile-connected-services__content">
                 <div class="profile-connected-services__top">
                     <div class="profile-connected-services__main">
                         <p class="profile-connected-services__name">
-                            AstushaChat
+                            AstushaMessage
                         </p>
 
                         <p class="profile-connected-services__description">
@@ -127,6 +129,7 @@
                         tuiButton
                         appearance="flat"
                         iconStart="@tui.chevron-right"
+                        (click)="goToAstushaChat()"
                     ></button>
                 </div>
             </div>
