@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {TuiError, TuiIcon, TuiInput, TuiTextfield} from '@taiga-ui/core';
 import {TuiAvatar, TuiSkeleton} from '@taiga-ui/kit';
-import {AstushaUser} from '../../../../shared/interfaces/interfaces/user.interface';
+import {AstushaUser} from '../../../../shared/interfaces/user.interface';
 import {DatePipe} from '@angular/common';
 
 @Component({

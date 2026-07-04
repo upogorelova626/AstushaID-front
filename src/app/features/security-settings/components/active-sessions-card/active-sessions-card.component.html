@@ -17,7 +17,7 @@
 
     <main class="active-sessions-card__content">
         <div class="active-sessions-card__list">
-            @for (session of sessions; track session.id) {
+            @for (session of sessions(); track session.id) {
                 <div class="active-sessions-card__session">
                     <div
                         class="active-sessions-card__session-icon"
@@ -27,7 +27,7 @@
 
                     <div class="active-sessions-card__session-info">
                         <div class="active-sessions-card__session-title">
-                            {{ session.title }}
+                            {{ session.device }}
 
                             @if (session.isCurrent) {
                                 <span class="active-sessions-card__badge">
@@ -37,42 +37,58 @@
                         </div>
 
                         <div class="active-sessions-card__session-meta">
-                            {{ session.meta }}
+                            {{ session.location }}
+
+                            @if (session.ipAddress) {
+                                · {{ session.ipAddress }}
+                            }
+
+                            @if (session.lastActive) {
+                                ·
+                                {{
+                                    session.lastActive | date: 'd MMM y, HH:mm'
+                                }}
+                            }
                         </div>
                     </div>
 
-                    @if (session.isCurrent) {
-                        <button
-                            tuiButton
-                            type="button"
-                            size="xs"
-                            appearance="flat"
-                            iconStart="@tui.chevron-right"
-                        ></button>
-                    } @else {
+                    @if (!session.isCurrent) {
                         <button
                             tuiButton
                             type="button"
                             size="s"
                             appearance="outline-destructive"
-                            (click)="terminateSession(session)"
+                            [disabled]="
+                                terminatingSessionId() === session.id ||
+                                isTerminatingOtherSessions()
+                            "
+                            (click)="terminateSession(session.id)"
                         >
                             Завершить
                         </button>
                     }
                 </div>
             }
+
+            @if (!isLoading() && !sessions().length) {
+                <div class="active-sessions-card__empty">
+                    Активных сессий пока нет.
+                </div>
+            }
         </div>
 
-        <button
-            class="active-sessions-card__terminate-all"
-            tuiButton
-            type="button"
-            size="s"
-            appearance="outline"
-            (click)="terminateOtherSessions()"
-        >
-            Завершить все другие сессии
-        </button>
+        @if (hasOtherSessions()) {
+            <button
+                class="active-sessions-card__terminate-all"
+                tuiButton
+                type="button"
+                size="s"
+                appearance="outline"
+                [disabled]="isTerminatingOtherSessions()"
+                (click)="terminateOtherSessions()"
+            >
+                Завершить все другие сессии
+            </button>
+        }
     </main>
 </div>

@@ -4,7 +4,7 @@ import {
     AuthResponse,
     CreateAccountPayload,
     LoginPayload
-} from '../../../shared/interfaces/interfaces/auth.interfaces';
+} from '../../../shared/interfaces';
 import {Observable} from 'rxjs';
 
 @Injectable({

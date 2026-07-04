@@ -25,7 +25,7 @@
 
             <tbody tuiTbody>
                 @for (action of previewActions(); track action.id) {
-                    <tr>
+                    <tr [tuiSkeleton]="isLoading()">
                         <td tuiTd>{{
                             action.time | date: 'd MMM y, HH:mm'
                         }}</td>

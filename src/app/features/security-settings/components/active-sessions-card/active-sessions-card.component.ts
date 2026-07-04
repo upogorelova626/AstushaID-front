@@ -1,48 +1,80 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    inject,
+    OnInit,
+    signal
+} from '@angular/core';
 import {TuiButton} from '@taiga-ui/core';
 import {TuiAvatar} from '@taiga-ui/kit';
-
-interface ActiveSession {
-    id: string;
-    icon: string;
-    title: string;
-    meta: string;
-    isCurrent: boolean;
-}
+import {catchError, EMPTY, finalize} from 'rxjs';
+import {UserSession} from '../../../../shared/interfaces';
+import {UserSessionsService} from '../../../../shared/services/user-sessions.service';
 
 @Component({
     selector: 'app-active-sessions-card',
-    imports: [TuiAvatar, TuiButton],
+    imports: [TuiAvatar, TuiButton, DatePipe],
     templateUrl: './active-sessions-card.component.html',
     styleUrl: './active-sessions-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ActiveSessionsCardComponent {
-    protected readonly sessions: ActiveSession[] = [
-        {
-            id: 'current',
-            icon: '@tui.monitor',
-            title: 'Windows · Chrome',
-            meta: 'Москва, Россия · 12 июн. 2025, 10:42',
-            isCurrent: true
-        },
-        {
-            id: 'iphone',
-            icon: '@tui.smartphone',
-            title: 'iPhone · Safari',
-            meta: 'Санкт-Петербург, Россия · 10 июн. 2025, 18:21',
-            isCurrent: false
-        },
-        {
-            id: 'macos',
-            icon: '@tui.laptop',
-            title: 'macOS · Safari',
-            meta: 'Казань, Россия · 8 июн. 2025, 22:15',
-            isCurrent: false
-        }
-    ];
+export class ActiveSessionsCardComponent implements OnInit {
+    private readonly userSessionsService = inject(UserSessionsService);
 
-    protected terminateSession(session: ActiveSession) {}
+    protected readonly sessions = signal<UserSession[]>([]);
+    protected readonly isLoading = signal(false);
+    protected readonly terminatingSessionId = signal<string | null>(null);
+    protected readonly isTerminatingOtherSessions = signal(false);
 
-    protected terminateOtherSessions() {}
+    protected readonly hasOtherSessions = computed(() =>
+        this.sessions().some(session => !session.isCurrent)
+    );
+
+    ngOnInit() {
+        this.isLoading.set(true);
+
+        this.userSessionsService
+            .getMySessions()
+            .pipe(
+                catchError(() => EMPTY),
+                finalize(() => this.isLoading.set(false))
+            )
+            .subscribe(sessions => {
+                this.sessions.set(sessions);
+            });
+    }
+
+    protected terminateSession(sessionId: string) {
+        this.terminatingSessionId.set(sessionId);
+
+        this.userSessionsService
+            .terminateSession(sessionId)
+            .pipe(
+                catchError(() => EMPTY),
+                finalize(() => this.terminatingSessionId.set(null))
+            )
+            .subscribe(() => {
+                this.sessions.update(sessions =>
+                    sessions.filter(session => session.id !== sessionId)
+                );
+            });
+    }
+
+    protected terminateOtherSessions() {
+        this.isTerminatingOtherSessions.set(true);
+
+        this.userSessionsService
+            .terminateOtherSessions()
+            .pipe(
+                catchError(() => EMPTY),
+                finalize(() => this.isTerminatingOtherSessions.set(false))
+            )
+            .subscribe(() => {
+                this.sessions.update(sessions =>
+                    sessions.filter(session => session.isCurrent)
+                );
+            });
+    }
 }

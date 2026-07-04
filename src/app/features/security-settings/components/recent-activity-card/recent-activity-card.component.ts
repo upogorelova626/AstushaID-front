@@ -8,18 +8,18 @@ import {
     signal
 } from '@angular/core';
 import {TuiButton, TuiDialogService} from '@taiga-ui/core';
-import {TuiAvatar} from '@taiga-ui/kit';
+import {TuiAvatar, TuiSkeleton} from '@taiga-ui/kit';
 import {TuiTable} from '@taiga-ui/addon-table';
 import {UserActivityService} from '../../../../shared/services/user-activity.service';
 import {UserActivity} from '../../../../shared/interfaces';
-import {finalize} from 'rxjs';
+import {catchError, EMPTY, finalize} from 'rxjs';
 import {DatePipe} from '@angular/common';
 import {PolymorpheusComponent} from '@taiga-ui/polymorpheus';
 import {AllActivitiesComponent} from './all-activities/all-activities.component';
 
 @Component({
     selector: 'app-recent-activity-card',
-    imports: [TuiAvatar, TuiButton, TuiTable, DatePipe],
+    imports: [TuiAvatar, TuiButton, TuiTable, DatePipe, TuiSkeleton],
     templateUrl: './recent-activity-card.component.html',
     styleUrl: './recent-activity-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -36,7 +36,10 @@ export class RecentActivityCardComponent implements OnInit {
         this.isLoading.set(true);
         this.userActivityService
             .getUserActivity()
-            .pipe(finalize(() => this.isLoading.set(false)))
+            .pipe(
+                catchError(() => EMPTY),
+                finalize(() => this.isLoading.set(false))
+            )
             .subscribe(activities => this.userActivities.set(activities));
     }
 

@@ -10,7 +10,7 @@ import {ProfileSecurityBannerComponent} from '../../components/profile-security-
 import {ProfileConnectedServicesComponent} from '../../components/profile-connected-services/profile-connected-services.component';
 import {ProfileQuickActionsComponent} from '../../components/profile-quick-actions/profile-quick-actions.component';
 import {UsersService} from '../../../auth/services/users.service';
-import {AstushaUser} from '../../../../shared/interfaces/interfaces/user.interface';
+import {AstushaUser} from '../../../../shared/interfaces/user.interface';
 import {finalize} from 'rxjs';
 
 @Component({
