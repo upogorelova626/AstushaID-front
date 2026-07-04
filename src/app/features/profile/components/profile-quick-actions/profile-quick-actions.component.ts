@@ -74,4 +74,8 @@ export class ProfileQuickActionsComponent {
             )
             .subscribe();
     }
+
+    protected goToSecurityPage() {
+        this.router.navigate(['/account/security']);
+    }
 }

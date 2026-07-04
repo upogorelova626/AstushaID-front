@@ -1,0 +1,23 @@
+<table tuiTable>
+    <thead>
+        <tr>
+            <th tuiTh>Время</th>
+            <th tuiTh>Устройство</th>
+            <th tuiTh>Действие</th>
+            <th tuiTh>Местоположение</th>
+            <th tuiTh>IP-адрес</th>
+        </tr>
+    </thead>
+
+    <tbody tuiTbody>
+        @for (action of actions; track action.id) {
+            <tr>
+                <td tuiTd>{{ action.time | date: 'd MMM y, HH:mm' }}</td>
+                <td tuiTd>{{ action.device }}</td>
+                <td tuiTd>{{ action.actionLabel }}</td>
+                <td tuiTd>{{ action.location }}</td>
+                <td tuiTd>{{ action.ipAddress }}</td>
+            </tr>
+        }
+    </tbody>
+</table>

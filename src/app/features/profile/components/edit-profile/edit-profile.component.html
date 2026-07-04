@@ -11,8 +11,7 @@
                     alt="Аватар пользователя"
                 />
             } @else {
-                <div class="profile-overview__avatar">
-                    {{ user()?.login?.slice(0, 2)?.toUpperCase() || 'ID' }}
+                <div class="profile-overview__avatar" tuiAvatar="@tui.user">
                 </div>
             }
         </div>
