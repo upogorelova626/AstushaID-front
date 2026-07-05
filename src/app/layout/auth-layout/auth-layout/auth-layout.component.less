@@ -1,6 +1,8 @@
 :host {
     display: block;
+    width: 100%;
     min-height: 100dvh;
+    overflow-x: hidden;
     background:
         radial-gradient(
             circle at top left,
@@ -17,19 +19,22 @@
 
 .auth-layout {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    width: 100%;
     min-height: 100dvh;
+    overflow-x: hidden;
 
     &__illustration {
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 0;
         padding: 40px;
-
         background: transparent;
     }
 
     &__image {
+        display: block;
         width: 100%;
         max-width: 620px;
         height: auto;
@@ -42,6 +47,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 0;
         padding: 48px;
         background: transparent;
     }
@@ -49,7 +55,7 @@
 
 @media (max-width: 900px) {
     .auth-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
 
         &__illustration {
             display: none;

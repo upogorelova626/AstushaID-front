@@ -10,14 +10,6 @@ import {UserTheme} from './shared/interfaces';
     templateUrl: './app.component.html',
     styleUrl: './app.component.less'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     title = 'astusha-id';
-
-    private readonly usersService = inject(UsersService);
-
-    protected readonly userTheme = signal<UserTheme | null>(null);
-
-    ngOnInit(): void {
-        this.usersService.getMe().subscribe(me => this.userTheme.set(me.theme));
-    }
 }

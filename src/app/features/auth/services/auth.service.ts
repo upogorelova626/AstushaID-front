@@ -3,7 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {
     AuthResponse,
     CreateAccountPayload,
-    LoginPayload
+    ForgotPasswordPayload,
+    LoginPayload,
+    ResetPasswordPayload
 } from '../../../shared/interfaces';
 import {Observable} from 'rxjs';
 
@@ -35,5 +37,19 @@ export class AuthService {
 
     logout(): Observable<AuthResponse> {
         return this.http.post<AuthResponse>(`${this.baseApiUrl}/logout`, null);
+    }
+
+    resetPasswordRequest(payload: ForgotPasswordPayload): Observable<void> {
+        return this.http.post<void>(
+            `${this.baseApiUrl}/password-reset/request`,
+            payload
+        );
+    }
+
+    confirmPasswordReset(payload: ResetPasswordPayload): Observable<void> {
+        return this.http.post<void>(
+            `${this.baseApiUrl}/password-reset/confirm`,
+            payload
+        );
     }
 }
