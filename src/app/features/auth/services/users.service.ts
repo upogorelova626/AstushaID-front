@@ -7,7 +7,7 @@ import {
     DeleteAccountPayload,
     ChangeThemePayload
 } from '../../../shared/interfaces';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable, tap} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -17,12 +17,33 @@ export class UsersService {
 
     private readonly baseApiUrl = 'http://localhost:3002/users';
 
+    private readonly currentUserSubject =
+        new BehaviorSubject<AstushaUser | null>(null);
+
+    readonly currentUser = this.currentUserSubject.asObservable();
+
     getMe(): Observable<AstushaUser> {
         return this.http.get<AstushaUser>(`${this.baseApiUrl}/me`);
     }
 
+    loadCurrentUser(): Observable<AstushaUser> {
+        return this.getMe().pipe(
+            tap(user => this.currentUserSubject.next(user))
+        );
+    }
+
+    setCurrentUser(user: AstushaUser) {
+        this.currentUserSubject.next(user);
+    }
+
+    clearCurrentUser() {
+        this.currentUserSubject.next(null);
+    }
+
     editProfile(payload: EditProfilePayload): Observable<AstushaUser> {
-        return this.http.patch<AstushaUser>(`${this.baseApiUrl}/me`, payload);
+        return this.http
+            .patch<AstushaUser>(`${this.baseApiUrl}/me`, payload)
+            .pipe(tap(user => this.currentUserSubject.next(user)));
     }
 
     editPassword(payload: ChangePasswordPayload): Observable<void> {
@@ -34,10 +55,9 @@ export class UsersService {
     }
 
     changeTheme(payload: ChangeThemePayload): Observable<AstushaUser> {
-        return this.http.patch<AstushaUser>(
-            `${this.baseApiUrl}/me/theme`,
-            payload
-        );
+        return this.http
+            .patch<AstushaUser>(`${this.baseApiUrl}/me/theme`, payload)
+            .pipe(tap(user => this.currentUserSubject.next(user)));
     }
 
     uploadAvatar(file: File): Observable<AstushaUser> {
@@ -45,13 +65,14 @@ export class UsersService {
 
         formData.append('avatar', file);
 
-        return this.http.patch<AstushaUser>(
-            `${this.baseApiUrl}/me/avatar`,
-            formData
-        );
+        return this.http
+            .patch<AstushaUser>(`${this.baseApiUrl}/me/avatar`, formData)
+            .pipe(tap(user => this.currentUserSubject.next(user)));
     }
 
     deleteAvatar(): Observable<AstushaUser> {
-        return this.http.delete<AstushaUser>(`${this.baseApiUrl}/me/avatar`);
+        return this.http
+            .delete<AstushaUser>(`${this.baseApiUrl}/me/avatar`)
+            .pipe(tap(user => this.currentUserSubject.next(user)));
     }
 }

@@ -7,13 +7,15 @@ import {
     LoginPayload,
     ResetPasswordPayload
 } from '../../../shared/interfaces';
-import {Observable} from 'rxjs';
+import {finalize, map, Observable, switchMap} from 'rxjs';
+import {UsersService} from './users.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     private readonly http = inject(HttpClient);
+    private readonly usersService = inject(UsersService);
 
     private readonly baseApiUrl = 'http://localhost:3002/auth';
 
@@ -25,10 +27,15 @@ export class AuthService {
     }
 
     login(payload: LoginPayload): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(
-            `${this.baseApiUrl}/login`,
-            payload
-        );
+        return this.http
+            .post<AuthResponse>(`${this.baseApiUrl}/login`, payload)
+            .pipe(
+                switchMap(response =>
+                    this.usersService
+                        .loadCurrentUser()
+                        .pipe(map(() => response))
+                )
+            );
     }
 
     refresh(): Observable<AuthResponse> {
@@ -36,7 +43,13 @@ export class AuthService {
     }
 
     logout(): Observable<AuthResponse> {
-        return this.http.post<AuthResponse>(`${this.baseApiUrl}/logout`, null);
+        return this.http
+            .post<AuthResponse>(`${this.baseApiUrl}/logout`, null)
+            .pipe(
+                finalize(() => {
+                    this.usersService.clearCurrentUser();
+                })
+            );
     }
 
     resetPasswordRequest(payload: ForgotPasswordPayload): Observable<void> {
