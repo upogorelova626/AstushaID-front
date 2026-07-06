@@ -42,6 +42,13 @@ export const routes: Routes = [
                     import('./features/auth/pages/reset-password-page/reset-password-page.component').then(
                         m => m.ResetPasswordPageComponent
                     )
+            },
+            {
+                path: 'two-factor',
+                loadComponent: () =>
+                    import('./features/auth/pages/two-factor-page/two-factor-page.component').then(
+                        m => m.TwoFactorPageComponent
+                    )
             }
         ]
     },

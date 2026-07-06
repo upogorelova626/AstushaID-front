@@ -1,0 +1,73 @@
+<div class="two-factor-form__wrapper">
+    <header class="two-factor-form__header">
+        <div
+            class="two-factor-form__icon"
+            tuiAvatar="@tui.mail"
+            appearance="info"
+        ></div>
+
+        <h1 class="two-factor-form__header-title"> Подтверждение входа </h1>
+
+        <p class="two-factor-form__header-subtitle">
+            Мы отправили код подтверждения на вашу почту. Введите его ниже,
+            чтобы завершить вход в аккаунт.
+        </p>
+    </header>
+
+    <main class="two-factor-form__content">
+        <form class="two-factor-form__form">
+            <label class="two-factor-form__field-label" for="two-factor-code">
+                Код из письма
+            </label>
+
+            <tui-textfield class="two-factor-form__pin">
+                <input
+                    id="two-factor-code"
+                    tuiInputPin
+                    inputmode="numeric"
+                    maxlength="6"
+                    autocomplete="one-time-code"
+                    placeholder="••••••"
+                    [formControl]="code"
+                />
+            </tui-textfield>
+
+            <p class="two-factor-form__hint"> Код действует 10 минут </p>
+
+            <button
+                tuiButton
+                class="two-factor-form__submit"
+                type="submit"
+                size="l"
+            >
+                Подтвердить
+            </button>
+        </form>
+
+        <div class="two-factor-form__resend">
+            <div>
+                <p class="two-factor-form__resend-title">
+                    Не получили письмо?
+                </p>
+
+                <p class="two-factor-form__resend-text">
+                    Проверьте папку «Спам» или запросите код повторно.
+                </p>
+            </div>
+
+            <button tuiButton type="button" appearance="flat" size="s">
+                Отправить повторно
+            </button>
+        </div>
+
+        <footer class="two-factor-form__footer">
+            <a
+                tuiLink
+                class="two-factor-form__login-link"
+                routerLink="/auth/login"
+            >
+                Вернуться ко входу
+            </a>
+        </footer>
+    </main>
+</div>
