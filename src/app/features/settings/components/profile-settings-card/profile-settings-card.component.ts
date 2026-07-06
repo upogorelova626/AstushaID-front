@@ -1,3 +1,4 @@
+import {AsyncPipe} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,6 +8,12 @@ import {
     signal
 } from '@angular/core';
 import {
+    FormControl,
+    FormGroup,
+    ReactiveFormsModule,
+    Validators
+} from '@angular/forms';
+import {
     TuiButton,
     TuiIcon,
     TuiInput,
@@ -15,26 +22,42 @@ import {
     TuiTextfield
 } from '@taiga-ui/core';
 import {
-    ReactiveFormsModule,
-    FormControl,
-    FormGroup,
-    Validators
-} from '@angular/forms';
-import {catchError, EMPTY, finalize, tap} from 'rxjs';
-import {UsersService} from '../../../auth/services/users.service';
+    TuiAvatar,
+    type TuiFileLike,
+    TuiFiles,
+    TuiSkeleton
+} from '@taiga-ui/kit';
+import {
+    catchError,
+    EMPTY,
+    finalize,
+    map,
+    of,
+    Subject,
+    switchMap,
+    tap
+} from 'rxjs';
+
 import {AstushaUser} from '../../../../shared/interfaces';
-import {TuiSkeleton} from '@taiga-ui/kit';
+import {UsersService} from '../../../auth/services/users.service';
+
+const MAX_AVATAR_SIZE = 5 * 1024 * 1024;
+
+const ALLOWED_AVATAR_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 @Component({
     selector: 'app-profile-settings-card',
     imports: [
+        AsyncPipe,
         ReactiveFormsModule,
+        TuiAvatar,
         TuiButton,
+        TuiFiles,
         TuiIcon,
-        TuiTextfield,
         TuiInput,
         TuiLabel,
-        TuiSkeleton
+        TuiSkeleton,
+        TuiTextfield
     ],
     templateUrl: './profile-settings-card.component.html',
     styleUrl: './profile-settings-card.component.less',
@@ -49,6 +72,9 @@ export class ProfileSettingsCardComponent {
 
     protected readonly isEditing = signal(false);
     protected readonly isSaving = signal(false);
+    protected readonly isAvatarDeleting = signal(false);
+    protected readonly localUser = signal<AstushaUser | null>(null);
+    protected readonly avatarPreviewUrl = signal<string | null>(null);
 
     protected readonly form = new FormGroup({
         firstName: new FormControl('', {
@@ -69,9 +95,21 @@ export class ProfileSettingsCardComponent {
         })
     });
 
+    protected readonly control = new FormControl<TuiFileLike | null>(null);
+
+    protected readonly failedFiles$ = new Subject<TuiFileLike | null>();
+    protected readonly loadingFiles$ = new Subject<TuiFileLike | null>();
+
+    protected readonly loadedFiles$ = this.control.valueChanges.pipe(
+        switchMap(file => this.processFile(file))
+    );
+
     constructor() {
         effect(() => {
-            this.patchForm();
+            const user = this.currentUser();
+
+            this.localUser.set(user);
+            this.patchForm(user);
         });
     }
 
@@ -80,7 +118,8 @@ export class ProfileSettingsCardComponent {
     }
 
     protected cancelEditing() {
-        this.patchForm();
+        this.patchForm(this.localUser());
+        this.removeFile();
 
         this.form.markAsPristine();
         this.form.markAsUntouched();
@@ -100,10 +139,12 @@ export class ProfileSettingsCardComponent {
             .editProfile(this.form.getRawValue())
             .pipe(
                 tap(user => {
+                    this.localUser.set(user);
                     this.patchForm(user);
                     this.form.markAsPristine();
                     this.form.markAsUntouched();
                     this.isEditing.set(false);
+
                     this.alerts
                         .open('Изменения профиля успешно сохранены', {
                             label: 'Профиль обновлён',
@@ -111,7 +152,16 @@ export class ProfileSettingsCardComponent {
                         })
                         .subscribe();
                 }),
-                catchError(() => EMPTY),
+                catchError(() => {
+                    this.alerts
+                        .open('Не удалось сохранить изменения профиля', {
+                            label: 'Ошибка',
+                            appearance: 'negative'
+                        })
+                        .subscribe();
+
+                    return EMPTY;
+                }),
                 finalize(() => {
                     this.isSaving.set(false);
                 })
@@ -119,7 +169,106 @@ export class ProfileSettingsCardComponent {
             .subscribe();
     }
 
-    private patchForm(user = this.currentUser()) {
+    protected removeFile() {
+        this.control.setValue(null);
+        this.failedFiles$.next(null);
+        this.loadingFiles$.next(null);
+        this.avatarPreviewUrl.set(null);
+    }
+
+    protected deleteAvatar() {
+        this.isAvatarDeleting.set(true);
+
+        this.usersService
+            .deleteAvatar()
+            .pipe(
+                tap(user => {
+                    this.localUser.set(user);
+                    this.removeFile();
+
+                    this.alerts
+                        .open('Фото профиля удалено', {
+                            label: 'Аватар обновлён',
+                            appearance: 'positive'
+                        })
+                        .subscribe();
+                }),
+                catchError(() => {
+                    this.alerts
+                        .open('Не удалось удалить фото профиля', {
+                            label: 'Ошибка',
+                            appearance: 'negative'
+                        })
+                        .subscribe();
+
+                    return EMPTY;
+                }),
+                finalize(() => {
+                    this.isAvatarDeleting.set(false);
+                })
+            )
+            .subscribe();
+    }
+
+    protected processFile(file: TuiFileLike | null) {
+        this.failedFiles$.next(null);
+
+        if (!file) {
+            return of(null);
+        }
+
+        if (!(file instanceof File)) {
+            this.failedFiles$.next(file);
+
+            return of(null);
+        }
+
+        if (!this.isValidAvatar(file)) {
+            this.failedFiles$.next(file);
+
+            return of(null);
+        }
+
+        const previewUrl = URL.createObjectURL(file);
+
+        this.avatarPreviewUrl.set(previewUrl);
+        this.loadingFiles$.next(file);
+
+        return this.usersService.uploadAvatar(file).pipe(
+            map(user => {
+                this.localUser.set(user);
+                this.avatarPreviewUrl.set(null);
+
+                this.alerts
+                    .open('Фото профиля успешно обновлено', {
+                        label: 'Аватар обновлён',
+                        appearance: 'positive'
+                    })
+                    .subscribe();
+
+                return file;
+            }),
+            catchError(() => {
+                this.failedFiles$.next(file);
+                this.avatarPreviewUrl.set(null);
+
+                this.alerts
+                    .open('Не удалось загрузить фото профиля', {
+                        label: 'Ошибка',
+                        appearance: 'negative'
+                    })
+                    .subscribe();
+
+                return of(null);
+            }),
+            finalize(() => {
+                this.loadingFiles$.next(null);
+                URL.revokeObjectURL(previewUrl);
+            })
+        );
+    }
+
+    private patchForm(user: AstushaUser | null) {
         if (!user) {
             return;
         }
@@ -130,5 +279,31 @@ export class ProfileSettingsCardComponent {
             position: user.position ?? '',
             about: user.about ?? ''
         });
+    }
+
+    private isValidAvatar(file: File) {
+        if (!ALLOWED_AVATAR_TYPES.includes(file.type)) {
+            this.alerts
+                .open('Можно загрузить только JPEG, PNG или WEBP', {
+                    label: 'Некорректный файл',
+                    appearance: 'negative'
+                })
+                .subscribe();
+
+            return false;
+        }
+
+        if (file.size > MAX_AVATAR_SIZE) {
+            this.alerts
+                .open('Размер файла не должен превышать 5 МБ', {
+                    label: 'Файл слишком большой',
+                    appearance: 'negative'
+                })
+                .subscribe();
+
+            return false;
+        }
+
+        return true;
     }
 }

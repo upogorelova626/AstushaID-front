@@ -14,6 +14,7 @@
             size="m"
             iconStart="@tui.bell"
             aria-label="Уведомления"
+            [tuiSkeleton]="isLoading()"
         ></button>
 
         <button
@@ -22,13 +23,26 @@
             type="button"
             appearance="flat"
             size="m"
+            [tuiSkeleton]="isLoading()"
         >
-            <div class="app-header__avatar" tuiAvatar="@tui.user"> </div>
+            @if (currentUser()?.avatarUrl) {
+                <img
+                    class="app-header__avatar"
+                    [src]="currentUser()?.avatarUrl"
+                    alt="Фото профиля"
+                />
+            } @else {
+                <div class="app-header__avatar" tuiAvatar="@tui.user"> </div>
+            }
 
             <div class="app-header__user-info">
-                <span class="app-header__user-name"> Astusha </span>
+                <span class="app-header__user-name">
+                    {{ currentUser()?.firstName || currentUser()?.login }}
+                </span>
 
-                <span class="app-header__user-login"> testuser </span>
+                <span class="app-header__user-login">
+                    {{ currentUser()?.email }}
+                </span>
             </div>
 
             <tui-icon class="app-header__chevron" icon="@tui.chevron-down" />

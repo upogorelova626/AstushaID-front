@@ -54,7 +54,13 @@
             <span class="sidebar__nav-text">Приложения</span>
         </a>
 
-        <a tuiButton class="sidebar__nav-item" appearance="flat" size="m">
+        <a
+            tuiButton
+            class="sidebar__nav-item"
+            appearance="flat"
+            size="m"
+            [routerLink]="['/account/notifications']"
+        >
             <tui-icon class="sidebar__nav-icon" icon="@tui.bell" />
             <span class="sidebar__nav-text">Уведомления</span>
         </a>

@@ -1,0 +1,87 @@
+<div class="astusha-services-notifications-card">
+    <header class="astusha-services-notifications-card__header">
+        <div tuiAvatar="@tui.blocks" size="l" appearance="info"></div>
+
+        <div class="astusha-services-notifications-card__info">
+            <h2 class="astusha-services-notifications-card__title">
+                Сервисы Astusha
+            </h2>
+
+            <p class="astusha-services-notifications-card__description">
+                Настройте уведомления от связанных сервисов экосистемы Astusha.
+            </p>
+        </div>
+    </header>
+
+    <main class="astusha-services-notifications-card__content">
+        <div class="astusha-services-notifications-card__list">
+            <div class="astusha-services-notifications-card__item">
+                <div class="astusha-services-notifications-card__item-icon">
+                    <tui-icon icon="@tui.panels-top-left" />
+                </div>
+
+                <div class="astusha-services-notifications-card__item-info">
+                    <div
+                        class="astusha-services-notifications-card__item-title"
+                    >
+                        AstushaApp
+                    </div>
+
+                    <div class="astusha-services-notifications-card__item-meta">
+                        Задачи, проекты, команды и приглашения.
+                    </div>
+                </div>
+
+                <input tuiSwitch type="checkbox" checked />
+            </div>
+
+            <div
+                class="astusha-services-notifications-card__item astusha-services-notifications-card__item_disabled"
+            >
+                <div class="astusha-services-notifications-card__item-icon">
+                    <tui-icon icon="@tui.message-circle" />
+                </div>
+
+                <div class="astusha-services-notifications-card__item-info">
+                    <div
+                        class="astusha-services-notifications-card__item-title"
+                    >
+                        AstushaMessage
+
+                        <span
+                            class="astusha-services-notifications-card__badge"
+                        >
+                            Скоро
+                        </span>
+                    </div>
+
+                    <div class="astusha-services-notifications-card__item-meta">
+                        Новые сообщения, упоминания и реакции.
+                    </div>
+                </div>
+
+                <input tuiSwitch type="checkbox" disabled />
+            </div>
+
+            <div class="astusha-services-notifications-card__item">
+                <div class="astusha-services-notifications-card__item-icon">
+                    <tui-icon icon="@tui.plug" />
+                </div>
+
+                <div class="astusha-services-notifications-card__item-info">
+                    <div
+                        class="astusha-services-notifications-card__item-title"
+                    >
+                        Интеграции
+                    </div>
+
+                    <div class="astusha-services-notifications-card__item-meta">
+                        Ошибки подключений и важные события интеграций.
+                    </div>
+                </div>
+
+                <input tuiSwitch type="checkbox" checked />
+            </div>
+        </div>
+    </main>
+</div>

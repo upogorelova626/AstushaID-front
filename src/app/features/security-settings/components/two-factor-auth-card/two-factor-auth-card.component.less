@@ -43,7 +43,7 @@
         grid-template-columns: 40px minmax(0, 1fr) auto;
         gap: 12px;
         align-items: center;
-        padding: 14px;
+        padding: 16px 14px;
         border: 1px solid var(--color-card-border);
         border-radius: 5px;
         background: var(--color-card-bg-soft);
@@ -66,60 +66,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
     }
-
-    &__method {
-        margin-top: 18px;
-    }
-
-    &__method-title {
-        margin: 0 0 10px;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-body-m);
-    }
-
-    &__method-item {
-        display: grid;
-        grid-template-columns: 36px minmax(0, 1fr) auto;
-        gap: 12px;
-        align-items: center;
-        min-height: 58px;
-        padding: 12px 14px;
-        border: 1px solid var(--color-card-border);
-        border-radius: 5px;
-        background: var(--color-card-background);
-    }
-
-    &__method-icon {
-        display: grid;
-        width: 36px;
-        height: 36px;
-        place-items: center;
-        color: var(--color-text-secondary);
-    }
-
-    &__method-info {
-        min-width: 0;
-    }
-
-    &__method-name {
-        color: var(--color-text-primary);
-        font: var(--tui-typography-body-m);
-    }
-
-    &__method-description {
-        margin-top: 2px;
-        color: var(--color-text-secondary);
-        font: var(--tui-typography-body-s);
-    }
-
-    &__method-button {
-        min-width: 96px;
-    }
-
-    &__backup-button {
-        width: 100%;
-        margin-top: 12px;
-    }
 }
 
 @media (max-width: 760px) {
@@ -141,16 +87,6 @@
 
         &__status-description {
             white-space: normal;
-        }
-
-        &__method-item {
-            grid-template-columns: 36px minmax(0, 1fr);
-        }
-
-        &__method-button {
-            grid-column: 2;
-            justify-self: flex-start;
-            margin-top: 4px;
         }
     }
 }

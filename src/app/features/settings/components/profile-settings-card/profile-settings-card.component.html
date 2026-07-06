@@ -28,20 +28,109 @@
 
     <main class="profile-settings-card__content">
         <div class="profile-settings-card__avatar" [tuiSkeleton]="isLoading()">
-            <tui-icon
-                icon="@tui.user"
-                class="profile-settings-card__avatar-preview"
-            />
+            @if (avatarPreviewUrl() || localUser()?.avatarUrl) {
+                <div class="profile-settings-card__avatar-preview">
+                    @if (avatarPreviewUrl() || localUser()?.avatarUrl) {
+                        <img
+                            class="profile-settings-card__avatar-image"
+                            [src]="avatarPreviewUrl() || localUser()?.avatarUrl"
+                            alt="Фото профиля"
+                        />
+                    } @else {
+                        <div tuiAvatar="@tui.user"> </div>
+                    }
+                </div>
+            } @else {
+                <div
+                    class="profile-settings-card__avatar-preview"
+                    tuiAvatar="@tui.user"
+                    size="xxl"
+                ></div>
+            }
 
-            <button
-                tuiButton
-                type="button"
-                appearance="flat"
-                iconStart="@tui.upload"
-                [disabled]="!isEditing()"
-            >
-                Изменить фото
-            </button>
+            <div class="profile-settings-card__avatar-content">
+                @if (isEditing()) {
+                    <div class="profile-settings-card__avatar-title">
+                        Фото профиля
+                    </div>
+
+                    <p class="profile-settings-card__avatar-description">
+                        JPG, PNG или WEBP до 5 МБ.
+                    </p>
+                }
+
+                @if (isEditing()) {
+                    @if (!control.value) {
+                        <label
+                            tuiInputFiles
+                            class="profile-settings-card__avatar-upload"
+                        >
+                            <input
+                                tuiInputFiles
+                                type="file"
+                                accept="image/png,image/jpeg,image/webp"
+                                [formControl]="control"
+                            />
+                        </label>
+                    }
+
+                    <tui-files class="profile-settings-card__files">
+                        @if (
+                            control.value
+                                | tuiFileRejected
+                                    : {
+                                          accept: 'image/png,image/jpeg,image/webp'
+                                      }
+                                | async;
+                            as file
+                        ) {
+                            <tui-file
+                                state="error"
+                                [file]="file"
+                                (remove)="removeFile()"
+                            />
+                        }
+
+                        @if (loadedFiles$ | async; as file) {
+                            <tui-file
+                                size="l"
+                                [file]="file"
+                                (remove)="removeFile()"
+                            />
+                        }
+
+                        @if (failedFiles$ | async; as file) {
+                            <tui-file
+                                state="error"
+                                [file]="file"
+                                (remove)="removeFile()"
+                            />
+                        }
+
+                        @if (loadingFiles$ | async; as file) {
+                            <tui-file
+                                state="loading"
+                                [file]="file"
+                                (remove)="removeFile()"
+                            />
+                        }
+                    </tui-files>
+
+                    @if (localUser()?.avatarUrl) {
+                        <button
+                            tuiButton
+                            type="button"
+                            size="s"
+                            appearance="outline-destructive"
+                            iconStart="@tui.trash"
+                            class="profile-settings-card__avatar-delete"
+                            (click)="deleteAvatar()"
+                        >
+                            Удалить фото
+                        </button>
+                    }
+                }
+            </div>
         </div>
 
         <form class="profile-settings-card__form" [formGroup]="form">
@@ -79,7 +168,7 @@
                         tuiInput
                         placeholder="example@mail.com"
                         [tuiSkeleton]="isLoading()"
-                        [value]="currentUser()?.email"
+                        [value]="localUser()?.email"
                         disabled
                     />
                 </tui-textfield>

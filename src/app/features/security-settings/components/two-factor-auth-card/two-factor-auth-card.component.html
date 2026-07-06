@@ -38,49 +38,5 @@
                 (change)="toggleTwoFactor()"
             />
         </section>
-
-        <section class="two-factor-auth-card__method">
-            <h3 class="two-factor-auth-card__method-title">
-                Метод аутентификации
-            </h3>
-
-            <div class="two-factor-auth-card__method-item">
-                <div class="two-factor-auth-card__method-icon">
-                    <tui-icon icon="@tui.smartphone" />
-                </div>
-
-                <div class="two-factor-auth-card__method-info">
-                    <div class="two-factor-auth-card__method-name">
-                        Приложение-аутентификатор
-                    </div>
-
-                    <div class="two-factor-auth-card__method-description">
-                        Google Authenticator
-                    </div>
-                </div>
-
-                <button
-                    tuiButton
-                    type="button"
-                    size="s"
-                    appearance="outline"
-                    class="two-factor-auth-card__method-button"
-                    (click)="setupAuthenticatorApp()"
-                >
-                    Настроить
-                </button>
-            </div>
-        </section>
-
-        <button
-            tuiButton
-            type="button"
-            size="s"
-            appearance="outline"
-            class="two-factor-auth-card__backup-button"
-            (click)="showBackupCodes()"
-        >
-            Показать резервные коды
-        </button>
     </main>
 </div>

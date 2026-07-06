@@ -39,4 +39,19 @@ export class UsersService {
             payload
         );
     }
+
+    uploadAvatar(file: File): Observable<AstushaUser> {
+        const formData = new FormData();
+
+        formData.append('avatar', file);
+
+        return this.http.patch<AstushaUser>(
+            `${this.baseApiUrl}/me/avatar`,
+            formData
+        );
+    }
+
+    deleteAvatar(): Observable<AstushaUser> {
+        return this.http.delete<AstushaUser>(`${this.baseApiUrl}/me/avatar`);
+    }
 }

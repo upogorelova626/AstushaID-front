@@ -1,0 +1,106 @@
+<div class="notification-frequency-card">
+    <header class="notification-frequency-card__header">
+        <div tuiAvatar="@tui.clock" size="l" appearance="info"></div>
+
+        <div class="notification-frequency-card__info">
+            <h2 class="notification-frequency-card__title">
+                Частота уведомлений
+            </h2>
+
+            <p class="notification-frequency-card__description">
+                Настройте, как часто Astusha ID будет отправлять уведомления.
+            </p>
+        </div>
+    </header>
+
+    <main class="notification-frequency-card__content">
+        <div class="notification-frequency-card__list">
+            <div class="notification-frequency-card__item">
+                <div class="notification-frequency-card__item-info">
+                    <div class="notification-frequency-card__item-title">
+                        Важные события
+                    </div>
+
+                    <div class="notification-frequency-card__item-meta">
+                        Вход в аккаунт, смена пароля и безопасность.
+                    </div>
+                </div>
+
+                <button
+                    class="notification-frequency-card__select"
+                    type="button"
+                >
+                    <tui-icon
+                        class="notification-frequency-card__select-icon"
+                        icon="@tui.zap"
+                    />
+
+                    <span>Сразу</span>
+
+                    <tui-icon
+                        class="notification-frequency-card__chevron"
+                        icon="@tui.chevron-down"
+                    />
+                </button>
+            </div>
+
+            <div class="notification-frequency-card__item">
+                <div class="notification-frequency-card__item-info">
+                    <div class="notification-frequency-card__item-title">
+                        Обычные уведомления
+                    </div>
+
+                    <div class="notification-frequency-card__item-meta">
+                        Новости сервисов, задачи и приглашения.
+                    </div>
+                </div>
+
+                <button
+                    class="notification-frequency-card__select"
+                    type="button"
+                >
+                    <tui-icon
+                        class="notification-frequency-card__select-icon"
+                        icon="@tui.calendar"
+                    />
+
+                    <span>Раз в день</span>
+
+                    <tui-icon
+                        class="notification-frequency-card__chevron"
+                        icon="@tui.chevron-down"
+                    />
+                </button>
+            </div>
+
+            <div class="notification-frequency-card__item">
+                <div class="notification-frequency-card__item-info">
+                    <div class="notification-frequency-card__item-title">
+                        Маркетинговые письма
+                    </div>
+
+                    <div class="notification-frequency-card__item-meta">
+                        Новости продукта и полезные обновления.
+                    </div>
+                </div>
+
+                <button
+                    class="notification-frequency-card__select"
+                    type="button"
+                >
+                    <tui-icon
+                        class="notification-frequency-card__select-icon"
+                        icon="@tui.mail"
+                    />
+
+                    <span>Отключено</span>
+
+                    <tui-icon
+                        class="notification-frequency-card__chevron"
+                        icon="@tui.chevron-down"
+                    />
+                </button>
+            </div>
+        </div>
+    </main>
+</div>

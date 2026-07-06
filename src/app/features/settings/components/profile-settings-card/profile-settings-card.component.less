@@ -3,9 +3,11 @@
 }
 
 .profile-settings-card {
+    box-sizing: border-box;
     padding: 28px;
     border: 1px solid var(--color-card-border);
     border-radius: 5px;
+    background: var(--color-card-background);
 
     &__header {
         display: flex;
@@ -18,12 +20,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
+        flex: 0 0 auto;
         width: 48px;
         height: 48px;
         border-radius: 16px;
-        background: var(--color-primary-soft);
         color: var(--astusha-color-primary);
+        background: var(--color-primary-soft);
     }
 
     &__header-content {
@@ -42,16 +44,18 @@
         margin: 8px 0 0;
         color: var(--astusha-color-text-secondary);
         font: var(--tui-typography-body-m);
+        line-height: 1.4;
     }
 
     &__edit-button {
-        flex-shrink: 0;
+        flex: 0 0 auto;
     }
 
     &__content {
         display: grid;
-        grid-template-columns: 180px minmax(0, 1fr);
+        grid-template-columns: 220px minmax(0, 1fr);
         gap: 32px;
+        align-items: flex-start;
     }
 
     &__avatar {
@@ -59,16 +63,73 @@
         flex-direction: column;
         align-items: center;
         gap: 16px;
+        min-width: 0;
     }
 
     &__avatar-preview {
         display: flex;
         align-items: center;
         justify-content: center;
+        flex: 0 0 auto;
         width: 132px;
         height: 132px;
+        overflow: hidden;
+        border: 1px solid var(--color-card-border);
         border-radius: 50%;
+        color: var(--astusha-color-primary);
         background: var(--color-primary-soft);
+    }
+
+    &__avatar-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__avatar-preview > div {
+        width: 72px;
+        height: 72px;
+    }
+
+    &__avatar-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        text-align: center;
+    }
+
+    &__avatar-title {
+        color: var(--astusha-color-text-primary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__avatar-description {
+        max-width: 180px;
+        margin: 4px 0 0;
+        color: var(--astusha-color-text-secondary);
+        font: var(--tui-typography-body-s);
+        line-height: 1.35;
+    }
+
+    &__avatar-upload {
+        display: block;
+        width: 100%;
+        margin-top: 14px;
+    }
+
+    &__files {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        text-align: left;
+    }
+
+    &__avatar-delete {
+        width: 100%;
+        margin-top: 12px;
     }
 
     &__form {
@@ -82,6 +143,7 @@
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 20px;
+        min-width: 0;
     }
 
     &__footer {
@@ -90,6 +152,7 @@
         gap: 12px;
         margin-top: 20px;
         padding-top: 20px;
+        border-top: 1px solid var(--color-card-border);
     }
 }
 
@@ -101,6 +164,22 @@
 
         &__avatar {
             align-items: flex-start;
+            flex-direction: row;
+        }
+
+        &__avatar-content {
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        &__avatar-description {
+            max-width: 320px;
+        }
+
+        &__avatar-upload,
+        &__files,
+        &__avatar-delete {
+            max-width: 320px;
         }
     }
 }
@@ -111,10 +190,36 @@
 
         &__header {
             flex-direction: column;
+            margin-bottom: 24px;
         }
 
         &__edit-button {
             width: 100%;
+        }
+
+        &__content {
+            gap: 24px;
+        }
+
+        &__avatar {
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        &__avatar-content {
+            align-items: center;
+            text-align: center;
+        }
+
+        &__avatar-description {
+            max-width: 220px;
+        }
+
+        &__avatar-upload,
+        &__files,
+        &__avatar-delete {
+            max-width: none;
         }
 
         &__row {

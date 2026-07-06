@@ -5,7 +5,7 @@ export const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'auth/login'
+        redirectTo: 'account/profile'
     },
     {
         path: 'auth',
@@ -84,6 +84,13 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./features/security-settings/pages/security-settings-page/security-settings-page.component').then(
                         m => m.SecuritySettingsPageComponent
+                    )
+            },
+            {
+                path: 'notifications',
+                loadComponent: () =>
+                    import('./features/notifications/pages/notifications-settings-page/notifications-settings-page.component').then(
+                        m => m.NotificationsSettingsPageComponent
                     )
             }
         ]

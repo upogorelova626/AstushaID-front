@@ -2,7 +2,7 @@
     display: block;
 }
 
-.active-sessions-card {
+.notification-channels-card {
     padding: 24px;
     border: 1px solid var(--color-card-border);
     border-radius: 5px;
@@ -27,7 +27,7 @@
     }
 
     &__description {
-        max-width: 260px;
+        max-width: 320px;
         margin: 6px 0 0;
         color: var(--color-text-secondary);
         font: var(--tui-typography-body-m);
@@ -40,11 +40,11 @@
     &__list {
         overflow: hidden;
         border: 1px solid var(--color-card-border);
-        border-radius: 8px;
+        border-radius: 5px;
         background: var(--color-card-background);
     }
 
-    &__session {
+    &__item {
         display: grid;
         grid-template-columns: 36px minmax(0, 1fr) auto;
         gap: 12px;
@@ -52,22 +52,25 @@
         min-height: 58px;
         padding: 10px 14px;
         border-bottom: 1px solid var(--color-card-border);
-
-        &:last-child {
-            border-bottom: none;
-        }
     }
 
-    &__session-icon {
+    &__item-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 1px solid var(--color-card-border);
+        border-radius: 8px;
         color: var(--color-text-secondary);
         background: transparent;
     }
 
-    &__session-info {
+    &__item-info {
         min-width: 0;
     }
 
-    &__session-title {
+    &__item-title {
         display: flex;
         gap: 8px;
         align-items: center;
@@ -76,7 +79,7 @@
         font: var(--tui-typography-body-m);
     }
 
-    &__session-meta {
+    &__item-meta {
         margin-top: 3px;
         overflow: hidden;
         color: var(--color-text-secondary);
@@ -93,27 +96,21 @@
         font: var(--tui-typography-body-xs);
         white-space: nowrap;
     }
-
-    &__terminate-all {
-        width: 100%;
-        margin-top: 10px;
-    }
 }
 
 @media (max-width: 760px) {
-    .active-sessions-card {
-        &__session {
+    .notification-channels-card {
+        &__item {
             grid-template-columns: 36px minmax(0, 1fr);
         }
 
-        &__session-title {
+        &__item-title {
             align-items: flex-start;
             flex-direction: column;
             gap: 4px;
         }
 
-        &__arrow,
-        &__terminate {
+        input[tuiSwitch] {
             grid-column: 2;
             justify-self: flex-start;
             margin-top: 4px;

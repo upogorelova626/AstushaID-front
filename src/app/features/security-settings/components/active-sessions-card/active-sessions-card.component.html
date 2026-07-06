@@ -16,7 +16,7 @@
     </header>
 
     <main class="active-sessions-card__content">
-        <div class="active-sessions-card__list">
+        <div class="active-sessions-card__list" [tuiSkeleton]="isLoading()">
             @for (session of sessions(); track session.id) {
                 <div class="active-sessions-card__session">
                     <div
