@@ -75,4 +75,13 @@ export class UsersService {
             .delete<AstushaUser>(`${this.baseApiUrl}/me/avatar`)
             .pipe(tap(user => this.currentUserSubject.next(user)));
     }
+
+    changeEmailTwoFactor(payload: {enabled: boolean}): Observable<AstushaUser> {
+        return this.http
+            .patch<AstushaUser>(
+                `${this.baseApiUrl}/me/two-factor/email`,
+                payload
+            )
+            .pipe(tap(user => this.currentUserSubject.next(user)));
+    }
 }

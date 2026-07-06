@@ -17,6 +17,7 @@ export interface AstushaUser {
     about: string | null;
 
     emailVerifiedAt: string | null;
+    emailTwoFactorEnabled: boolean;
 
     theme: UserTheme;
 

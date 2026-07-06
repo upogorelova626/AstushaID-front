@@ -21,10 +21,19 @@
                 appearance="positive"
             ></div>
 
-            <div class="two-factor-auth-card__status-info">
-                <div class="two-factor-auth-card__status-title">
-                    2FA включена
-                </div>
+            <div
+                class="two-factor-auth-card__status-info"
+                [tuiSkeleton]="isLoading()"
+            >
+                @if (isTwoFactorEnabled()) {
+                    <div class="two-factor-auth-card__status-title">
+                        2FA включена
+                    </div>
+                } @else {
+                    <div class="two-factor-auth-card__status-title">
+                        2FA выключена
+                    </div>
+                }
 
                 <div class="two-factor-auth-card__status-description">
                     Ваш аккаунт защищён дополнительным уровнем безопасности.
@@ -34,7 +43,8 @@
             <input
                 tuiSwitch
                 type="checkbox"
-                [checked]="isTwoFactorEnabled()"
+                [formControl]="control"
+                [tuiSkeleton]="isLoading()"
                 (change)="toggleTwoFactor()"
             />
         </section>
