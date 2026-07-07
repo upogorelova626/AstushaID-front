@@ -1,0 +1,59 @@
+.two-factor-auth-dialog {
+    &__header {
+        display: flex;
+        gap: 16px;
+        min-width: 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    &__title {
+        margin: 0;
+        color: var(--color-text-primary);
+        font: var(--tui-typography-heading-h5);
+    }
+
+    &__description {
+        max-width: 320px;
+        margin: 6px 0 0;
+        color: var(--color-text-secondary);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__content {
+        margin-top: 20px;
+    }
+
+    &__status {
+        display: grid;
+        grid-template-columns: 40px minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        padding: 16px 14px;
+        border: 1px solid var(--color-card-border);
+        border-radius: 5px;
+        background: var(--color-card-bg-soft);
+    }
+
+    &__status-info {
+        min-width: 0;
+    }
+
+    &__status-title {
+        color: var(--color-success);
+        font: var(--tui-typography-body-m);
+    }
+
+    &__status-description {
+        margin-top: 2px;
+        overflow: hidden;
+        color: var(--color-text-secondary);
+        font: var(--tui-typography-body-s);
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

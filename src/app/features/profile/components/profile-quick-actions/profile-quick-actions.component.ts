@@ -13,10 +13,11 @@ import {
 } from '@taiga-ui/core';
 import {PolymorpheusComponent} from '@taiga-ui/polymorpheus';
 import {catchError, EMPTY, filter, switchMap, tap, timer} from 'rxjs';
-
 import {AuthService} from '../../../auth/services/auth.service';
 import {ChangePasswordDialogComponent} from './change-password-dialog/change-password-dialog.component';
 import {DeleteProfileNotificationDialogComponent} from './delete-profile-notification-dialog/delete-profile-notification-dialog.component';
+import {TwoFactorDialogComponent} from './two-factor-dialog/two-factor-dialog.component';
+import {SessionsDialogComponent} from './sessions-dialog/sessions-dialog.component';
 
 @Component({
     selector: 'app-profile-quick-actions',
@@ -75,7 +76,31 @@ export class ProfileQuickActionsComponent {
             .subscribe();
     }
 
-    protected goToSecurityPage() {
-        this.router.navigate(['/account/security']);
+    protected openTwoFactorAuthDialog() {
+        this.dialogs
+            .open<void>(
+                new PolymorpheusComponent(
+                    TwoFactorDialogComponent,
+                    this.injector
+                ),
+                {
+                    size: 's'
+                }
+            )
+            .subscribe();
+    }
+
+    protected openSessionDialog() {
+        this.dialogs
+            .open<void>(
+                new PolymorpheusComponent(
+                    SessionsDialogComponent,
+                    this.injector
+                ),
+                {
+                    size: 'm'
+                }
+            )
+            .subscribe();
     }
 }

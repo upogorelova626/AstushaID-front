@@ -1,0 +1,94 @@
+<div class="active-sessions-dialog">
+    <header class="active-sessions-dialog__header">
+        <div
+            tuiAvatar="@tui.monitor-smartphone"
+            size="l"
+            appearance="positive"
+        ></div>
+
+        <div class="active-sessions-dialog__info">
+            <h2 class="active-sessions-dialog__title">Активные сессии</h2>
+
+            <p class="active-sessions-dialog__description">
+                Управляйте устройствами, на которых вы вошли в аккаунт.
+            </p>
+        </div>
+    </header>
+
+    <main class="active-sessions-dialog__content">
+        <div class="active-sessions-dialog__list" [tuiSkeleton]="isLoading()">
+            @for (session of sessions(); track session.id) {
+                <div class="active-sessions-dialog__session">
+                    <div
+                        class="active-sessions-dialog__session-icon"
+                        [tuiAvatar]="session.icon"
+                        size="m"
+                    ></div>
+
+                    <div class="active-sessions-dialog__session-info">
+                        <div class="active-sessions-dialog__session-title">
+                            {{ session.device }}
+
+                            @if (session.isCurrent) {
+                                <span class="active-sessions-dialog__badge">
+                                    Текущая сессия
+                                </span>
+                            }
+                        </div>
+
+                        <div class="active-sessions-dialog__session-meta">
+                            {{ session.location }}
+
+                            @if (session.ipAddress) {
+                                · {{ session.ipAddress }}
+                            }
+
+                            @if (session.lastActive) {
+                                ·
+                                {{
+                                    session.lastActive | date: 'd MMM y, HH:mm'
+                                }}
+                            }
+                        </div>
+                    </div>
+
+                    @if (!session.isCurrent) {
+                        <button
+                            tuiButton
+                            type="button"
+                            size="s"
+                            appearance="outline-destructive"
+                            [disabled]="
+                                terminatingSessionId() === session.id ||
+                                isTerminatingOtherSessions()
+                            "
+                            (click)="terminateSession(session.id)"
+                        >
+                            Завершить
+                        </button>
+                    }
+                </div>
+            }
+
+            @if (!isLoading() && !sessions().length) {
+                <div class="active-sessions-dialog__empty">
+                    Активных сессий пока нет.
+                </div>
+            }
+        </div>
+
+        @if (hasOtherSessions()) {
+            <button
+                class="active-sessions-dialog__terminate-all"
+                tuiButton
+                type="button"
+                size="s"
+                appearance="outline"
+                [disabled]="isTerminatingOtherSessions()"
+                (click)="terminateOtherSessions()"
+            >
+                Завершить все другие сессии
+            </button>
+        }
+    </main>
+</div>

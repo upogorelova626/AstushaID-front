@@ -6,8 +6,8 @@
     <div class="profile-quick-actions__items">
         <button
             tuiButton
+            type="button"
             class="profile-quick-actions__item"
-            routerLink="/account/security"
             appearance="flat"
             (click)="openChangePasswordDialog()"
         >
@@ -24,7 +24,7 @@
                 </p>
 
                 <p class="profile-quick-actions__item-description">
-                    Обновите пароль для защиты вашего аккаунта
+                    Обновите пароль для защиты вашего аккаунта.
                 </p>
             </div>
 
@@ -36,10 +36,10 @@
 
         <button
             tuiButton
+            type="button"
             class="profile-quick-actions__item"
-            routerLink="/account/security"
             appearance="flat"
-            (click)="goToSecurityPage()"
+            (click)="openTwoFactorAuthDialog()"
         >
             <div class="profile-quick-actions__icon-wrapper">
                 <tui-icon
@@ -52,7 +52,8 @@
                 <p class="profile-quick-actions__item-title"> Безопасность </p>
 
                 <p class="profile-quick-actions__item-description">
-                    Настройте двухфакторную аутентификацию и другие параметры
+                    Управляйте двухфакторной аутентификацией, чтобы
+                    дополнительно защитить вход в аккаунт.
                 </p>
             </div>
 
@@ -64,10 +65,10 @@
 
         <button
             tuiButton
+            type="button"
             class="profile-quick-actions__item"
-            routerLink="/account/sessions"
             appearance="flat"
-            (click)="goToSecurityPage()"
+            (click)="openSessionDialog()"
         >
             <div class="profile-quick-actions__icon-wrapper">
                 <tui-icon
@@ -80,7 +81,7 @@
                 <p class="profile-quick-actions__item-title"> Сессии </p>
 
                 <p class="profile-quick-actions__item-description">
-                    Управляйте активными сессиями на устройствах
+                    Управляйте активными сессиями на устройствах.
                 </p>
             </div>
 
@@ -92,6 +93,7 @@
 
         <button
             tuiButton
+            type="button"
             class="profile-quick-actions__item profile-quick-actions__item_danger"
             type="button"
             appearance="flat"
@@ -110,7 +112,7 @@
                 </p>
 
                 <p class="profile-quick-actions__item-description">
-                    Удалите свой аккаунт и все данные
+                    Удалите свой аккаунт и все данные.
                 </p>
             </div>
 

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {
     TuiButton,
     TuiLink,
+    TuiLoader,
     TuiNotificationService,
     TuiTextfield
 } from '@taiga-ui/core';
@@ -24,6 +25,7 @@ const RETURN_URL_STORAGE_KEY = 'emailTwoFactorReturnUrl';
         TuiButton,
         TuiButtonLoading,
         TuiLink,
+        TuiLoader,
         ReactiveFormsModule
     ],
     templateUrl: './two-factor-page.component.html',
@@ -35,6 +37,7 @@ export class TwoFactorPageComponent implements OnInit {
     private readonly alerts = inject(TuiNotificationService);
 
     protected readonly isLoading = signal(false);
+    protected readonly isPageLoading = signal(true);
     protected readonly email = signal<string | null>(null);
 
     protected readonly code = new FormControl('', {
@@ -52,12 +55,14 @@ export class TwoFactorPageComponent implements OnInit {
         const email = sessionStorage.getItem(EMAIL_STORAGE_KEY);
 
         if (!challengeId) {
+            this.isPageLoading.set(false);
             void this.router.navigate(['/auth/login']);
 
             return;
         }
 
         this.email.set(email);
+        this.isPageLoading.set(false);
 
         this.code.valueChanges.subscribe(value => {
             const normalizedValue = value.replace(/\D/g, '').slice(0, 6);

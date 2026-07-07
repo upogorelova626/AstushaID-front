@@ -1,0 +1,52 @@
+<div class="two-factor-auth-dialog">
+    <header class="two-factor-auth-dialog__header">
+        <div tuiAvatar="@tui.shield-check" size="l" appearance="warning"></div>
+
+        <div class="two-factor-auth-dialog__info">
+            <h2 class="two-factor-auth-dialog__title">
+                Двухфакторная аутентификация
+            </h2>
+
+            <p class="two-factor-auth-dialog__description">
+                Добавьте дополнительный уровень защиты для вашего аккаунта.
+            </p>
+        </div>
+    </header>
+
+    <main class="two-factor-auth-dialog__content">
+        <section class="two-factor-auth-dialog__status">
+            <div
+                tuiAvatar="@tui.lock-keyhole"
+                size="m"
+                appearance="positive"
+            ></div>
+
+            <div
+                class="two-factor-auth-dialog__status-info"
+                [tuiSkeleton]="isLoading()"
+            >
+                @if (isTwoFactorEnabled()) {
+                    <div class="two-factor-auth-dialog__status-title">
+                        2FA включена
+                    </div>
+                } @else {
+                    <div class="two-factor-auth-dialog__status-title">
+                        2FA выключена
+                    </div>
+                }
+
+                <div class="two-factor-auth-dialog__status-description">
+                    Ваш аккаунт защищён дополнительным уровнем безопасности.
+                </div>
+            </div>
+
+            <input
+                tuiSwitch
+                type="checkbox"
+                [formControl]="control"
+                [tuiSkeleton]="isLoading()"
+                (change)="toggleTwoFactor()"
+            />
+        </section>
+    </main>
+</div>
