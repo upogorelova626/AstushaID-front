@@ -20,6 +20,15 @@ export interface ResetPasswordPayload {
     newPassword: string;
 }
 
-export interface AuthResponse {
-    user: AstushaUser;
+export interface EmailTwoFactorRequiredResponse {
+    twoFactorRequired: true;
+    challengeId: string;
+    email: string;
 }
+
+export interface VerifyEmailTwoFactorPayload {
+    challengeId: string;
+    code: string;
+}
+
+export type AuthResponse = AstushaUser | EmailTwoFactorRequiredResponse;

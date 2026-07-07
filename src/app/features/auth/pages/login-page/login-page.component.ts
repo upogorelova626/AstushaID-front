@@ -81,18 +81,51 @@ export class LoginPageComponent {
         this.authService
             .login(loginPayload)
             .pipe(
-                tap(() => {
+                tap(response => {
                     const returnUrl =
                         this.route.snapshot.queryParamMap.get('returnUrl');
 
+                    if ('twoFactorRequired' in response) {
+                        sessionStorage.setItem(
+                            'emailTwoFactorChallengeId',
+                            response.challengeId
+                        );
+
+                        sessionStorage.setItem(
+                            'emailTwoFactorEmail',
+                            response.email
+                        );
+
+                        if (returnUrl) {
+                            sessionStorage.setItem(
+                                'emailTwoFactorReturnUrl',
+                                returnUrl
+                            );
+                        } else {
+                            sessionStorage.removeItem(
+                                'emailTwoFactorReturnUrl'
+                            );
+                        }
+
+                        void this.router.navigate(['/auth/two-factor']);
+
+                        return;
+                    }
+
                     if (returnUrl) {
                         window.location.href = returnUrl;
+
+                        return;
                     }
 
                     void this.router.navigate(['/account/profile']);
                 }),
                 catchError(() => {
                     this.loginError.set(true);
+
+                    sessionStorage.removeItem('emailTwoFactorChallengeId');
+                    sessionStorage.removeItem('emailTwoFactorEmail');
+                    sessionStorage.removeItem('emailTwoFactorReturnUrl');
 
                     this.alerts
                         .open('Неверный логин/email или пароль', {

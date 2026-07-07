@@ -6,16 +6,21 @@
             appearance="info"
         ></div>
 
-        <h1 class="two-factor-form__header-title"> Подтверждение входа </h1>
+        <h1 class="two-factor-form__header-title">Подтверждение входа</h1>
 
         <p class="two-factor-form__header-subtitle">
-            Мы отправили код подтверждения на вашу почту. Введите его ниже,
-            чтобы завершить вход в аккаунт.
+            Мы отправили код подтверждения
+            @if (email()) {
+                на {{ email() }}.
+            } @else {
+                на вашу почту.
+            }
+            Введите его ниже, чтобы завершить вход в аккаунт.
         </p>
     </header>
 
     <main class="two-factor-form__content">
-        <form class="two-factor-form__form">
+        <form class="two-factor-form__form" (submit)="$event.preventDefault()">
             <label class="two-factor-form__field-label" for="two-factor-code">
                 Код из письма
             </label>
@@ -29,16 +34,24 @@
                     autocomplete="one-time-code"
                     placeholder="••••••"
                     [formControl]="code"
+                    (keydown.enter)="verifyCode()"
                 />
             </tui-textfield>
 
-            <p class="two-factor-form__hint"> Код действует 10 минут </p>
+            @if (code.touched && code.invalid) {
+                <p class="two-factor-form__error"> Введите 6 цифр из письма </p>
+            } @else {
+                <p class="two-factor-form__hint"> Код действует 10 минут </p>
+            }
 
             <button
                 tuiButton
                 class="two-factor-form__submit"
-                type="submit"
+                type="button"
                 size="l"
+                [disabled]="isLoading()"
+                (click)="verifyCode()"
+                [loading]="isLoading()"
             >
                 Подтвердить
             </button>
@@ -51,11 +64,12 @@
                 </p>
 
                 <p class="two-factor-form__resend-text">
-                    Проверьте папку «Спам» или запросите код повторно.
+                    Проверьте папку «Спам» или вернитесь ко входу, чтобы
+                    запросить новый код.
                 </p>
             </div>
 
-            <button tuiButton type="button" appearance="flat" size="s">
+            <button tuiButton type="button" appearance="flat" size="s" disabled>
                 Отправить повторно
             </button>
         </div>
@@ -64,7 +78,10 @@
             <a
                 tuiLink
                 class="two-factor-form__login-link"
-                routerLink="/auth/login"
+                role="button"
+                tabindex="0"
+                (click)="backToLogin()"
+                (keydown.enter)="backToLogin()"
             >
                 Вернуться ко входу
             </a>
