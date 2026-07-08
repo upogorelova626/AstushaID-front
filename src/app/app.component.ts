@@ -1,8 +1,8 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {TuiRoot} from '@taiga-ui/core';
 import {UsersService} from './features/auth/services/users.service';
-import {UserTheme} from './shared/interfaces';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-root',
@@ -12,4 +12,14 @@ import {UserTheme} from './shared/interfaces';
 })
 export class AppComponent {
     title = 'astusha-id';
+
+    private readonly usersService = inject(UsersService);
+
+    private readonly currentUser = toSignal(this.usersService.currentUser$, {
+        initialValue: null
+    });
+
+    protected readonly tuiTheme = computed(() =>
+        this.currentUser()?.theme === 'DARK' ? 'dark' : 'light'
+    );
 }

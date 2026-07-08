@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {TuiButton, TuiIcon} from '@taiga-ui/core';
 
 type ApplicationStatus = 'active' | 'connected' | 'current' | 'soon';
@@ -18,7 +18,8 @@ interface Application {
     selector: 'app-applications-card',
     imports: [TuiButton, TuiIcon],
     templateUrl: './applications-card.component.html',
-    styleUrl: './applications-card.component.less'
+    styleUrl: './applications-card.component.less',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApplicationsCardComponent {
     protected readonly applications: Application[] = [

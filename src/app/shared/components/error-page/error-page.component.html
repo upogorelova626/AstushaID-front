@@ -1,0 +1,43 @@
+<div class="not-found-page">
+    <main class="not-found-page__content">
+        <section class="not-found-page__info">
+            <div class="not-found-page__code">404</div>
+
+            <h1 class="not-found-page__title">Страница не найдена</h1>
+
+            <p class="not-found-page__description">
+                Информация по указанному адресу не найдена или страница была
+                перемещена.
+            </p>
+        </section>
+
+        <div class="not-found-page__actions">
+            <button
+                tuiButton
+                type="button"
+                iconStart="@tui.house"
+                (click)="goToMain()"
+            >
+                На главную
+            </button>
+
+            <button
+                tuiButton
+                type="button"
+                iconStart="@tui.arrow-left"
+                appearance="flat"
+                (click)="goBack()"
+            >
+                Вернуться назад
+            </button>
+        </div>
+    </main>
+
+    <footer class="not-found-page__footer">
+        <span class="not-found-page__brand">Astusha ID</span>
+
+        <span class="not-found-page__copyright">
+            © 2026 Astusha ID. Все права защищены.
+        </span>
+    </footer>
+</div>

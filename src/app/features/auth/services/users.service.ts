@@ -20,7 +20,7 @@ export class UsersService {
     private readonly currentUserSubject =
         new BehaviorSubject<AstushaUser | null>(null);
 
-    readonly currentUser = this.currentUserSubject.asObservable();
+    readonly currentUser$ = this.currentUserSubject.asObservable();
 
     getMe(): Observable<AstushaUser> {
         return this.http.get<AstushaUser>(`${this.baseApiUrl}/me`);

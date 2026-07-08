@@ -32,6 +32,10 @@ export class CreateAccountPage {
         });
     }
 
+    private get loginLink() {
+        return this.page.getByRole('link', {name: 'Войти'});
+    }
+
     async open() {
         await this.page.goto('/auth/create-account');
     }
@@ -62,5 +66,9 @@ export class CreateAccountPage {
         await expect(
             this.page.getByText('Не удалось создать аккаунт')
         ).toBeVisible();
+    }
+
+    async goToLogin() {
+        await this.loginLink.click();
     }
 }

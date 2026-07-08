@@ -5,8 +5,8 @@
 .astusha-applications-card {
     padding: 24px;
     border: 1px solid var(--color-card-border);
-    border-radius: 24px;
-    background: var(--astusha-color-surface);
+    border-radius: 5px;
+    background: var(--color-card-background);
 
     &__header {
         display: flex;
@@ -18,13 +18,13 @@
 
     &__title {
         margin: 0;
-        color: var(--astusha-color-text-primary);
+        color: var(--color-text-primary);
         font: var(--tui-typography-heading-h6);
     }
 
     &__description {
         margin: 8px 0 0;
-        color: var(--astusha-color-text-secondary);
+        color: var(--color-text-secondary);
         font: var(--tui-typography-body-m);
     }
 
@@ -32,9 +32,10 @@
         flex-shrink: 0;
         padding: 6px 10px;
         border-radius: 999px;
-        background: rgba(122, 92, 255, 0.1);
-        color: var(--astusha-color-primary);
+        background: var(--color-primary-soft);
+        color: var(--color-primary);
         font: var(--tui-typography-body-s);
+        white-space: nowrap;
     }
 
     &__list {
@@ -45,13 +46,15 @@
 
     &__item {
         display: grid;
-        grid-template-columns: auto minmax(0, 1fr) auto auto;
+        grid-template-columns: 48px minmax(0, 1fr) auto auto;
         align-items: center;
         gap: 16px;
+        width: 100%;
+        box-sizing: border-box;
         padding: 16px;
         border: 1px solid var(--color-card-border);
-        border-radius: 18px;
-        background: var(--astusha-color-surface-secondary);
+        border-radius: 5px;
+        background: var(--color-card-bg-soft);
     }
 
     &__icon-wrapper {
@@ -60,12 +63,12 @@
         justify-content: center;
         width: 48px;
         height: 48px;
-        border-radius: 16px;
-        background: rgba(122, 92, 255, 0.12);
+        border-radius: 5px;
+        background: var(--color-primary-soft);
     }
 
     &__icon {
-        color: var(--astusha-color-primary);
+        color: var(--color-primary);
         font-size: 24px;
     }
 
@@ -75,13 +78,14 @@
 
     &__name {
         margin: 0;
-        color: var(--astusha-color-text-primary);
+        color: var(--color-text-primary);
         font: var(--tui-typography-body-l);
     }
 
     &__text {
         margin: 4px 0 0;
-        color: var(--astusha-color-text-secondary);
+        overflow-wrap: anywhere;
+        color: var(--color-text-secondary);
         font: var(--tui-typography-body-m);
     }
 
@@ -89,6 +93,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        justify-self: flex-end;
         min-width: 96px;
         padding: 6px 10px;
         border-radius: 999px;
@@ -97,59 +102,111 @@
 
         &_active,
         &_connected {
-            background: rgba(28, 164, 85, 0.12);
-            color: #168a46;
+            background: var(--color-success-bg-soft);
+            color: var(--color-success);
         }
 
         &_current {
-            background: rgba(122, 92, 255, 0.14);
-            color: var(--astusha-color-primary);
+            background: var(--color-primary-soft);
+            color: var(--color-primary);
         }
 
         &_soon {
-            background: rgba(31, 41, 55, 0.08);
-            color: var(--astusha-color-text-secondary);
+            background: var(--color-card-inner-bg);
+            color: var(--color-text-muted);
         }
     }
 
     &__action {
+        justify-self: flex-end;
         flex-shrink: 0;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .astusha-applications-card {
+        &__item {
+            grid-template-columns: 48px minmax(0, 1fr) auto;
+            align-items: flex-start;
+        }
+
+        &__status {
+            grid-column: 2 / 4;
+            justify-self: flex-start;
+            min-width: auto;
+            margin-top: -6px;
+        }
+
+        &__action {
+            justify-self: flex-end;
+        }
+    }
+}
+
+@media (max-width: 640px) {
     .astusha-applications-card {
         padding: 20px;
 
         &__header {
             flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        &__counter {
+            align-self: flex-start;
         }
 
         &__item {
-            grid-template-columns: auto minmax(0, 1fr) auto;
+            grid-template-columns: 44px minmax(0, 1fr);
+            gap: 12px;
+            padding: 14px;
+        }
+
+        &__icon-wrapper {
+            width: 44px;
+            height: 44px;
+        }
+
+        &__icon {
+            font-size: 22px;
         }
 
         &__status {
-            grid-column: 2 / 4;
-            justify-content: flex-start;
+            grid-column: 1 / 3;
+            justify-self: flex-start;
             width: fit-content;
+            margin-top: 0;
+        }
+
+        &__action {
+            grid-column: 1 / 3;
+            width: 100%;
+            justify-self: stretch;
+        }
+
+        &__action button {
+            width: 100%;
         }
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 420px) {
     .astusha-applications-card {
+        padding: 16px;
+
         &__item {
-            grid-template-columns: 1fr;
+            padding: 12px;
         }
 
-        &__icon-wrapper,
-        &__action {
-            justify-self: flex-start;
+        &__title {
+            font: var(--tui-typography-body-l);
+            font-weight: 600;
         }
 
-        &__status {
-            grid-column: auto;
+        &__description,
+        &__text {
+            font: var(--tui-typography-body-s);
         }
     }
 }

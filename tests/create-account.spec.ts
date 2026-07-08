@@ -1,5 +1,9 @@
-import test, {expect} from '@playwright/test';
-import {mockCreateAccount, mockCreateAccountError} from './mocks/auth.mocks';
+import {test, expect} from '@playwright/test';
+import {
+    mockCreateAccount,
+    mockCreateAccountError,
+    mockCurrentUser
+} from './mocks/auth.mocks';
 import {CreateAccountPage} from './pages/create-account.page';
 
 test.describe('Create account', () => {
@@ -13,6 +17,7 @@ test.describe('Create account', () => {
 
     test('creates account successfully', async ({page}) => {
         await mockCreateAccount(page);
+        await mockCurrentUser(page);
 
         const createAccountPage = new CreateAccountPage(page);
 
@@ -20,7 +25,7 @@ test.describe('Create account', () => {
         await createAccountPage.fillValidForm();
         await createAccountPage.submit();
 
-        await expect(page).toHaveURL(/\/account\/profile/);
+        await expect(page).toHaveURL('/account/profile');
     });
 
     test('show alert when create account failed', async ({page}) => {
@@ -34,13 +39,17 @@ test.describe('Create account', () => {
 
         await createAccountPage.expectCreateAccountError();
 
-        await expect(page).toHaveURL(/\/auth\/create-account/);
+        await expect(page).toHaveURL('/auth/create-account');
     });
 
     test('does not submit empty form', async ({page}) => {
         let requestWasSent = false;
 
-        await page.route('http://localhost:3002/auth/create-account', route => {
+        await page.route('**/auth/create-account', route => {
+            if (route.request().method() !== 'POST') {
+                return route.continue();
+            }
+
             requestWasSent = true;
 
             return route.fulfill({
@@ -57,6 +66,6 @@ test.describe('Create account', () => {
 
         expect(requestWasSent).toBe(false);
 
-        await expect(page).toHaveURL(/\/auth\/create-account/);
+        await expect(page).toHaveURL('/auth/create-account');
     });
 });

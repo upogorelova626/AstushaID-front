@@ -10,6 +10,7 @@ import {TuiAvatar, TuiSkeleton} from '@taiga-ui/kit';
 import {UsersService} from '../../../features/auth/services/users.service';
 import {finalize} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-layout-header',
@@ -20,7 +21,8 @@ import {AsyncPipe} from '@angular/common';
 })
 export class LayoutHeaderComponent implements OnInit {
     private readonly usersService = inject(UsersService);
-    protected readonly currentUser$ = this.usersService.currentUser;
+
+    protected readonly currentUser$ = this.usersService.currentUser$;
 
     protected readonly isLoading = signal(false);
 

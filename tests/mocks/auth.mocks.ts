@@ -17,17 +17,12 @@ export const mockUser = {
 };
 
 export async function mockCreateAccount(page: Page) {
-    await page.route('http://localhost:3002/auth/create-account', route => {
+    await page.route('**/auth/create-account', route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
         return route.fulfill({
             status: 201,
-            contentType: 'application/json',
-            body: JSON.stringify(mockUser)
-        });
-    });
-
-    await page.route('http://localhost:3002/users/me', route => {
-        return route.fulfill({
-            status: 200,
             contentType: 'application/json',
             body: JSON.stringify(mockUser)
         });
@@ -35,15 +30,10 @@ export async function mockCreateAccount(page: Page) {
 }
 
 export async function mockSuccessfulLogin(page: Page) {
-    await page.route('http://localhost:3002/auth/login', route => {
-        return route.fulfill({
-            status: 200,
-            contentType: 'application/json',
-            body: JSON.stringify(mockUser)
-        });
-    });
-
-    await page.route('http://localhost:3002/users/me', route => {
+    await page.route('**/auth/login', route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
         return route.fulfill({
             status: 200,
             contentType: 'application/json',
@@ -53,7 +43,10 @@ export async function mockSuccessfulLogin(page: Page) {
 }
 
 export async function mockCreateAccountError(page: Page) {
-    await page.route('http://localhost:3002/auth/create-account', route => {
+    await page.route('**/auth/create-account', route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
         return route.fulfill({
             status: 409,
             contentType: 'application/json',
@@ -63,6 +56,37 @@ export async function mockCreateAccountError(page: Page) {
                     'Пользователь с таким email или логином уже существует',
                 error: 'Conflict'
             })
+        });
+    });
+}
+
+export async function mockLoginError(page: Page) {
+    await page.route('**/auth/login', route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
+        return route.fulfill({
+            status: 401,
+            contentType: 'application/json',
+            body: JSON.stringify({
+                statusCode: 401,
+                message: 'Неверный логин или пароль',
+                error: 'Unauthorized'
+            })
+        });
+    });
+}
+
+export async function mockCurrentUser(page: Page) {
+    await page.route('**/users/me', route => {
+        if (route.request().method() !== 'GET') {
+            return route.continue();
+        }
+
+        return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify(mockUser)
         });
     });
 }
