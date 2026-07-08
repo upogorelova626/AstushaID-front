@@ -91,6 +91,23 @@ export async function mockCurrentUser(page: Page) {
     });
 }
 
+export async function mockCurrentUserUnauthorized(page: Page) {
+    await page.route('**/users/me', route => {
+        if (route.request().method() !== 'GET') {
+            return route.continue();
+        }
+        return route.fulfill({
+            status: 401,
+            contentType: 'application/json',
+            body: JSON.stringify({
+                statusCode: 401,
+                message: 'Unauthorized',
+                error: 'Unauthorized'
+            })
+        });
+    });
+}
+
 export async function mockTwoFactorLogin(page: Page) {
     await page.route('**/auth/login', route => {
         if (route.request().method() !== 'POST') {

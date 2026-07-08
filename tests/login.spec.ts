@@ -91,4 +91,22 @@ test.describe('Login', () => {
         expect(challengeId).toBe('test-challenge-id');
         expect(email).toBe('test-user@example.com');
     });
+
+    test('should navigate to forgot password page', async ({page}) => {
+        const loginPage = new LoginPage(page);
+
+        await loginPage.open();
+        await loginPage.goToForgotPassword();
+
+        await expect(page).toHaveURL('/auth/forgot-password');
+    });
+
+    test('should navigate to create account page', async ({page}) => {
+        const loginPage = new LoginPage(page);
+
+        await loginPage.open();
+        await loginPage.goToCreateAccount();
+
+        await expect(page).toHaveURL('/auth/create-account');
+    });
 });

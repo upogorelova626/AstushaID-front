@@ -1,4 +1,5 @@
-import {test, expect} from '@playwright/test';
+import {expect, test} from '@playwright/test';
+
 import {
     mockCreateAccount,
     mockCreateAccountError,
@@ -7,7 +8,7 @@ import {
 import {CreateAccountPage} from './pages/create-account.page';
 
 test.describe('Create account', () => {
-    test('opens create account page', async ({page}) => {
+    test('should open create account page', async ({page}) => {
         const createAccountPage = new CreateAccountPage(page);
 
         await createAccountPage.open();
@@ -15,7 +16,7 @@ test.describe('Create account', () => {
         await createAccountPage.expectOpened();
     });
 
-    test('creates account successfully', async ({page}) => {
+    test('should create account successfully', async ({page}) => {
         await mockCreateAccount(page);
         await mockCurrentUser(page);
 
@@ -28,7 +29,7 @@ test.describe('Create account', () => {
         await expect(page).toHaveURL('/account/profile');
     });
 
-    test('show alert when create account failed', async ({page}) => {
+    test('should show alert when create account failed', async ({page}) => {
         await mockCreateAccountError(page);
 
         const createAccountPage = new CreateAccountPage(page);
@@ -42,7 +43,7 @@ test.describe('Create account', () => {
         await expect(page).toHaveURL('/auth/create-account');
     });
 
-    test('does not submit empty form', async ({page}) => {
+    test('should not submit empty form', async ({page}) => {
         let requestWasSent = false;
 
         await page.route('**/auth/create-account', route => {
@@ -53,15 +54,78 @@ test.describe('Create account', () => {
             requestWasSent = true;
 
             return route.fulfill({
-                status: 500,
-                contentType: 'application/json',
-                body: JSON.stringify({})
+                status: 500
             });
         });
 
         const createAccountPage = new CreateAccountPage(page);
 
         await createAccountPage.open();
+        await createAccountPage.submit();
+
+        expect(requestWasSent).toBe(false);
+
+        await expect(page).toHaveURL('/auth/create-account');
+    });
+
+    test('should navigate to login page', async ({page}) => {
+        const createAccountPage = new CreateAccountPage(page);
+
+        await createAccountPage.open();
+        await createAccountPage.goToLogin();
+
+        await expect(page).toHaveURL('/auth/login');
+    });
+
+    test('should not submit form when passwords do not match', async ({
+        page
+    }) => {
+        let requestWasSent = false;
+
+        await page.route('**/auth/create-account', route => {
+            if (route.request().method() !== 'POST') {
+                return route.continue();
+            }
+
+            requestWasSent = true;
+
+            return route.fulfill({
+                status: 500
+            });
+        });
+
+        const createAccountPage = new CreateAccountPage(page);
+
+        await createAccountPage.open();
+        await createAccountPage.fillInvalidForm();
+        await createAccountPage.submit();
+
+        expect(requestWasSent).toBe(false);
+
+        await expect(page).toHaveURL('/auth/create-account');
+    });
+
+    test('should not submit form without agreement checkbox', async ({
+        page
+    }) => {
+        let requestWasSent = false;
+
+        await page.route('**/auth/create-account', route => {
+            if (route.request().method() !== 'POST') {
+                return route.continue();
+            }
+
+            requestWasSent = true;
+
+            return route.fulfill({
+                status: 500
+            });
+        });
+
+        const createAccountPage = new CreateAccountPage(page);
+
+        await createAccountPage.open();
+        await createAccountPage.fillFormWithoutCheckbox();
         await createAccountPage.submit();
 
         expect(requestWasSent).toBe(false);

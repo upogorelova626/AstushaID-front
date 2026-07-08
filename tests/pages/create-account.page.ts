@@ -48,12 +48,22 @@ export class CreateAccountPage {
         await this.agreementCheckbox.check();
     }
 
+    async fillInvalidForm() {
+        await this.fillValidForm();
+        await this.confirmPasswordInput.fill('invalid123');
+    }
+
+    async fillFormWithoutCheckbox() {
+        await this.fillValidForm();
+        await this.agreementCheckbox.uncheck();
+    }
+
     async submit() {
         await this.submitButton.click();
     }
 
     async expectOpened() {
-        await expect(this.page).toHaveURL(/\/auth\/create-account/);
+        await expect(this.page).toHaveURL('/auth/create-account');
 
         await expect(
             this.page.getByRole('heading', {
