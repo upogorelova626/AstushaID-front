@@ -14,7 +14,7 @@ import {
     TuiNotificationService,
     TuiTextfield
 } from '@taiga-ui/core';
-import {catchError, EMPTY, finalize} from 'rxjs';
+import {catchError, EMPTY, finalize, switchMap, tap, timer} from 'rxjs';
 
 import {AuthService} from '../../services/auth.service';
 
@@ -63,6 +63,17 @@ export class ForgotPasswordPageComponent {
                 email: this.emailControl.value.trim()
             })
             .pipe(
+                tap(() => {
+                    this.alerts
+                        .open(
+                            'Если аккаунт с такой почтой существует, мы отправили письмо со ссылкой для сброса пароля.',
+                            {
+                                appearance: 'positive'
+                            }
+                        )
+                        .subscribe();
+                }),
+                switchMap(() => timer(2000)),
                 catchError(() => {
                     this.alerts
                         .open(
@@ -79,12 +90,6 @@ export class ForgotPasswordPageComponent {
             )
             .subscribe(() => {
                 this.isEmailSent.set(true);
-                this.alerts.open(
-                    'Если аккаунт с такой почтой существует, мы отправили письмо со ссылкой для сброса пароля.',
-                    {
-                        appearance: 'positive'
-                    }
-                );
             });
     }
 }

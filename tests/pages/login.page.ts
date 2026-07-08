@@ -48,7 +48,7 @@ export class LoginPage {
     }
 
     async expectOpened() {
-        await expect(this.page).toHaveURL(/\/auth\/login/);
+        await expect(this.page).toHaveURL('/auth/login');
 
         await expect(
             this.page.getByRole('heading', {

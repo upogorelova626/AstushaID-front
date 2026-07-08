@@ -140,3 +140,28 @@ export async function mockVerifyEmailTwoFactorError(page: Page) {
         });
     });
 }
+
+export async function mockForgotPasswordSuccess(page: Page) {
+    await page.route('**/password-reset/request', async route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
+
+        return route.fulfill({
+            status: 204
+        });
+    });
+}
+
+export async function mockForgotPasswordError(page: Page) {
+    await page.route('**/password-reset/request', async route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
+
+        return route.fulfill({
+            status: 500,
+            body: ''
+        });
+    });
+}

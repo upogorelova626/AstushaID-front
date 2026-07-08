@@ -4,7 +4,7 @@ import {TuiAvatar, TuiSwitch} from '@taiga-ui/kit';
 
 @Component({
     selector: 'app-notification-frequency-card',
-    imports: [TuiAvatar, TuiIcon, TuiInput, TuiSwitch],
+    imports: [TuiAvatar, TuiIcon, TuiInput],
     templateUrl: './notification-frequency-card.component.html',
     styleUrl: './notification-frequency-card.component.less'
 })
