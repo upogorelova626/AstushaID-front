@@ -111,10 +111,6 @@ export async function mockTwoFactorLogin(page: Page) {
 
 export async function mockVerifyEmailTwoFactor(page: Page) {
     await page.route('**/auth/two-factor/email/verify', route => {
-        if (route.request().method() !== 'POST') {
-            return route.continue();
-        }
-
         return route.fulfill({
             status: 200,
             contentType: 'application/json',
@@ -125,10 +121,6 @@ export async function mockVerifyEmailTwoFactor(page: Page) {
 
 export async function mockVerifyEmailTwoFactorError(page: Page) {
     await page.route('**/auth/two-factor/email/verify', route => {
-        if (route.request().method() !== 'POST') {
-            return route.continue();
-        }
-
         return route.fulfill({
             status: 401,
             contentType: 'application/json',
@@ -142,11 +134,7 @@ export async function mockVerifyEmailTwoFactorError(page: Page) {
 }
 
 export async function mockForgotPasswordSuccess(page: Page) {
-    await page.route('**/password-reset/request', async route => {
-        if (route.request().method() !== 'POST') {
-            return route.continue();
-        }
-
+    await page.route('**/password-reset/request', route => {
         return route.fulfill({
             status: 204
         });
@@ -154,13 +142,26 @@ export async function mockForgotPasswordSuccess(page: Page) {
 }
 
 export async function mockForgotPasswordError(page: Page) {
-    await page.route('**/password-reset/request', async route => {
-        if (route.request().method() !== 'POST') {
-            return route.continue();
-        }
-
+    await page.route('**/password-reset/request', route => {
         return route.fulfill({
             status: 500,
+            body: ''
+        });
+    });
+}
+
+export async function mockResetPasswordSuccess(page: Page) {
+    await page.route('**/password-reset/confirm', route => {
+        return route.fulfill({
+            status: 204
+        });
+    });
+}
+
+export async function mockResetPasswordError(page: Page) {
+    await page.route('**/password-reset/confirm', route => {
+        return route.fulfill({
+            status: 400,
             body: ''
         });
     });
