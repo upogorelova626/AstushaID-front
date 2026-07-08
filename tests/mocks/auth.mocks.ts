@@ -90,3 +90,53 @@ export async function mockCurrentUser(page: Page) {
         });
     });
 }
+
+export async function mockTwoFactorLogin(page: Page) {
+    await page.route('**/auth/login', route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
+
+        return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({
+                twoFactorRequired: true,
+                challengeId: 'test-challenge-id',
+                email: 'test-user@example.com'
+            })
+        });
+    });
+}
+
+export async function mockVerifyEmailTwoFactor(page: Page) {
+    await page.route('**/auth/two-factor/email/verify', route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
+
+        return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify(mockUser)
+        });
+    });
+}
+
+export async function mockVerifyEmailTwoFactorError(page: Page) {
+    await page.route('**/auth/two-factor/email/verify', route => {
+        if (route.request().method() !== 'POST') {
+            return route.continue();
+        }
+
+        return route.fulfill({
+            status: 401,
+            contentType: 'application/json',
+            body: JSON.stringify({
+                statusCode: 401,
+                message: 'Неверный код подтверждения',
+                error: 'Unauthorized'
+            })
+        });
+    });
+}

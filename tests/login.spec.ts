@@ -2,7 +2,8 @@ import {test, expect} from '@playwright/test';
 import {
     mockCurrentUser,
     mockLoginError,
-    mockSuccessfulLogin
+    mockSuccessfulLogin,
+    mockTwoFactorLogin
 } from './mocks/auth.mocks';
 import {LoginPage} from './pages/login.page';
 
@@ -66,5 +67,28 @@ test.describe('Login', () => {
         expect(requestWasSent).toBe(false);
 
         await expect(page).toHaveURL('/auth/login');
+    });
+
+    test('redirect to two-factor page when 2Fa is required', async ({page}) => {
+        await mockTwoFactorLogin(page);
+
+        const loginPage = new LoginPage(page);
+
+        await loginPage.open();
+        await loginPage.fillValidForm();
+        await loginPage.submit();
+
+        await expect(page).toHaveURL('auth/two-factor');
+
+        const challengeId = await page.evaluate(() =>
+            sessionStorage.getItem('emailTwoFactorChallengeId')
+        );
+
+        const email = await page.evaluate(() =>
+            sessionStorage.getItem('emailTwoFactorEmail')
+        );
+
+        expect(challengeId).toBe('test-challenge-id');
+        expect(email).toBe('test-user@example.com');
     });
 });
