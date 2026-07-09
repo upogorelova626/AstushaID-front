@@ -20,11 +20,19 @@
                     <tui-icon icon="@tui.panels-top-left" />
                 </div>
 
-                <div class="astusha-services-notifications-card__item-info">
+                <div
+                    class="astusha-services-notifications-card__item-info astusha-services-notifications-card__item_disabled"
+                >
                     <div
                         class="astusha-services-notifications-card__item-title"
                     >
                         AstushaApp
+
+                        <span
+                            class="astusha-services-notifications-card__badge"
+                        >
+                            Скоро
+                        </span>
                     </div>
 
                     <div class="astusha-services-notifications-card__item-meta">
@@ -32,7 +40,7 @@
                     </div>
                 </div>
 
-                <input tuiSwitch type="checkbox" checked />
+                <input tuiSwitch type="checkbox" disabled />
             </div>
 
             <div
@@ -63,7 +71,9 @@
                 <input tuiSwitch type="checkbox" disabled />
             </div>
 
-            <div class="astusha-services-notifications-card__item">
+            <div
+                class="astusha-services-notifications-card__item astusha-services-notifications-card__item_disabled"
+            >
                 <div class="astusha-services-notifications-card__item-icon">
                     <tui-icon icon="@tui.plug" />
                 </div>
@@ -73,6 +83,12 @@
                         class="astusha-services-notifications-card__item-title"
                     >
                         Интеграции
+
+                        <span
+                            class="astusha-services-notifications-card__badge"
+                        >
+                            Скоро
+                        </span>
                     </div>
 
                     <div class="astusha-services-notifications-card__item-meta">
@@ -80,7 +96,7 @@
                     </div>
                 </div>
 
-                <input tuiSwitch type="checkbox" checked />
+                <input tuiSwitch type="checkbox" disabled />
             </div>
         </div>
     </main>
