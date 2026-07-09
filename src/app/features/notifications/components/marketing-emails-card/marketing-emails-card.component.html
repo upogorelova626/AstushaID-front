@@ -31,6 +31,9 @@
                 class="marketing-emails-card__switch"
                 tuiSwitch
                 type="checkbox"
+                [tuiSkeleton]="isLoading() || isSaving()"
+                [formControl]="control"
+                (change)="updateNotificationSettings()"
             />
         </div>
     </main>

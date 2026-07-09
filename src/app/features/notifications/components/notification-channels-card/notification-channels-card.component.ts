@@ -10,7 +10,6 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {TuiIcon, TuiNotificationService} from '@taiga-ui/core';
 import {TuiAvatar, TuiSkeleton, TuiSwitch} from '@taiga-ui/kit';
 import {catchError, EMPTY, finalize, tap} from 'rxjs';
-
 import {NotificationSettings} from '../../../../shared/interfaces';
 import {NotificationSettingsService} from '../../../../shared/services/notification-settings.service';
 
