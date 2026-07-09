@@ -6,3 +6,4 @@ export * from './user.interface';
 export * from './change-theme.interface';
 export * from './user-activity.interface';
 export * from './user-session.interface';
+export * from './notification-settings.interface';

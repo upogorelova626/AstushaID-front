@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {TuiIcon, TuiInput} from '@taiga-ui/core';
 import {TuiAvatar, TuiSwitch} from '@taiga-ui/kit';
+import {NotificationSettings} from '../../../../shared/interfaces';
 
 @Component({
     selector: 'app-account-security-notifications-card',
@@ -9,4 +10,7 @@ import {TuiAvatar, TuiSwitch} from '@taiga-ui/kit';
     styleUrl: './account-security-notifications-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountSecurityNotificationsCardComponent {}
+export class AccountSecurityNotificationsCardComponent {
+    readonly settings = input<NotificationSettings | null>(null);
+    readonly isLoading = input();
+}

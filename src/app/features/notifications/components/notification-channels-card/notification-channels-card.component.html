@@ -13,69 +13,87 @@
         </div>
     </header>
 
-    <main class="notification-channels-card__content">
-        <div class="notification-channels-card__list">
-            <div class="notification-channels-card__item">
-                <div class="notification-channels-card__item-icon">
-                    <tui-icon icon="@tui.mail" />
-                </div>
-
-                <div class="notification-channels-card__item-info">
-                    <div class="notification-channels-card__item-title">
-                        Email-уведомления
+    <form [formGroup]="channelsForm">
+        <main class="notification-channels-card__content">
+            <div class="notification-channels-card__list">
+                <div class="notification-channels-card__item">
+                    <div class="notification-channels-card__item-icon">
+                        <tui-icon icon="@tui.mail" />
                     </div>
 
-                    <div class="notification-channels-card__item-meta">
-                        Важные события аккаунта будут приходить на почту.
+                    <div class="notification-channels-card__item-info">
+                        <div class="notification-channels-card__item-title">
+                            Email-уведомления
+                        </div>
+
+                        <div class="notification-channels-card__item-meta">
+                            Важные события аккаунта будут приходить на почту.
+                        </div>
                     </div>
+
+                    <input
+                        tuiSwitch
+                        type="checkbox"
+                        formControlName="emailNotifications"
+                        [tuiSkeleton]="isLoading() || isSaving()"
+                        (change)="updateNotificationSettings()"
+                    />
                 </div>
 
-                <input tuiSwitch type="checkbox" checked />
+                <div class="notification-channels-card__item">
+                    <div class="notification-channels-card__item-icon">
+                        <tui-icon icon="@tui.bell" />
+                    </div>
+
+                    <div class="notification-channels-card__item-info">
+                        <div class="notification-channels-card__item-title">
+                            Push-уведомления
+
+                            <span class="notification-channels-card__badge">
+                                Скоро
+                            </span>
+                        </div>
+
+                        <div class="notification-channels-card__item-meta">
+                            Уведомления в браузере о важных действиях.
+                        </div>
+                    </div>
+
+                    <input
+                        tuiSwitch
+                        type="checkbox"
+                        formControlName="pushNotifications"
+                        [tuiSkeleton]="isLoading()"
+                    />
+                </div>
+
+                <div class="notification-channels-card__item">
+                    <div class="notification-channels-card__item-icon">
+                        <tui-icon icon="@tui.send" />
+                    </div>
+
+                    <div class="notification-channels-card__item-info">
+                        <div class="notification-channels-card__item-title">
+                            Telegram
+
+                            <span class="notification-channels-card__badge">
+                                Скоро
+                            </span>
+                        </div>
+
+                        <div class="notification-channels-card__item-meta">
+                            Уведомления через Telegram-бота Astusha.
+                        </div>
+                    </div>
+
+                    <input
+                        tuiSwitch
+                        type="checkbox"
+                        formControlName="telegramNotifications"
+                        [tuiSkeleton]="isLoading()"
+                    />
+                </div>
             </div>
-
-            <div class="notification-channels-card__item">
-                <div class="notification-channels-card__item-icon">
-                    <tui-icon icon="@tui.bell" />
-                </div>
-
-                <div class="notification-channels-card__item-info">
-                    <div class="notification-channels-card__item-title">
-                        Push-уведомления
-
-                        <span class="notification-channels-card__badge">
-                            Скоро
-                        </span>
-                    </div>
-
-                    <div class="notification-channels-card__item-meta">
-                        Уведомления в браузере о важных действиях.
-                    </div>
-                </div>
-
-                <input tuiSwitch type="checkbox" disabled />
-            </div>
-
-            <div class="notification-channels-card__item">
-                <div class="notification-channels-card__item-icon">
-                    <tui-icon icon="@tui.send" />
-                </div>
-
-                <div class="notification-channels-card__item-info">
-                    <div class="notification-channels-card__item-title">
-                        Telegram
-
-                        <span class="notification-channels-card__badge">
-                            Скоро
-                        </span>
-                    </div>
-
-                    <div class="notification-channels-card__item-meta">
-                        Уведомления через Telegram-бота Astusha.
-                    </div>
-                </div>
-
-                <input tuiSwitch type="checkbox" disabled />
-            </div>
-        </div>
-    </main>
+        </main>
+    </form>
 </div>

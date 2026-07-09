@@ -1,10 +1,19 @@
 <div class="notifications-page">
     <div class="left-column">
-        <app-notification-channels-card />
+        <app-notification-channels-card
+            [settings]="notificationSettings()"
+            [isLoading]="isLoading()"
+        />
         <app-astusha-services-notification-card />
     </div>
     <div class="right-column">
-        <app-account-security-notifications-card />
-        <marketing-emails-frequency-card />
+        <app-account-security-notifications-card
+            [settings]="notificationSettings()"
+            [isLoading]="isLoading()"
+        />
+        <marketing-emails-card
+            [settings]="notificationSettings()"
+            [isLoading]="isLoading()"
+        />
     </div>
 </div>
