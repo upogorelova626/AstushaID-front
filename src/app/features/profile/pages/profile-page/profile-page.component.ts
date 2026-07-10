@@ -25,23 +25,4 @@ import {finalize} from 'rxjs';
     styleUrl: './profile-page.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProfilePageComponent implements OnInit {
-    private readonly usersService = inject(UsersService);
-
-    protected readonly me = signal<AstushaUser | null>(null);
-    protected readonly isLoading = signal(false);
-
-    ngOnInit() {
-        this.isLoading.set(true);
-        this.usersService
-            .getMe()
-            .pipe(
-                finalize(() => {
-                    this.isLoading.set(false);
-                })
-            )
-            .subscribe(user => {
-                this.me.set(user);
-            });
-    }
-}
+export class ProfilePageComponent {}

@@ -2,15 +2,13 @@ import {
     ChangeDetectionStrategy,
     Component,
     inject,
-    OnInit,
     signal
 } from '@angular/core';
 import {TuiButton, TuiIcon} from '@taiga-ui/core';
 import {TuiAvatar, TuiSkeleton} from '@taiga-ui/kit';
 import {UsersService} from '../../../features/auth/services/users.service';
-import {finalize} from 'rxjs';
+import {tap} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'app-layout-header',
@@ -19,18 +17,16 @@ import {ActivatedRoute, Router} from '@angular/router';
     styleUrl: './layout-header.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LayoutHeaderComponent implements OnInit {
+export class LayoutHeaderComponent {
     private readonly usersService = inject(UsersService);
 
-    protected readonly currentUser$ = this.usersService.currentUser$;
+    protected readonly isLoading = signal(true);
 
-    protected readonly isLoading = signal(false);
-
-    ngOnInit(): void {
-        this.isLoading.set(true);
-        this.usersService
-            .loadCurrentUser()
-            .pipe(finalize(() => this.isLoading.set(false)))
-            .subscribe();
-    }
+    protected readonly currentUser$ = this.usersService.currentUser$.pipe(
+        tap(user => {
+            if (user) {
+                this.isLoading.set(false);
+            }
+        })
+    );
 }

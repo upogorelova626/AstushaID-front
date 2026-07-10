@@ -1,13 +1,14 @@
 <div class="profile-overview">
+    @let user = currentUser$ | async;
     <section class="profile-overview__card profile-overview__card_hero">
         <div
             class="profile-overview__avatar-wrapper"
             [tuiSkeleton]="isLoading()"
         >
-            @if (user()?.avatarUrl) {
+            @if (user?.avatarUrl) {
                 <img
                     class="profile-overview__avatar-img"
-                    [src]="user()?.avatarUrl"
+                    [src]="user?.avatarUrl"
                     alt="Аватар пользователя"
                 />
             } @else {
@@ -19,11 +20,9 @@
         <div class="profile-overview__hero-info">
             <h2 class="profile-overview__name" [tuiSkeleton]="isLoading()">
                 {{
-                    user()?.firstName || user()?.lastName
-                        ? (user()?.firstName || '') +
-                          ' ' +
-                          (user()?.lastName || '')
-                        : user()?.login
+                    user?.firstName || user?.lastName
+                        ? (user?.firstName || '') + ' ' + (user?.lastName || '')
+                        : user?.login
                 }}
             </h2>
 
@@ -32,7 +31,7 @@
                     class="profile-overview__login"
                     [tuiSkeleton]="isLoading()"
                 >
-                    {{ user()?.login }}
+                    {{ user?.login }}
                 </span>
 
                 <span class="profile-overview__dot"></span>
@@ -41,7 +40,7 @@
                     class="profile-overview__email"
                     [tuiSkeleton]="isLoading()"
                 >
-                    {{ user()?.email }}
+                    {{ user?.email }}
                 </span>
             </div>
 
@@ -53,7 +52,7 @@
 
                 <span class="profile-overview__date-text">
                     Дата регистрации:
-                    {{ user()?.createdAt | date: 'd MMMM y, HH:mm' }}
+                    {{ user?.createdAt | date: 'd MMMM y, HH:mm' }}
                 </span>
             </div>
         </div>
@@ -88,7 +87,7 @@
                         class="profile-overview__info-value"
                         [tuiSkeleton]="isLoading()"
                     >
-                        {{ user()?.login }}
+                        {{ user?.login }}
                     </span>
                 </div>
             </div>
@@ -110,7 +109,7 @@
                     [tuiSkeleton]="isLoading()"
                 >
                     <span class="profile-overview__info-value">
-                        {{ user()?.email }}
+                        {{ user?.email }}
                     </span>
                 </div>
             </div>
@@ -130,7 +129,7 @@
                         class="profile-overview__info-value"
                         [tuiSkeleton]="isLoading()"
                     >
-                        {{ user()?.firstName || 'Не указано' }}
+                        {{ user?.firstName || 'Не указано' }}
                     </span>
                 </div>
             </div>
@@ -152,7 +151,7 @@
                         class="profile-overview__info-value"
                         [tuiSkeleton]="isLoading()"
                     >
-                        {{ user()?.lastName || 'Не указана' }}
+                        {{ user?.lastName || 'Не указана' }}
                     </span>
                 </div>
             </div>
@@ -174,7 +173,7 @@
                         class="profile-overview__info-value"
                         [tuiSkeleton]="isLoading()"
                     >
-                        {{ user()?.position || 'Не указана' }}
+                        {{ user?.position || 'Не указана' }}
                     </span>
                 </div>
             </div>
@@ -199,7 +198,7 @@
                         [tuiSkeleton]="isLoading()"
                     >
                         {{
-                            user()?.about ||
+                            user?.about ||
                                 'Пользователь пока ничего не рассказал о себе'
                         }}
                     </span>
@@ -223,7 +222,7 @@
                         class="profile-overview__info-value"
                         [tuiSkeleton]="isLoading()"
                     >
-                        {{ user()?.theme === 'LIGHT' ? 'Светлая' : 'Тёмная' }}
+                        {{ user?.theme === 'LIGHT' ? 'Светлая' : 'Тёмная' }}
                     </span>
                 </div>
             </div>
@@ -245,7 +244,7 @@
                         class="profile-overview__info-value"
                         [tuiSkeleton]="isLoading()"
                     >
-                        {{ user()?.createdAt | date: 'd MMMM y, HH:mm' }}
+                        {{ user?.createdAt | date: 'd MMMM y, HH:mm' }}
                     </span>
                 </div>
             </div>
@@ -267,7 +266,7 @@
                         class="profile-overview__info-value"
                         [tuiSkeleton]="isLoading()"
                     >
-                        {{ user()?.updatedAt | date: 'd MMMM y, HH:mm' }}
+                        {{ user?.updatedAt | date: 'd MMMM y, HH:mm' }}
                     </span>
                 </div>
             </div>
