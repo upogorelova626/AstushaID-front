@@ -1,5 +1,4 @@
 import {expect, test} from '@playwright/test';
-
 import {mockCurrentUser, mockCurrentUserUnauthorized} from './mocks/auth.mocks';
 
 test.describe('Auth guadrs', () => {
