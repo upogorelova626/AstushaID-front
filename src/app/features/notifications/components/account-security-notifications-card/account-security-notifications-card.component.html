@@ -14,87 +14,121 @@
     </header>
 
     <main class="account-security-notifications-card__content">
-        <div class="account-security-notifications-card__list">
-            <div class="account-security-notifications-card__item">
-                <div class="account-security-notifications-card__item-icon">
-                    <tui-icon icon="@tui.log-in" />
-                </div>
-
-                <div class="account-security-notifications-card__item-info">
-                    <div
-                        class="account-security-notifications-card__item-title"
-                    >
-                        Новый вход в аккаунт
+        <form [formGroup]="securityNotificationsForm">
+            <div class="account-security-notifications-card__list">
+                <div class="account-security-notifications-card__item">
+                    <div class="account-security-notifications-card__item-icon">
+                        <tui-icon icon="@tui.log-in" />
                     </div>
 
-                    <div class="account-security-notifications-card__item-meta">
-                        Уведомлять, если кто-то вошёл в аккаунт с нового
-                        устройства.
+                    <div class="account-security-notifications-card__item-info">
+                        <div
+                            class="account-security-notifications-card__item-title"
+                        >
+                            Новый вход в аккаунт
+                        </div>
+
+                        <div
+                            class="account-security-notifications-card__item-meta"
+                        >
+                            Уведомлять, если кто-то вошёл в аккаунт с нового
+                            устройства.
+                        </div>
                     </div>
+
+                    <input
+                        tuiSwitch
+                        type="checkbox"
+                        formControlName="login"
+                        [tuiSkeleton]="isLoading()"
+                        (change)="updateNotificationSettings()"
+                    />
                 </div>
 
-                <input tuiSwitch type="checkbox" checked />
+                <div class="account-security-notifications-card__item">
+                    <div class="account-security-notifications-card__item-icon">
+                        <tui-icon icon="@tui.lock-keyhole" />
+                    </div>
+
+                    <div class="account-security-notifications-card__item-info">
+                        <div
+                            class="account-security-notifications-card__item-title"
+                        >
+                            Смена пароля
+                        </div>
+
+                        <div
+                            class="account-security-notifications-card__item-meta"
+                        >
+                            Отправлять уведомление после изменения пароля.
+                        </div>
+                    </div>
+
+                    <input
+                        tuiSwitch
+                        type="checkbox"
+                        formControlName="changePassword"
+                        [tuiSkeleton]="isLoading()"
+                        (change)="updateNotificationSettings()"
+                    />
+                </div>
+
+                <div class="account-security-notifications-card__item">
+                    <div class="account-security-notifications-card__item-icon">
+                        <tui-icon icon="@tui.monitor-x" />
+                    </div>
+
+                    <div class="account-security-notifications-card__item-info">
+                        <div
+                            class="account-security-notifications-card__item-title"
+                        >
+                            Завершение сессий
+                        </div>
+
+                        <div
+                            class="account-security-notifications-card__item-meta"
+                        >
+                            Уведомлять о выходе с других устройств.
+                        </div>
+                    </div>
+
+                    <input
+                        tuiSwitch
+                        type="checkbox"
+                        formControlName="sessionsFinished"
+                        [tuiSkeleton]="isLoading()"
+                        (change)="updateNotificationSettings()"
+                    />
+                </div>
+
+                <div class="account-security-notifications-card__item">
+                    <div class="account-security-notifications-card__item-icon">
+                        <tui-icon icon="@tui.badge-check" />
+                    </div>
+
+                    <div class="account-security-notifications-card__item-info">
+                        <div
+                            class="account-security-notifications-card__item-title"
+                        >
+                            Двухфакторная аутентификация
+                        </div>
+
+                        <div
+                            class="account-security-notifications-card__item-meta"
+                        >
+                            Уведомлять о включении и отключении 2FA.
+                        </div>
+                    </div>
+
+                    <input
+                        tuiSwitch
+                        type="checkbox"
+                        formControlName="twoFactorNotifications"
+                        [tuiSkeleton]="isLoading()"
+                        (change)="updateNotificationSettings()"
+                    />
+                </div>
             </div>
-
-            <div class="account-security-notifications-card__item">
-                <div class="account-security-notifications-card__item-icon">
-                    <tui-icon icon="@tui.lock-keyhole" />
-                </div>
-
-                <div class="account-security-notifications-card__item-info">
-                    <div
-                        class="account-security-notifications-card__item-title"
-                    >
-                        Смена пароля
-                    </div>
-
-                    <div class="account-security-notifications-card__item-meta">
-                        Отправлять уведомление после изменения пароля.
-                    </div>
-                </div>
-
-                <input tuiSwitch type="checkbox" checked />
-            </div>
-
-            <div class="account-security-notifications-card__item">
-                <div class="account-security-notifications-card__item-icon">
-                    <tui-icon icon="@tui.monitor-x" />
-                </div>
-
-                <div class="account-security-notifications-card__item-info">
-                    <div
-                        class="account-security-notifications-card__item-title"
-                    >
-                        Завершение сессий
-                    </div>
-
-                    <div class="account-security-notifications-card__item-meta">
-                        Уведомлять о выходе с других устройств.
-                    </div>
-                </div>
-
-                <input tuiSwitch type="checkbox" checked />
-            </div>
-
-            <div class="account-security-notifications-card__item">
-                <div class="account-security-notifications-card__item-icon">
-                    <tui-icon icon="@tui.badge-check" />
-                </div>
-
-                <div class="account-security-notifications-card__item-info">
-                    <div
-                        class="account-security-notifications-card__item-title"
-                    >
-                        Двухфакторная аутентификация
-                    </div>
-
-                    <div class="account-security-notifications-card__item-meta">
-                        Уведомлять о включении и отключении 2FA.
-                    </div>
-                </div>
-
-                <input tuiSwitch type="checkbox" checked />
-            </div>
-        </div>
+        </form>
     </main>
 </div>
