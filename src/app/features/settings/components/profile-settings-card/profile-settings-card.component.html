@@ -1,16 +1,14 @@
 <section class="card">
     <header class="header">
-        <div class="header-icon">
-            <tui-icon icon="@tui.user" />
-        </div>
+        <div tuiAvatar="@tui.user" appearance="info" size="l"> </div>
 
         <div class="header-content">
-            <h2 class="title">Профиль</h2>
+            <div class="title">Профиль</div>
 
-            <p class="description">
+            <div class="description">
                 Эти данные будут отображаться в вашем профиле и других сервисах
                 Astusha.
-            </p>
+            </div>
         </div>
 
         <button
@@ -19,7 +17,7 @@
             type="button"
             iconStart="@tui.pencil"
             appearance="flat"
-            [disabled]="isLoading() || isEditing()"
+            [disabled]="isEditing()"
             (click)="startEditing()"
         >
             Редактировать
@@ -27,12 +25,12 @@
     </header>
 
     <main class="content">
-        <div class="avatar" [tuiSkeleton]="isLoading()">
-            @if (avatarPreviewUrl() || localUser()?.avatarUrl) {
+        <div class="avatar">
+            @if (avatarPreviewUrl() || currentUser()?.avatarUrl) {
                 <div class="avatar-preview">
                     <img
                         class="avatar-image"
-                        [src]="avatarPreviewUrl() || localUser()?.avatarUrl"
+                        [src]="avatarPreviewUrl() || currentUser()?.avatarUrl"
                         alt="Фото профиля"
                     />
                 </div>
@@ -52,20 +50,20 @@
                         JPG, PNG или WEBP до 5 МБ.
                     </p>
 
-                    @if (!control.value) {
+                    @if (!avatarControl.value) {
                         <label tuiInputFiles class="avatar-upload">
                             <input
                                 tuiInputFiles
                                 type="file"
                                 accept="image/png,image/jpeg,image/webp"
-                                [formControl]="control"
+                                [formControl]="avatarControl"
                             />
                         </label>
                     }
 
                     <tui-files class="files">
                         @if (
-                            control.value
+                            avatarControl.value
                                 | tuiFileRejected
                                     : {
                                           accept: 'image/png,image/jpeg,image/webp'
@@ -76,36 +74,36 @@
                             <tui-file
                                 state="error"
                                 [file]="file"
-                                (remove)="removeFile()"
+                                (remove)="removeAvatarFile()"
                             />
                         }
 
-                        @if (loadedFiles$ | async; as file) {
+                        @if (loadingAvatarFiles$ | async; as file) {
                             <tui-file
                                 size="l"
                                 [file]="file"
-                                (remove)="removeFile()"
+                                (remove)="removeAvatarFile()"
                             />
                         }
 
-                        @if (failedFiles$ | async; as file) {
+                        @if (failedAvatarFiles$ | async; as file) {
                             <tui-file
                                 state="error"
                                 [file]="file"
-                                (remove)="removeFile()"
+                                (remove)="removeAvatarFile()"
                             />
                         }
 
-                        @if (loadingFiles$ | async; as file) {
+                        @if (loadingAvatarFiles$ | async; as file) {
                             <tui-file
                                 state="loading"
                                 [file]="file"
-                                (remove)="removeFile()"
+                                (remove)="removeAvatarFile()"
                             />
                         }
                     </tui-files>
 
-                    @if (localUser()?.avatarUrl) {
+                    @if (currentUser()?.avatarUrl) {
                         <button
                             class="avatar-delete"
                             tuiButton
@@ -131,7 +129,6 @@
                         tuiInput
                         placeholder="Введите имя"
                         formControlName="firstName"
-                        [tuiSkeleton]="isLoading()"
                         [readOnly]="!isEditing()"
                     />
                 </tui-textfield>
@@ -143,7 +140,6 @@
                         tuiInput
                         placeholder="Введите фамилию"
                         formControlName="lastName"
-                        [tuiSkeleton]="isLoading()"
                         [readOnly]="!isEditing()"
                     />
                 </tui-textfield>
@@ -156,8 +152,7 @@
                     <input
                         tuiInput
                         placeholder="Введите email"
-                        [tuiSkeleton]="isLoading()"
-                        [value]="localUser()?.email"
+                        [value]="currentUser()?.email"
                         disabled
                     />
                 </tui-textfield>
@@ -169,7 +164,6 @@
                         tuiInput
                         placeholder="Введите должность"
                         formControlName="position"
-                        [tuiSkeleton]="isLoading()"
                         [readOnly]="!isEditing()"
                     />
                 </tui-textfield>
@@ -182,7 +176,6 @@
                     tuiInput
                     placeholder="Расскажите немного о себе"
                     formControlName="about"
-                    [tuiSkeleton]="isLoading()"
                     [readOnly]="!isEditing()"
                 />
             </tui-textfield>

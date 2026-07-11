@@ -23,24 +23,4 @@ import {AppearanceSettingsCardComponent} from '../../components/appearance-setti
     styleUrl: './settings-page.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SettingsPageComponent implements OnInit {
-    private readonly usersService = inject(UsersService);
-
-    protected readonly currentUser = signal<AstushaUser | null>(null);
-    protected readonly isLoading = signal(false);
-
-    ngOnInit(): void {
-        this.isLoading.set(true);
-
-        this.usersService
-            .getMe()
-            .pipe(
-                finalize(() => {
-                    this.isLoading.set(false);
-                })
-            )
-            .subscribe(user => {
-                this.currentUser.set(user);
-            });
-    }
-}
+export class SettingsPageComponent {}

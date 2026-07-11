@@ -26,9 +26,11 @@ export class UsersService {
         return this.http.get<AstushaUser>(`${this.baseApiUrl}/me`);
     }
 
-    loadCurrentUser(): Observable<AstushaUser> {
-        return this.getMe().pipe(
-            tap(user => this.currentUserSubject.next(user))
+    loadCurrentUser() {
+        return this.http.get<AstushaUser>(`${this.baseApiUrl}/me`).pipe(
+            tap(user => {
+                this.currentUserSubject.next(user);
+            })
         );
     }
 

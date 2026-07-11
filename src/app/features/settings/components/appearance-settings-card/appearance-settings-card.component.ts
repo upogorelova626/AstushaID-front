@@ -1,16 +1,16 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    effect,
+    computed,
     inject,
-    input,
     signal
 } from '@angular/core';
 import {TuiButton} from '@taiga-ui/core';
-import {catchError, EMPTY, finalize, tap} from 'rxjs';
+import {catchError, EMPTY, finalize} from 'rxjs';
 import {UsersService} from '../../../auth/services/users.service';
-import {AstushaUser, UserTheme} from '../../../../shared/interfaces';
+import {UserTheme} from '../../../../shared/interfaces';
 import {TuiAvatar} from '@taiga-ui/kit';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 interface ThemeOption {
     label: string;
@@ -26,13 +26,15 @@ interface ThemeOption {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppearanceSettingsCardComponent {
-    readonly currentUser = input<AstushaUser | null>(null);
-    readonly isLoading = input(false);
-
     private readonly usersService = inject(UsersService);
 
+    protected readonly currentUser = toSignal(this.usersService.currentUser$);
+
     protected readonly changingTheme = signal<UserTheme | null>(null);
-    protected readonly selectedTheme = signal<UserTheme | null>(null);
+
+    protected readonly selectedTheme = computed(
+        () => this.currentUser()?.theme ?? null
+    );
 
     protected readonly themes: ThemeOption[] = [
         {
@@ -47,18 +49,6 @@ export class AppearanceSettingsCardComponent {
         }
     ];
 
-    constructor() {
-        effect(() => {
-            const user = this.currentUser();
-
-            if (!user) {
-                return;
-            }
-
-            this.selectedTheme.set(user.theme);
-        });
-    }
-
     protected changeTheme(theme: UserTheme) {
         if (this.selectedTheme() === theme || this.changingTheme()) {
             return;
@@ -69,9 +59,6 @@ export class AppearanceSettingsCardComponent {
         this.usersService
             .changeTheme({theme})
             .pipe(
-                tap(user => {
-                    this.selectedTheme.set(user.theme);
-                }),
                 catchError(() => EMPTY),
                 finalize(() => {
                     this.changingTheme.set(null);

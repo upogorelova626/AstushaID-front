@@ -19,8 +19,8 @@
                 appearance="positive"
             ></div>
 
-            <div class="status-info" [tuiSkeleton]="isLoading()">
-                @if (isTwoFactorEnabled()) {
+            <div class="status-info">
+                @if (me()?.emailTwoFactorEnabled) {
                     <div class="status-title status-title_enabled">
                         2FA включена
                     </div>
@@ -42,7 +42,6 @@
                 tuiSwitch
                 type="checkbox"
                 [formControl]="control"
-                [tuiSkeleton]="isLoading()"
                 (change)="toggleTwoFactor()"
             />
         </div>

@@ -4,9 +4,9 @@ import {
     Component,
     effect,
     inject,
-    input,
     signal
 } from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {
     FormControl,
     FormGroup,
@@ -15,18 +15,12 @@ import {
 } from '@angular/forms';
 import {
     TuiButton,
-    TuiIcon,
     TuiInput,
     TuiLabel,
     TuiNotificationService,
     TuiTextfield
 } from '@taiga-ui/core';
-import {
-    TuiAvatar,
-    type TuiFileLike,
-    TuiFiles,
-    TuiSkeleton
-} from '@taiga-ui/kit';
+import {TuiAvatar, type TuiFileLike, TuiFiles} from '@taiga-ui/kit';
 import {
     catchError,
     EMPTY,
@@ -43,7 +37,7 @@ import {UsersService} from '../../../auth/services/users.service';
 
 const MAX_AVATAR_SIZE = 5 * 1024 * 1024;
 
-const ALLOWED_AVATAR_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+const ALLOWED_AVATAR_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
 @Component({
     selector: 'app-profile-settings-card',
@@ -53,10 +47,8 @@ const ALLOWED_AVATAR_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
         TuiAvatar,
         TuiButton,
         TuiFiles,
-        TuiIcon,
         TuiInput,
         TuiLabel,
-        TuiSkeleton,
         TuiTextfield
     ],
     templateUrl: './profile-settings-card.component.html',
@@ -64,16 +56,15 @@ const ALLOWED_AVATAR_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileSettingsCardComponent {
-    readonly currentUser = input<AstushaUser | null>(null);
-    readonly isLoading = input(false);
-
     private readonly usersService = inject(UsersService);
     private readonly alerts = inject(TuiNotificationService);
 
+    protected readonly currentUser = toSignal(this.usersService.currentUser$, {
+        initialValue: null
+    });
     protected readonly isEditing = signal(false);
     protected readonly isSaving = signal(false);
     protected readonly isAvatarDeleting = signal(false);
-    protected readonly localUser = signal<AstushaUser | null>(null);
     protected readonly avatarPreviewUrl = signal<string | null>(null);
 
     protected readonly form = new FormGroup({
@@ -95,21 +86,26 @@ export class ProfileSettingsCardComponent {
         })
     });
 
-    protected readonly control = new FormControl<TuiFileLike | null>(null);
-
-    protected readonly failedFiles$ = new Subject<TuiFileLike | null>();
-    protected readonly loadingFiles$ = new Subject<TuiFileLike | null>();
-
-    protected readonly loadedFiles$ = this.control.valueChanges.pipe(
-        switchMap(file => this.processFile(file))
+    protected readonly avatarControl = new FormControl<TuiFileLike | null>(
+        null
     );
+
+    protected readonly failedAvatarFiles$ = new Subject<TuiFileLike | null>();
+
+    protected readonly loadingAvatarFiles$ = new Subject<TuiFileLike | null>();
+
+    protected readonly loadedAvatarFiles$ =
+        this.avatarControl.valueChanges.pipe(
+            switchMap(file => this.processAvatarFile(file))
+        );
 
     constructor() {
         effect(() => {
             const user = this.currentUser();
 
-            this.localUser.set(user);
-            this.patchForm(user);
+            if (user && !this.isEditing()) {
+                this.patchForm(user);
+            }
         });
     }
 
@@ -118,8 +114,8 @@ export class ProfileSettingsCardComponent {
     }
 
     protected cancelEditing() {
-        this.patchForm(this.localUser());
-        this.removeFile();
+        this.patchForm(this.currentUser());
+        this.removeAvatarFile();
 
         this.form.markAsPristine();
         this.form.markAsUntouched();
@@ -139,26 +135,22 @@ export class ProfileSettingsCardComponent {
             .editProfile(this.form.getRawValue())
             .pipe(
                 tap(user => {
-                    this.localUser.set(user);
                     this.patchForm(user);
+
                     this.form.markAsPristine();
                     this.form.markAsUntouched();
                     this.isEditing.set(false);
 
-                    this.alerts
-                        .open('Изменения профиля успешно сохранены', {
-                            label: 'Профиль обновлён',
-                            appearance: 'positive'
-                        })
-                        .subscribe();
+                    this.showSuccess(
+                        'Изменения профиля успешно сохранены',
+                        'Профиль обновлён'
+                    );
                 }),
                 catchError(() => {
-                    this.alerts
-                        .open('Не удалось сохранить изменения профиля', {
-                            label: 'Ошибка',
-                            appearance: 'negative'
-                        })
-                        .subscribe();
+                    this.showError(
+                        'Не удалось сохранить изменения профиля',
+                        'Ошибка'
+                    );
 
                     return EMPTY;
                 }),
@@ -169,10 +161,10 @@ export class ProfileSettingsCardComponent {
             .subscribe();
     }
 
-    protected removeFile() {
-        this.control.setValue(null);
-        this.failedFiles$.next(null);
-        this.loadingFiles$.next(null);
+    protected removeAvatarFile() {
+        this.avatarControl.setValue(null);
+        this.failedAvatarFiles$.next(null);
+        this.loadingAvatarFiles$.next(null);
         this.avatarPreviewUrl.set(null);
     }
 
@@ -182,24 +174,13 @@ export class ProfileSettingsCardComponent {
         this.usersService
             .deleteAvatar()
             .pipe(
-                tap(user => {
-                    this.localUser.set(user);
-                    this.removeFile();
+                tap(() => {
+                    this.removeAvatarFile();
 
-                    this.alerts
-                        .open('Фото профиля удалено', {
-                            label: 'Аватар обновлён',
-                            appearance: 'positive'
-                        })
-                        .subscribe();
+                    this.showSuccess('Фото профиля удалено', 'Аватар обновлён');
                 }),
                 catchError(() => {
-                    this.alerts
-                        .open('Не удалось удалить фото профиля', {
-                            label: 'Ошибка',
-                            appearance: 'negative'
-                        })
-                        .subscribe();
+                    this.showError('Не удалось удалить фото профиля', 'Ошибка');
 
                     return EMPTY;
                 }),
@@ -210,21 +191,22 @@ export class ProfileSettingsCardComponent {
             .subscribe();
     }
 
-    protected processFile(file: TuiFileLike | null) {
-        this.failedFiles$.next(null);
+    private processAvatarFile(file: TuiFileLike | null) {
+        this.failedAvatarFiles$.next(null);
+        this.avatarPreviewUrl.set(null);
 
         if (!file) {
             return of(null);
         }
 
         if (!(file instanceof File)) {
-            this.failedFiles$.next(file);
+            this.failedAvatarFiles$.next(file);
 
             return of(null);
         }
 
         if (!this.isValidAvatar(file)) {
-            this.failedFiles$.next(file);
+            this.failedAvatarFiles$.next(file);
 
             return of(null);
         }
@@ -232,37 +214,28 @@ export class ProfileSettingsCardComponent {
         const previewUrl = URL.createObjectURL(file);
 
         this.avatarPreviewUrl.set(previewUrl);
-        this.loadingFiles$.next(file);
+        this.loadingAvatarFiles$.next(file);
 
         return this.usersService.uploadAvatar(file).pipe(
-            map(user => {
-                this.localUser.set(user);
+            tap(() => {
                 this.avatarPreviewUrl.set(null);
 
-                this.alerts
-                    .open('Фото профиля успешно обновлено', {
-                        label: 'Аватар обновлён',
-                        appearance: 'positive'
-                    })
-                    .subscribe();
-
-                return file;
+                this.showSuccess(
+                    'Фото профиля успешно обновлено',
+                    'Аватар обновлён'
+                );
             }),
+            map(() => file),
             catchError(() => {
-                this.failedFiles$.next(file);
+                this.failedAvatarFiles$.next(file);
                 this.avatarPreviewUrl.set(null);
 
-                this.alerts
-                    .open('Не удалось загрузить фото профиля', {
-                        label: 'Ошибка',
-                        appearance: 'negative'
-                    })
-                    .subscribe();
+                this.showError('Не удалось загрузить фото профиля', 'Ошибка');
 
                 return of(null);
             }),
             finalize(() => {
-                this.loadingFiles$.next(null);
+                this.loadingAvatarFiles$.next(null);
                 URL.revokeObjectURL(previewUrl);
             })
         );
@@ -282,28 +255,42 @@ export class ProfileSettingsCardComponent {
     }
 
     private isValidAvatar(file: File) {
-        if (!ALLOWED_AVATAR_TYPES.includes(file.type)) {
-            this.alerts
-                .open('Можно загрузить только JPEG, PNG или WEBP', {
-                    label: 'Некорректный файл',
-                    appearance: 'negative'
-                })
-                .subscribe();
+        if (!ALLOWED_AVATAR_TYPES.has(file.type)) {
+            this.showError(
+                'Можно загрузить только JPEG, PNG или WEBP',
+                'Некорректный файл'
+            );
 
             return false;
         }
 
         if (file.size > MAX_AVATAR_SIZE) {
-            this.alerts
-                .open('Размер файла не должен превышать 5 МБ', {
-                    label: 'Файл слишком большой',
-                    appearance: 'negative'
-                })
-                .subscribe();
+            this.showError(
+                'Размер файла не должен превышать 5 МБ',
+                'Файл слишком большой'
+            );
 
             return false;
         }
 
         return true;
+    }
+
+    private showSuccess(message: string, label: string) {
+        this.alerts
+            .open(message, {
+                label,
+                appearance: 'positive'
+            })
+            .subscribe();
+    }
+
+    private showError(message: string, label: string) {
+        this.alerts
+            .open(message, {
+                label,
+                appearance: 'negative'
+            })
+            .subscribe();
     }
 }

@@ -1,46 +1,38 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
-import {TuiButton, TuiIcon, TuiNotificationService} from '@taiga-ui/core';
-import {TuiAvatar, TuiSkeleton, TuiSwitch} from '@taiga-ui/kit';
+import {Component, effect, inject, signal} from '@angular/core';
+import {TuiNotificationService} from '@taiga-ui/core';
+import {TuiAvatar, TuiSwitch} from '@taiga-ui/kit';
 import {UsersService} from '../../../auth/services/users.service';
 import {catchError, EMPTY, finalize, tap} from 'rxjs';
 import {ReactiveFormsModule, FormControl} from '@angular/forms';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-two-factor-auth-card',
-    imports: [TuiAvatar, TuiSwitch, TuiSkeleton, ReactiveFormsModule],
+    imports: [TuiAvatar, TuiSwitch, ReactiveFormsModule],
     templateUrl: './two-factor-auth-card.component.html',
     styleUrl: './two-factor-auth-card.component.less'
 })
-export class TwoFactorAuthCardComponent implements OnInit {
+export class TwoFactorAuthCardComponent {
     private readonly usersService = inject(UsersService);
     private readonly alerts = inject(TuiNotificationService);
 
-    protected readonly isTwoFactorEnabled = signal(false);
-    protected readonly isLoading = signal(false);
     protected readonly isSaving = signal(false);
+    protected readonly me = toSignal(this.usersService.currentUser$, {
+        initialValue: null
+    });
+
+    constructor() {
+        effect(() => {
+            const me = this.me();
+            if (!me) {
+                return;
+            }
+
+            this.control.setValue(me.emailTwoFactorEnabled, {emitEvent: false});
+        });
+    }
 
     protected readonly control = new FormControl(false, {nonNullable: true});
-
-    ngOnInit(): void {
-        this.isLoading.set(true);
-        this.control.disable({emitEvent: false});
-
-        this.usersService
-            .getMe()
-            .pipe(
-                tap(me => {
-                    this.isTwoFactorEnabled.set(me.emailTwoFactorEnabled);
-                    this.control.setValue(me.emailTwoFactorEnabled, {
-                        emitEvent: false
-                    });
-                }),
-                finalize(() => {
-                    this.isLoading.set(false);
-                    this.control.enable({emitEvent: false});
-                })
-            )
-            .subscribe();
-    }
 
     protected toggleTwoFactor() {
         const enable = this.control.value;
@@ -53,10 +45,6 @@ export class TwoFactorAuthCardComponent implements OnInit {
             .changeEmailTwoFactor({enabled: enable})
             .pipe(
                 tap(user => {
-                    this.isTwoFactorEnabled.set(user.emailTwoFactorEnabled);
-                    this.control.setValue(user.emailTwoFactorEnabled, {
-                        emitEvent: false
-                    });
                     this.alerts
                         .open(
                             user.emailTwoFactorEnabled
@@ -70,7 +58,6 @@ export class TwoFactorAuthCardComponent implements OnInit {
                         .subscribe();
                 }),
                 catchError(() => {
-                    this.isTwoFactorEnabled.set(previousValue);
                     this.control.setValue(previousValue, {
                         emitEvent: false
                     });

@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
-import {finalize, map, Observable, of, switchMap, tap} from 'rxjs';
+import {finalize, Observable, tap} from 'rxjs';
 
 import {
     AstushaUser,
@@ -37,14 +37,10 @@ export class AuthService {
         return this.http
             .post<AuthResponse>(`${this.baseApiUrl}/login`, payload)
             .pipe(
-                switchMap(response => {
-                    if (this.isEmailTwoFactorRequired(response)) {
-                        return of(response);
+                tap(response => {
+                    if (!this.isEmailTwoFactorRequired(response)) {
+                        this.usersService.setCurrentUser(response);
                     }
-
-                    return this.usersService
-                        .loadCurrentUser()
-                        .pipe(map(() => response));
                 })
             );
     }

@@ -25,7 +25,7 @@
                 [class.appearance-settings-card__button_active]="
                     selectedTheme() === theme.theme
                 "
-                [disabled]="isLoading() || !!changingTheme()"
+                [disabled]="!!changingTheme()"
                 (click)="changeTheme(theme.theme)"
             >
                 {{ theme.label }}
