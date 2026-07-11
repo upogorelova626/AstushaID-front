@@ -44,11 +44,6 @@ export class AppearanceSettingsCardComponent {
             label: 'Тёмная',
             icon: '@tui.moon',
             theme: UserTheme.Dark
-        },
-        {
-            label: 'Системная',
-            icon: '@tui.monitor',
-            theme: UserTheme.System
         }
     ];
 
