@@ -1,24 +1,24 @@
-<section class="profile-settings-card">
-    <header class="profile-settings-card__header">
-        <div class="profile-settings-card__header-icon">
+<section class="card">
+    <header class="header">
+        <div class="header-icon">
             <tui-icon icon="@tui.user" />
         </div>
 
-        <div class="profile-settings-card__header-content">
-            <h2 class="profile-settings-card__title">Профиль</h2>
+        <div class="header-content">
+            <h2 class="title">Профиль</h2>
 
-            <p class="profile-settings-card__description">
+            <p class="description">
                 Эти данные будут отображаться в вашем профиле и других сервисах
                 Astusha.
             </p>
         </div>
 
         <button
+            class="edit-button"
             tuiButton
             type="button"
             iconStart="@tui.pencil"
             appearance="flat"
-            class="profile-settings-card__edit-button"
             [disabled]="isLoading() || isEditing()"
             (click)="startEditing()"
         >
@@ -26,45 +26,34 @@
         </button>
     </header>
 
-    <main class="profile-settings-card__content">
-        <div class="profile-settings-card__avatar" [tuiSkeleton]="isLoading()">
+    <main class="content">
+        <div class="avatar" [tuiSkeleton]="isLoading()">
             @if (avatarPreviewUrl() || localUser()?.avatarUrl) {
-                <div class="profile-settings-card__avatar-preview">
-                    @if (avatarPreviewUrl() || localUser()?.avatarUrl) {
-                        <img
-                            class="profile-settings-card__avatar-image"
-                            [src]="avatarPreviewUrl() || localUser()?.avatarUrl"
-                            alt="Фото профиля"
-                        />
-                    } @else {
-                        <div tuiAvatar="@tui.user"> </div>
-                    }
+                <div class="avatar-preview">
+                    <img
+                        class="avatar-image"
+                        [src]="avatarPreviewUrl() || localUser()?.avatarUrl"
+                        alt="Фото профиля"
+                    />
                 </div>
             } @else {
                 <div
-                    class="profile-settings-card__avatar-preview"
+                    class="avatar-preview"
                     tuiAvatar="@tui.user"
                     size="xxl"
                 ></div>
             }
 
-            <div class="profile-settings-card__avatar-content">
+            <div class="avatar-content">
                 @if (isEditing()) {
-                    <div class="profile-settings-card__avatar-title">
-                        Фото профиля
-                    </div>
+                    <div class="avatar-title">Фото профиля</div>
 
-                    <p class="profile-settings-card__avatar-description">
+                    <p class="avatar-description">
                         JPG, PNG или WEBP до 5 МБ.
                     </p>
-                }
 
-                @if (isEditing()) {
                     @if (!control.value) {
-                        <label
-                            tuiInputFiles
-                            class="profile-settings-card__avatar-upload"
-                        >
+                        <label tuiInputFiles class="avatar-upload">
                             <input
                                 tuiInputFiles
                                 type="file"
@@ -74,7 +63,7 @@
                         </label>
                     }
 
-                    <tui-files class="profile-settings-card__files">
+                    <tui-files class="files">
                         @if (
                             control.value
                                 | tuiFileRejected
@@ -118,12 +107,12 @@
 
                     @if (localUser()?.avatarUrl) {
                         <button
+                            class="avatar-delete"
                             tuiButton
                             type="button"
                             size="s"
                             appearance="outline-destructive"
                             iconStart="@tui.trash"
-                            class="profile-settings-card__avatar-delete"
                             (click)="deleteAvatar()"
                         >
                             Удалить фото
@@ -133,8 +122,8 @@
             </div>
         </div>
 
-        <form class="profile-settings-card__form" [formGroup]="form">
-            <div class="profile-settings-card__row">
+        <form class="form" [formGroup]="form">
+            <div class="row">
                 <tui-textfield>
                     <label tuiLabel>Имя</label>
 
@@ -160,13 +149,13 @@
                 </tui-textfield>
             </div>
 
-            <div class="profile-settings-card__row">
+            <div class="row">
                 <tui-textfield>
                     <label tuiLabel>Email</label>
 
                     <input
                         tuiInput
-                        placeholder="example@mail.com"
+                        placeholder="Введите email"
                         [tuiSkeleton]="isLoading()"
                         [value]="localUser()?.email"
                         disabled
@@ -200,7 +189,7 @@
         </form>
     </main>
 
-    <footer class="profile-settings-card__footer">
+    <footer class="footer">
         <button
             tuiButton
             type="button"

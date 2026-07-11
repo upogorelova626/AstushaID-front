@@ -1,20 +1,18 @@
-<div class="email-settings-card">
-    <header class="email-settings-card__header">
-        <div class="email-settings-card__icon-wrapper">
-            <tui-icon icon="@tui.mail" />
-        </div>
+<div class="card">
+    <header class="header">
+        <div tuiAvatar="@tui.mail" appearance="info" size="l"></div>
 
-        <div class="email-settings-card__header-content">
-            <h2 class="email-settings-card__title">Email</h2>
+        <div class="header-content">
+            <h2 class="title">Email</h2>
 
-            <p class="email-settings-card__description">
+            <p class="description">
                 Ваш email используется для входа в аккаунт и получения
                 уведомлений.
             </p>
         </div>
     </header>
 
-    <div class="email-settings-card__content">
+    <div class="content">
         <tui-textfield>
             <label tuiLabel>Email</label>
 
@@ -27,18 +25,15 @@
             />
         </tui-textfield>
 
-        <div class="email-settings-card__notice">
-            <tui-icon
-                class="email-settings-card__notice-icon"
-                icon="@tui.circle-alert"
-            />
+        <div class="notice">
+            <tui-icon class="notice-icon" icon="@tui.circle-alert" />
 
-            <div class="email-settings-card__notice-content">
-                <div class="email-settings-card__notice-title">
+            <div class="notice-content">
+                <div class="notice-title">
                     Изменение email пока недоступно
                 </div>
 
-                <div class="email-settings-card__notice-text">
+                <div class="notice-text">
                     Позже здесь появится подтверждение email и смена адреса
                     через письмо.
                 </div>

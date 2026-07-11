@@ -1,36 +1,28 @@
-<div class="account-security-notifications-card">
-    <header class="account-security-notifications-card__header">
+<div class="card">
+    <header class="header">
         <div tuiAvatar="@tui.shield" size="l" appearance="positive"></div>
 
-        <div class="account-security-notifications-card__info">
-            <h2 class="account-security-notifications-card__title">
-                Безопасность аккаунта
-            </h2>
+        <div class="info">
+            <div class="title"> Безопасность аккаунта </div>
 
-            <p class="account-security-notifications-card__description">
+            <div class="description">
                 Настройте уведомления о важных действиях с вашим аккаунтом.
-            </p>
+            </div>
         </div>
     </header>
 
-    <main class="account-security-notifications-card__content">
+    <main class="content">
         <form [formGroup]="securityNotificationsForm">
-            <div class="account-security-notifications-card__list">
-                <div class="account-security-notifications-card__item">
-                    <div class="account-security-notifications-card__item-icon">
+            <div class="list">
+                <div class="item">
+                    <div class="item-icon">
                         <tui-icon icon="@tui.log-in" />
                     </div>
 
-                    <div class="account-security-notifications-card__item-info">
-                        <div
-                            class="account-security-notifications-card__item-title"
-                        >
-                            Новый вход в аккаунт
-                        </div>
+                    <div class="item-info">
+                        <div class="item-title"> Новый вход в аккаунт </div>
 
-                        <div
-                            class="account-security-notifications-card__item-meta"
-                        >
+                        <div class="item-meta">
                             Уведомлять, если кто-то вошёл в аккаунт с нового
                             устройства.
                         </div>
@@ -45,17 +37,13 @@
                     />
                 </div>
 
-                <div class="account-security-notifications-card__item">
-                    <div class="account-security-notifications-card__item-icon">
+                <div class="item">
+                    <div class="item-icon">
                         <tui-icon icon="@tui.lock-keyhole" />
                     </div>
 
-                    <div class="account-security-notifications-card__item-info">
-                        <div
-                            class="account-security-notifications-card__item-title"
-                        >
-                            Смена пароля
-                        </div>
+                    <div class="item-info">
+                        <div class="item-title"> Смена пароля </div>
 
                         <div
                             class="account-security-notifications-card__item-meta"
@@ -73,21 +61,15 @@
                     />
                 </div>
 
-                <div class="account-security-notifications-card__item">
-                    <div class="account-security-notifications-card__item-icon">
+                <div class="item">
+                    <div class="item-icon">
                         <tui-icon icon="@tui.monitor-x" />
                     </div>
 
-                    <div class="account-security-notifications-card__item-info">
-                        <div
-                            class="account-security-notifications-card__item-title"
-                        >
-                            Завершение сессий
-                        </div>
+                    <div class="item-info">
+                        <div class="item-title"> Завершение сессий </div>
 
-                        <div
-                            class="account-security-notifications-card__item-meta"
-                        >
+                        <div class="item-meta">
                             Уведомлять о выходе с других устройств.
                         </div>
                     </div>
@@ -101,21 +83,17 @@
                     />
                 </div>
 
-                <div class="account-security-notifications-card__item">
-                    <div class="account-security-notifications-card__item-icon">
+                <div class="item">
+                    <div class="item-icon">
                         <tui-icon icon="@tui.badge-check" />
                     </div>
 
-                    <div class="account-security-notifications-card__item-info">
-                        <div
-                            class="account-security-notifications-card__item-title"
-                        >
+                    <div class="item-info">
+                        <div class="item-title">
                             Двухфакторная аутентификация
                         </div>
 
-                        <div
-                            class="account-security-notifications-card__item-meta"
-                        >
+                        <div class="item-meta">
                             Уведомлять о включении и отключении 2FA.
                         </div>
                     </div>

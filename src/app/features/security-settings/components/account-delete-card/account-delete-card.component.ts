@@ -9,15 +9,14 @@ import {
     TuiDialogService,
     TuiNotificationService
 } from '@taiga-ui/core';
-import {TuiAvatar} from '@taiga-ui/kit';
+import {TuiAvatar, TuiBadge} from '@taiga-ui/kit';
 import {TuiList} from '@taiga-ui/layout';
 import {PolymorpheusComponent} from '@taiga-ui/polymorpheus';
 import {DeleteProfileNotificationDialogComponent} from '../../../profile/components/profile-quick-actions/delete-profile-notification-dialog/delete-profile-notification-dialog.component';
-import {switchMap} from 'rxjs';
 
 @Component({
     selector: 'app-account-delete-card',
-    imports: [TuiAvatar, TuiButton, TuiList],
+    imports: [TuiAvatar, TuiButton, TuiList, TuiBadge],
     templateUrl: './account-delete-card.component.html',
     styleUrl: './account-delete-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush

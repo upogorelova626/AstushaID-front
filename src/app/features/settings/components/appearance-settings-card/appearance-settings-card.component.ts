@@ -6,11 +6,11 @@ import {
     input,
     signal
 } from '@angular/core';
-import {TuiButton, TuiIcon} from '@taiga-ui/core';
+import {TuiButton} from '@taiga-ui/core';
 import {catchError, EMPTY, finalize, tap} from 'rxjs';
-
 import {UsersService} from '../../../auth/services/users.service';
 import {AstushaUser, UserTheme} from '../../../../shared/interfaces';
+import {TuiAvatar} from '@taiga-ui/kit';
 
 interface ThemeOption {
     label: string;
@@ -20,7 +20,7 @@ interface ThemeOption {
 
 @Component({
     selector: 'app-appearance-settings-card',
-    imports: [TuiButton, TuiIcon],
+    imports: [TuiButton, TuiAvatar],
     templateUrl: './appearance-settings-card.component.html',
     styleUrl: './appearance-settings-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush

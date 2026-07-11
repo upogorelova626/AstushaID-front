@@ -1,46 +1,49 @@
-<div class="marketing-emails-card">
-    <header class="marketing-emails-card__header">
-        <div tuiAvatar="@tui.mail" size="l" appearance="info"></div>
+<section class="card">
+    <header class="header">
+        <div
+            class="header-icon"
+            tuiAvatar="@tui.mail"
+            size="l"
+            appearance="info"
+        ></div>
 
-        <div class="marketing-emails-card__info">
-            <h2 class="marketing-emails-card__title">
-                Маркетинговые рассылки
-            </h2>
+        <div class="header-info">
+            <div class="title">Маркетинговые рассылки</div>
 
-            <p class="marketing-emails-card__description">
+            <div class="description">
                 Настройте, хотите ли вы получать письма о новостях Astusha,
                 обновлениях продукта и полезных материалах.
-            </p>
+            </div>
         </div>
     </header>
 
-    <main class="marketing-emails-card__content">
-        <div class="marketing-emails-card__setting">
-            <div class="marketing-emails-card__setting-info">
-                <div class="marketing-emails-card__setting-title">
-                    Получать маркетинговые письма
-                </div>
+    <main class="content">
+        <label class="setting">
+            <div class="setting-info">
+                <div class="setting-title"> Получать маркетинговые письма </div>
 
-                <div class="marketing-emails-card__setting-meta">
+                <div class="setting-description">
                     Новости продукта, анонсы новых функций, полезные материалы и
                     специальные предложения.
                 </div>
             </div>
 
             <input
-                class="marketing-emails-card__switch"
+                class="switch"
                 tuiSwitch
                 type="checkbox"
                 [tuiSkeleton]="isLoading()"
                 [formControl]="control"
                 (change)="updateNotificationSettings()"
             />
-        </div>
+        </label>
     </main>
-    <footer class="marketing-emails-card__footer">
-        <tui-icon icon="@tui.info" class="marketing-emails-card__footer-icon" />
-        <div class="marketing-emails-card__footer-text"
-            >Эту настройку можно изменить в любой момент.</div
-        >
+
+    <footer class="footer">
+        <tui-icon class="footer-icon" icon="@tui.info" />
+
+        <div class="footer-text">
+            Эту настройку можно изменить в любой момент.
+        </div>
     </footer>
-</div>
+</section>

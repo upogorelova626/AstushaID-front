@@ -2,113 +2,111 @@
     display: block;
 }
 
-.account-security-notifications-card {
+.card {
     padding: 25px;
     border: 1px solid var(--color-card-border);
     border-radius: 5px;
     background: var(--color-card-background);
+}
 
-    &__header {
-        display: flex;
-        gap: 16px;
-        min-width: 0;
-    }
+.header {
+    display: flex;
+    gap: 16px;
+    min-width: 0;
+}
 
-    &__info {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-    }
+.info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
 
-    &__title {
-        margin: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-heading-h5);
-    }
+.title {
+    margin: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-heading-h5);
+}
 
-    &__description {
-        max-width: 320px;
-        margin: 6px 0 0;
-        color: var(--color-text-secondary);
-        font: var(--tui-typography-body-m);
-    }
+.description {
+    max-width: 320px;
+    margin: 6px 0 0;
+    color: var(--color-text-secondary);
+    font: var(--tui-typography-body-m);
+}
 
-    &__content {
-        margin-top: 20px;
-    }
+.content {
+    margin-top: 20px;
+}
 
-    &__list {
-        overflow: hidden;
-        border: 1px solid var(--color-card-border);
-        border-radius: 8px;
-        background: var(--color-card-background);
-    }
+.list {
+    overflow: hidden;
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    background: var(--color-card-background);
+}
 
-    &__item {
-        display: grid;
-        grid-template-columns: 36px minmax(0, 1fr) auto;
-        gap: 12px;
-        align-items: center;
-        min-height: 58px;
-        padding: 10px 14px;
-        border-bottom: 1px solid var(--color-card-border);
+.item {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    min-height: 58px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-card-border);
 
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-
-    &__item-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border: 1px solid var(--color-card-border);
-        border-radius: 8px;
-        color: var(--color-text-secondary);
-        background: transparent;
-    }
-
-    &__item-info {
-        min-width: 0;
-    }
-
-    &__item-title {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        min-width: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-body-m);
-    }
-
-    &__item-meta {
-        margin-top: 3px;
-        overflow: hidden;
-        color: var(--color-text-secondary);
-        font: var(--tui-typography-body-s);
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    &:last-child {
+        border-bottom: none;
     }
 }
 
+.item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    background: transparent;
+}
+
+.item-info {
+    min-width: 0;
+}
+
+.item-title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-width: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-body-m);
+}
+
+.item-meta {
+    margin-top: 3px;
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font: var(--tui-typography-body-s);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @media (max-width: 760px) {
-    .account-security-notifications-card {
-        &__item {
-            grid-template-columns: 36px minmax(0, 1fr);
-        }
+    .item {
+        grid-template-columns: 36px minmax(0, 1fr);
+    }
 
-        &__item-title {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 4px;
-        }
+    .item-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+    }
 
-        input[tuiSwitch] {
-            grid-column: 2;
-            justify-self: flex-start;
-            margin-top: 4px;
-        }
+    input[tuiSwitch] {
+        grid-column: 2;
+        justify-self: flex-start;
+        margin-top: 4px;
     }
 }

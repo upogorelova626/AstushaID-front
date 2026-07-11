@@ -1,42 +1,42 @@
-<div class="active-sessions-card">
-    <header class="active-sessions-card__header">
+<div class="card">
+    <header class="header">
         <div
             tuiAvatar="@tui.monitor-smartphone"
             size="l"
             appearance="positive"
         ></div>
 
-        <div class="active-sessions-card__info">
-            <h2 class="active-sessions-card__title">Активные сессии</h2>
+        <div class="info">
+            <div class="title">Активные сессии</div>
 
-            <p class="active-sessions-card__description">
+            <div class="description">
                 Управляйте устройствами, на которых вы вошли в аккаунт.
-            </p>
+            </div>
         </div>
     </header>
 
-    <main class="active-sessions-card__content">
-        <div class="active-sessions-card__list" [tuiSkeleton]="isLoading()">
+    <main class="content">
+        <div class="list" [tuiSkeleton]="isLoading()">
             @for (session of sessions(); track session.id) {
-                <div class="active-sessions-card__session">
+                <div class="session">
                     <div
-                        class="active-sessions-card__session-icon"
+                        class="session-icon"
                         [tuiAvatar]="session.icon"
                         size="m"
                     ></div>
 
-                    <div class="active-sessions-card__session-info">
-                        <div class="active-sessions-card__session-title">
+                    <div class="session-info">
+                        <div class="session-title">
                             {{ session.device }}
 
                             @if (session.isCurrent) {
-                                <span class="active-sessions-card__badge">
+                                <span tuiBadge appearance="positive">
                                     Текущая сессия
                                 </span>
                             }
                         </div>
 
-                        <div class="active-sessions-card__session-meta">
+                        <div class="session-meta">
                             {{ session.location }}
 
                             @if (session.ipAddress) {
@@ -54,6 +54,7 @@
 
                     @if (!session.isCurrent) {
                         <button
+                            class="terminate"
                             tuiButton
                             type="button"
                             size="s"
@@ -69,17 +70,11 @@
                     }
                 </div>
             }
-
-            @if (!isLoading() && !sessions().length) {
-                <div class="active-sessions-card__empty">
-                    Активных сессий пока нет.
-                </div>
-            }
         </div>
 
         @if (hasOtherSessions()) {
             <button
-                class="active-sessions-card__terminate-all"
+                class="terminate-all"
                 tuiButton
                 type="button"
                 size="s"

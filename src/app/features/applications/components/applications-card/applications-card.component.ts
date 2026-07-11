@@ -1,22 +1,20 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {TuiButton, TuiIcon} from '@taiga-ui/core';
-
-type ApplicationStatus = 'active' | 'connected' | 'current' | 'soon';
+import {TuiBadge} from '@taiga-ui/kit';
 
 interface Application {
     icon: string;
     name: string;
     description: string;
-    status: ApplicationStatus;
     statusLabel: string;
-    actionLabel: string;
+    appearance: string;
     url?: string;
     disabled?: boolean;
 }
 
 @Component({
     selector: 'app-applications-card',
-    imports: [TuiButton, TuiIcon],
+    imports: [TuiButton, TuiIcon, TuiBadge],
     templateUrl: './applications-card.component.html',
     styleUrl: './applications-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -27,45 +25,40 @@ export class ApplicationsCardComponent {
             icon: '@tui.layout-grid',
             name: 'Astusha App',
             description: 'Проекты, задачи и команды',
-            status: 'active',
             statusLabel: 'Активно',
-            actionLabel: 'Открыть',
+            appearance: 'positive',
             url: 'http://localhost:4200/dashboard'
         },
         {
             icon: '@tui.book-open-text',
             name: 'Astusha Book',
             description: 'Хэндбуки и база знаний',
-            status: 'connected',
-            statusLabel: 'Подключено',
-            actionLabel: 'Открыть',
+            statusLabel: 'Активно',
+            appearance: 'positive',
             url: 'http://localhost:4201'
         },
         {
             icon: '@tui.shield',
             name: 'Astusha ID',
             description: 'Единый аккаунт и управление профилем',
-            status: 'current',
             statusLabel: 'Текущее приложение',
-            actionLabel: 'Открыто',
+            appearance: 'primary',
             disabled: true
         },
         {
             icon: '@tui.message-square-heart',
             name: 'Astusha Messenger',
             description: 'Корпоративный мессенджер от Астюши',
-            status: 'soon',
             statusLabel: 'Скоро',
-            actionLabel: 'Скоро',
+            appearance: 'neutral',
             disabled: true
         },
         {
             icon: '@tui.notebook-pen',
             name: 'Astusha Notes',
             description: 'Личные заметки и быстрые записи',
-            status: 'soon',
             statusLabel: 'Скоро',
-            actionLabel: 'Скоро',
+            appearance: 'neutral',
             disabled: true
         }
     ];

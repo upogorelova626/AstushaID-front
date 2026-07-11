@@ -57,11 +57,7 @@ export class ChangePasswordCardComponent {
         {
             currentPassword: new FormControl('', {
                 nonNullable: true,
-                validators: [
-                    Validators.required,
-                    Validators.minLength(8),
-                    Validators.maxLength(64)
-                ]
+                validators: [Validators.required]
             }),
             newPassword: new FormControl('', {
                 nonNullable: true,

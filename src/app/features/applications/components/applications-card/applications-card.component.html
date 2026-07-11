@@ -1,77 +1,52 @@
-<section class="astusha-applications-card">
-    <header class="astusha-applications-card__header">
+<div class="card">
+    <header class="header">
         <div>
-            <h2 class="astusha-applications-card__title">
-                Приложения Astusha
-            </h2>
+            <div class="title"> Приложения Astusha </div>
 
-            <p class="astusha-applications-card__description">
+            <div class="description">
                 Управляйте сервисами экосистемы Astusha, подключёнными к вашему
                 аккаунту.
-            </p>
+            </div>
         </div>
 
-        <span class="astusha-applications-card__counter">
-            {{ applications.length }} сервисов
-        </span>
+        <span class="counter"> {{ applications.length }} сервисов </span>
     </header>
 
-    <div class="astusha-applications-card__list">
+    <div class="list">
         @for (application of applications; track application.name) {
-            <article
-                class="astusha-applications-card__item"
-                [class.astusha-applications-card__item_current]="
-                    application.status === 'current'
-                "
-            >
-                <div class="astusha-applications-card__icon-wrapper">
-                    <tui-icon
-                        class="astusha-applications-card__icon"
-                        [icon]="application.icon"
-                    />
+            <article class="item">
+                <div class="icon-wrapper">
+                    <tui-icon class="card__icon" [icon]="application.icon" />
                 </div>
 
-                <div class="astusha-applications-card__info">
-                    <h3 class="astusha-applications-card__name">
+                <div class="info">
+                    <div class="name">
                         {{ application.name }}
-                    </h3>
+                    </div>
 
-                    <p class="astusha-applications-card__text">
+                    <p class="text">
                         {{ application.description }}
                     </p>
                 </div>
 
-                <span
-                    class="astusha-applications-card__status"
-                    [class.astusha-applications-card__status_active]="
-                        application.status === 'active'
-                    "
-                    [class.astusha-applications-card__status_connected]="
-                        application.status === 'connected'
-                    "
-                    [class.astusha-applications-card__status_current]="
-                        application.status === 'current'
-                    "
-                    [class.astusha-applications-card__status_soon]="
-                        application.status === 'soon'
-                    "
+                <div
+                    class="label"
+                    tuiBadge
+                    [appearance]="application.appearance"
                 >
                     {{ application.statusLabel }}
-                </span>
+                </div>
 
                 <button
                     tuiButton
                     type="button"
                     appearance="flat"
                     iconStart="@tui.chevron-right"
-                    class="astusha-applications-card__action"
+                    class="action"
                     [disabled]="application.disabled"
-                    [attr.aria-label]="
-                        application.actionLabel + ' ' + application.name
-                    "
                     (click)="openApplication(application)"
                 ></button>
             </article>
         }
     </div>
-</section>
+</div>

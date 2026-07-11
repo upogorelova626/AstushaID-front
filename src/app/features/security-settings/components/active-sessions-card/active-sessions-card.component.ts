@@ -8,14 +8,14 @@ import {
     signal
 } from '@angular/core';
 import {TuiButton} from '@taiga-ui/core';
-import {TuiAvatar, TuiSkeleton} from '@taiga-ui/kit';
+import {TuiAvatar, TuiBadge, TuiSkeleton} from '@taiga-ui/kit';
 import {catchError, EMPTY, finalize} from 'rxjs';
 import {UserSession} from '../../../../shared/interfaces';
 import {UserSessionsService} from '../../../../shared/services/user-sessions.service';
 
 @Component({
     selector: 'app-active-sessions-card',
-    imports: [TuiAvatar, TuiButton, TuiSkeleton, DatePipe],
+    imports: [TuiAvatar, TuiButton, TuiSkeleton, TuiBadge, DatePipe],
     templateUrl: './active-sessions-card.component.html',
     styleUrl: './active-sessions-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush

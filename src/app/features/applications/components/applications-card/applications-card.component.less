@@ -2,211 +2,183 @@
     display: block;
 }
 
-.astusha-applications-card {
+.card {
+    box-sizing: border-box;
     padding: 24px;
     border: 1px solid var(--color-card-border);
     border-radius: 5px;
     background: var(--color-card-background);
+}
 
-    &__header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 20px;
-    }
+.header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
 
-    &__title {
-        margin: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-heading-h6);
-    }
+.header > div {
+    min-width: 0;
+}
 
-    &__description {
-        margin: 8px 0 0;
-        color: var(--color-text-secondary);
-        font: var(--tui-typography-body-m);
-    }
+.title {
+    margin: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-heading-h6);
+}
 
-    &__counter {
-        flex-shrink: 0;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: var(--color-primary-soft);
-        color: var(--color-primary);
-        font: var(--tui-typography-body-s);
-        white-space: nowrap;
-    }
+.description {
+    margin: 8px 0 0;
+    color: var(--color-text-secondary);
+    font: var(--tui-typography-body-m);
+}
 
-    &__list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
+.counter {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--color-primary-soft);
+    color: var(--color-primary);
+    font: var(--tui-typography-body-s);
+    white-space: nowrap;
+}
 
-    &__item {
-        display: grid;
-        grid-template-columns: 48px minmax(0, 1fr) auto auto;
-        align-items: center;
-        gap: 16px;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 16px;
-        border: 1px solid var(--color-card-border);
-        border-radius: 5px;
-        background: var(--color-card-bg-soft);
-    }
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
-    &__icon-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 5px;
-        background: var(--color-primary-soft);
-    }
+.item {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) max-content auto;
+    align-items: center;
+    gap: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 5px;
+    background: var(--color-card-bg-soft);
+}
 
-    &__icon {
-        color: var(--color-primary);
-        font-size: 24px;
-    }
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 5px;
+    background: var(--color-primary-soft);
+}
 
-    &__info {
-        min-width: 0;
-    }
+.card__icon {
+    color: var(--color-primary);
+    font-size: 24px;
+}
 
-    &__name {
-        margin: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-body-l);
-    }
+.info {
+    min-width: 0;
+}
 
-    &__text {
-        margin: 4px 0 0;
-        overflow-wrap: anywhere;
-        color: var(--color-text-secondary);
-        font: var(--tui-typography-body-m);
-    }
+.name {
+    margin: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-body-l);
+}
 
-    &__status {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        justify-self: flex-end;
-        min-width: 96px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        font: var(--tui-typography-body-s);
-        white-space: nowrap;
+.text {
+    margin: 4px 0 0;
+    overflow-wrap: anywhere;
+    color: var(--color-text-secondary);
+    font: var(--tui-typography-body-m);
+}
 
-        &_active,
-        &_connected {
-            background: var(--color-success-bg-soft);
-            color: var(--color-success);
-        }
+.label {
+    width: max-content;
+    justify-self: end;
+    white-space: nowrap;
+}
 
-        &_current {
-            background: var(--color-primary-soft);
-            color: var(--color-primary);
-        }
-
-        &_soon {
-            background: var(--color-card-inner-bg);
-            color: var(--color-text-muted);
-        }
-    }
-
-    &__action {
-        justify-self: flex-end;
-        flex-shrink: 0;
-    }
+.action {
+    justify-self: end;
 }
 
 @media (max-width: 900px) {
-    .astusha-applications-card {
-        &__item {
-            grid-template-columns: 48px minmax(0, 1fr) auto;
-            align-items: flex-start;
-        }
-
-        &__status {
-            grid-column: 2 / 4;
-            justify-self: flex-start;
-            min-width: auto;
-            margin-top: -6px;
-        }
-
-        &__action {
-            justify-self: flex-end;
-        }
+    .item {
+        gap: 12px;
     }
 }
 
 @media (max-width: 640px) {
-    .astusha-applications-card {
+    .card {
         padding: 20px;
+    }
 
-        &__header {
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
 
-        &__counter {
-            align-self: flex-start;
-        }
+    .counter {
+        align-self: flex-start;
+    }
 
-        &__item {
-            grid-template-columns: 44px minmax(0, 1fr);
-            gap: 12px;
-            padding: 14px;
-        }
+    .item {
+        grid-template-columns: 44px minmax(0, 1fr);
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+    }
 
-        &__icon-wrapper {
-            width: 44px;
-            height: 44px;
-        }
+    .icon-wrapper {
+        grid-column: 1;
+        grid-row: 1;
+        width: 44px;
+        height: 44px;
+    }
 
-        &__icon {
-            font-size: 22px;
-        }
+    .card__icon {
+        font-size: 22px;
+    }
 
-        &__status {
-            grid-column: 1 / 3;
-            justify-self: flex-start;
-            width: fit-content;
-            margin-top: 0;
-        }
+    .info {
+        grid-column: 2;
+        grid-row: 1;
+    }
 
-        &__action {
-            grid-column: 1 / 3;
-            width: 100%;
-            justify-self: stretch;
-        }
+    .label {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start;
+    }
 
-        &__action button {
-            width: 100%;
-        }
+    .action {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        width: 100%;
+        justify-self: stretch;
     }
 }
 
 @media (max-width: 420px) {
-    .astusha-applications-card {
+    .card {
         padding: 16px;
+    }
 
-        &__item {
-            padding: 12px;
-        }
+    .item {
+        padding: 12px;
+    }
 
-        &__title {
-            font: var(--tui-typography-body-l);
-            font-weight: 600;
-        }
+    .title {
+        font: var(--tui-typography-body-l);
+        font-weight: 600;
+    }
 
-        &__description,
-        &__text {
-            font: var(--tui-typography-body-s);
-        }
+    .description,
+    .text {
+        font: var(--tui-typography-body-s);
     }
 }

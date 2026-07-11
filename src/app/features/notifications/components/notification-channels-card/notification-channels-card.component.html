@@ -1,32 +1,28 @@
-<div class="notification-channels-card">
-    <header class="notification-channels-card__header">
+<div class="card">
+    <header class="header">
         <div tuiAvatar="@tui.mail" size="l" appearance="info"></div>
 
-        <div class="notification-channels-card__info">
-            <h2 class="notification-channels-card__title">
-                Каналы уведомлений
-            </h2>
+        <div class="info">
+            <div class="title"> Каналы уведомлений </div>
 
-            <p class="notification-channels-card__description">
+            <div class="description">
                 Выберите, куда Astusha ID может отправлять уведомления.
-            </p>
+            </div>
         </div>
     </header>
 
     <form [formGroup]="channelsForm">
-        <main class="notification-channels-card__content">
-            <div class="notification-channels-card__list">
-                <div class="notification-channels-card__item">
-                    <div class="notification-channels-card__item-icon">
+        <main class="content">
+            <div class="list">
+                <div class="item">
+                    <div class="item-icon">
                         <tui-icon icon="@tui.mail" />
                     </div>
 
-                    <div class="notification-channels-card__item-info">
-                        <div class="notification-channels-card__item-title">
-                            Email-уведомления
-                        </div>
+                    <div class="item-info">
+                        <div class="item-title"> Email-уведомления </div>
 
-                        <div class="notification-channels-card__item-meta">
+                        <div class="item-meta">
                             Важные события аккаунта будут приходить на почту.
                         </div>
                     </div>
@@ -40,21 +36,19 @@
                     />
                 </div>
 
-                <div class="notification-channels-card__item">
-                    <div class="notification-channels-card__item-icon">
+                <div class="item">
+                    <div class="item-icon">
                         <tui-icon icon="@tui.bell" />
                     </div>
 
-                    <div class="notification-channels-card__item-info">
-                        <div class="notification-channels-card__item-title">
+                    <div class="item-info">
+                        <div class="item-title">
                             Push-уведомления
 
-                            <span class="notification-channels-card__badge">
-                                Скоро
-                            </span>
+                            <div tuiBadge appearance="neutral"> Скоро </div>
                         </div>
 
-                        <div class="notification-channels-card__item-meta">
+                        <div class="item-meta">
                             Уведомления в браузере о важных действиях.
                         </div>
                     </div>
@@ -67,21 +61,19 @@
                     />
                 </div>
 
-                <div class="notification-channels-card__item">
-                    <div class="notification-channels-card__item-icon">
+                <div class="item">
+                    <div class="item-icon">
                         <tui-icon icon="@tui.send" />
                     </div>
 
-                    <div class="notification-channels-card__item-info">
-                        <div class="notification-channels-card__item-title">
+                    <div class="item-info">
+                        <div class="item-title">
                             Telegram
 
-                            <span class="notification-channels-card__badge">
-                                Скоро
-                            </span>
+                            <div tuiBadge appearance="neutral"> Скоро </div>
                         </div>
 
-                        <div class="notification-channels-card__item-meta">
+                        <div class="item-meta">
                             Уведомления через Telegram-бота Astusha.
                         </div>
                     </div>

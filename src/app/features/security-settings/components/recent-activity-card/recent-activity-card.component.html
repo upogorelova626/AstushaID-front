@@ -1,17 +1,17 @@
-<div class="recent-activity-card">
-    <header class="recent-activity-card__header">
+<div class="card">
+    <header class="header">
         <div tuiAvatar="@tui.clock" size="l" appearance="info"></div>
 
-        <div class="recent-activity-card__info">
-            <h2 class="recent-activity-card__title">Недавняя активность</h2>
+        <div class="info">
+            <h2 class="title">Недавняя активность</h2>
 
-            <p class="recent-activity-card__description">
+            <p class="description">
                 Просматривайте историю входов в ваш аккаунт.
             </p>
         </div>
     </header>
 
-    <main class="recent-activity-card__content">
+    <main class="content">
         <table tuiTable [tuiSkeleton]="isLoading()">
             <thead>
                 <tr>
@@ -26,9 +26,10 @@
             <tbody tuiTbody>
                 @for (action of previewActions(); track action.id) {
                     <tr>
-                        <td tuiTd>{{
-                            action.time | date: 'd MMM y, HH:mm'
-                        }}</td>
+                        <td tuiTd>
+                            {{ action.time | date: 'd MMM y, HH:mm' }}
+                        </td>
+
                         <td tuiTd>{{ action.device }}</td>
                         <td tuiTd>{{ action.actionLabel }}</td>
                         <td tuiTd>{{ action.location }}</td>
@@ -38,15 +39,17 @@
             </tbody>
         </table>
     </main>
+
     @if (userActivities().length > 3) {
         <button
-            class="recent-activity-card__button"
-            type="button"
+            class="button"
             tuiButton
+            type="button"
             appearance="flat"
             size="s"
             (click)="showAllActions()"
-            >Показать больше</button
         >
+            Показать больше
+        </button>
     }
 </div>

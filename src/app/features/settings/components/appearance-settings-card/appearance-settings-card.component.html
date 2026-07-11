@@ -1,37 +1,35 @@
-<div class="appearance-settings-card">
-    <header class="appearance-settings-card__header">
+<div class="card">
+    <header class="header">
         <div class="appearance-settings-card__icon-wrapper">
-            <tui-icon icon="@tui.monitor" />
+            <div tuiAvatar="@tui.monitor" size="l" appearance="info"></div>
         </div>
 
-        <div class="appearance-settings-card__header-content">
-            <h2 class="appearance-settings-card__title">Внешний вид</h2>
+        <div class="header-content">
+            <div class="title">Внешний вид</div>
 
-            <p class="appearance-settings-card__description">
+            <div class="description">
                 Выберите тему для оформления интерфейса.
-            </p>
+            </div>
         </div>
     </header>
 
-    <div class="appearance-settings-card__buttons">
-        <div class="appearance-settings-card__buttons">
-            @for (theme of themes; track theme.theme) {
-                <button
-                    tuiButton
-                    type="button"
-                    [iconStart]="theme.icon"
-                    appearance="outline"
-                    size="l"
-                    class="appearance-settings-card__button"
-                    [class.appearance-settings-card__button_active]="
-                        selectedTheme() === theme.theme
-                    "
-                    [disabled]="isLoading() || !!changingTheme()"
-                    (click)="changeTheme(theme.theme)"
-                >
-                    {{ theme.label }}
-                </button>
-            }
-        </div>
+    <div class="buttons">
+        @for (theme of themes; track theme.theme) {
+            <button
+                tuiButton
+                type="button"
+                [iconStart]="theme.icon"
+                appearance="outline"
+                size="l"
+                class="button"
+                [class.appearance-settings-card__button_active]="
+                    selectedTheme() === theme.theme
+                "
+                [disabled]="isLoading() || !!changingTheme()"
+                (click)="changeTheme(theme.theme)"
+            >
+                {{ theme.label }}
+            </button>
+        }
     </div>
 </div>

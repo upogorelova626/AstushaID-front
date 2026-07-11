@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {TuiIcon, TuiNotificationService} from '@taiga-ui/core';
-import {TuiAvatar, TuiSkeleton, TuiSwitch} from '@taiga-ui/kit';
+import {TuiAvatar, TuiBadge, TuiSkeleton, TuiSwitch} from '@taiga-ui/kit';
 import {catchError, EMPTY, finalize, tap} from 'rxjs';
 import {NotificationSettings} from '../../../../shared/interfaces';
 import {NotificationSettingsService} from '../../../../shared/services/notification-settings.service';
@@ -21,7 +21,14 @@ interface ChannelsFormValue {
 
 @Component({
     selector: 'app-notification-channels-card',
-    imports: [TuiIcon, TuiSwitch, TuiAvatar, ReactiveFormsModule, TuiSkeleton],
+    imports: [
+        TuiIcon,
+        TuiSwitch,
+        TuiAvatar,
+        ReactiveFormsModule,
+        TuiSkeleton,
+        TuiBadge
+    ],
     templateUrl: './notification-channels-card.component.html',
     styleUrl: './notification-channels-card.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,52 +1,50 @@
-<div class="two-factor-auth-card">
-    <header class="two-factor-auth-card__header">
+<div class="card">
+    <header class="header">
         <div tuiAvatar="@tui.shield-check" size="l" appearance="warning"></div>
 
-        <div class="two-factor-auth-card__info">
-            <h2 class="two-factor-auth-card__title">
-                Двухфакторная аутентификация
-            </h2>
+        <div class="info">
+            <div class="title">Двухфакторная аутентификация</div>
 
-            <p class="two-factor-auth-card__description">
+            <div class="description">
                 Добавьте дополнительный уровень защиты для вашего аккаунта.
-            </p>
+            </div>
         </div>
     </header>
 
-    <main class="two-factor-auth-card__content">
-        <section class="two-factor-auth-card__status">
+    <main class="content">
+        <div class="status">
             <div
                 tuiAvatar="@tui.lock-keyhole"
                 size="m"
                 appearance="positive"
             ></div>
 
-            <div
-                class="two-factor-auth-card__status-info"
-                [tuiSkeleton]="isLoading()"
-            >
+            <div class="status-info" [tuiSkeleton]="isLoading()">
                 @if (isTwoFactorEnabled()) {
-                    <div class="two-factor-auth-card__status-title">
+                    <div class="status-title status-title_enabled">
                         2FA включена
                     </div>
+
+                    <div class="status-description">
+                        Ваш аккаунт защищён дополнительным уровнем безопасности.
+                    </div>
                 } @else {
-                    <div class="two-factor-auth-card__status-title">
-                        2FA выключена
+                    <div class="status-title">2FA выключена</div>
+
+                    <div class="status-description">
+                        Включите 2FA, чтобы дополнительно защитить аккаунт.
                     </div>
                 }
-
-                <div class="two-factor-auth-card__status-description">
-                    Ваш аккаунт защищён дополнительным уровнем безопасности.
-                </div>
             </div>
 
             <input
+                class="switch"
                 tuiSwitch
                 type="checkbox"
                 [formControl]="control"
                 [tuiSkeleton]="isLoading()"
                 (change)="toggleTwoFactor()"
             />
-        </section>
+        </div>
     </main>
 </div>

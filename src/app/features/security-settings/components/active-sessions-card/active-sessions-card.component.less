@@ -2,121 +2,109 @@
     display: block;
 }
 
-.active-sessions-card {
+.card {
     padding: 24px;
     border: 1px solid var(--color-card-border);
     border-radius: 5px;
     background: var(--color-card-background);
+}
 
-    &__header {
-        display: flex;
-        gap: 16px;
-        min-width: 0;
-    }
+.header {
+    display: flex;
+    gap: 16px;
+    min-width: 0;
+}
 
-    &__info {
-        display: flex;
-        flex-direction: column;
-        min-width: 0;
-    }
+.info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
 
-    &__title {
-        margin: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-heading-h5);
-    }
+.title {
+    margin: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-heading-h5);
+}
 
-    &__description {
-        max-width: 260px;
-        margin: 6px 0 0;
-        color: var(--color-text-secondary);
-        font: var(--tui-typography-body-m);
-    }
+.description {
+    max-width: 260px;
+    margin: 6px 0 0;
+    color: var(--color-text-secondary);
+    font: var(--tui-typography-body-m);
+}
 
-    &__content {
-        margin-top: 20px;
-    }
+.content {
+    margin-top: 20px;
+}
 
-    &__list {
-        overflow: hidden;
-        border: 1px solid var(--color-card-border);
-        border-radius: 8px;
-        background: var(--color-card-background);
-    }
+.list {
+    overflow: hidden;
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    background: var(--color-card-background);
+}
 
-    &__session {
-        display: grid;
-        grid-template-columns: 36px minmax(0, 1fr) auto;
-        gap: 12px;
-        align-items: center;
-        min-height: 58px;
-        padding: 10px 14px;
-        border-bottom: 1px solid var(--color-card-border);
+.session {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    min-height: 58px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-card-border);
 
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-
-    &__session-icon {
-        color: var(--color-text-secondary);
-        background: transparent;
-    }
-
-    &__session-info {
-        min-width: 0;
-    }
-
-    &__session-title {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        min-width: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-body-m);
-    }
-
-    &__session-meta {
-        margin-top: 3px;
-        overflow: hidden;
-        color: var(--color-text-secondary);
-        font: var(--tui-typography-body-s);
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    &__badge {
-        padding: 2px 8px;
-        border-radius: 999px;
-        color: #6d3df5;
-        background: var(--color-primary-soft);
-        font: var(--tui-typography-body-xs);
-        white-space: nowrap;
-    }
-
-    &__terminate-all {
-        width: 100%;
-        margin-top: 10px;
+    &:last-child {
+        border-bottom: none;
     }
 }
 
+.session-icon {
+    color: var(--color-text-secondary);
+    background: transparent;
+}
+
+.session-info {
+    min-width: 0;
+}
+
+.session-title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    min-width: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-body-m);
+}
+
+.session-meta {
+    margin-top: 3px;
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font: var(--tui-typography-body-s);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.terminate-all {
+    width: 100%;
+    margin-top: 10px;
+}
+
 @media (max-width: 760px) {
-    .active-sessions-card {
-        &__session {
-            grid-template-columns: 36px minmax(0, 1fr);
-        }
+    .session {
+        grid-template-columns: 36px minmax(0, 1fr);
+    }
 
-        &__session-title {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 4px;
-        }
+    .session-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+    }
 
-        &__arrow,
-        &__terminate {
-            grid-column: 2;
-            justify-self: flex-start;
-            margin-top: 4px;
-        }
+    .terminate {
+        grid-column: 2;
+        justify-self: flex-start;
+        margin-top: 4px;
     }
 }

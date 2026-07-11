@@ -1,23 +1,23 @@
-<div class="account-delete-card">
-    <header class="account-delete-card__header">
+<div class="card">
+    <header class="header">
         <div tuiAvatar="@tui.trash-2" size="l" appearance="negative"></div>
 
-        <div class="account-delete-card__info">
-            <div class="account-delete-card__title-row">
-                <h2 class="account-delete-card__title">Удаление аккаунта</h2>
+        <div class="info">
+            <div class="title-row">
+                <div class="title">Удаление аккаунта</div>
 
-                <span class="account-delete-card__badge">Опасная зона</span>
+                <span tuiBadge appearance="negative">Опасная зона</span>
             </div>
 
-            <p class="account-delete-card__description">
+            <div class="description">
                 Удаление аккаунта необратимо. Все ваши данные, проекты, задачи и
                 настройки будут удалены навсегда.
-            </p>
+            </div>
         </div>
     </header>
 
-    <main class="account-delete-card__content">
-        <div class="account-delete-card__danger-list">
+    <main class="content">
+        <div class="danger-list">
             <ul tuiList>
                 <li>Все проекты, задачи и файлы</li>
                 <li>Интеграции и подключения</li>
@@ -32,7 +32,7 @@
         type="button"
         appearance="accent"
         iconStart="@tui.trash-2"
-        class="account-delete-card__button"
+        class="button"
         (click)="openDeleteProfileNotificationDialog()"
     >
         Удалить аккаунт
