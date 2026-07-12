@@ -16,8 +16,8 @@
     </header>
 
     <main class="content">
-        <form class="form" (ngSubmit)="verifyCode()">
-            <label for="two-factor-code"> Код из письма </label>
+        <form class="form" (submit)="$event.preventDefault()">
+            <label for="two-factor-code">Код из письма</label>
 
             <tui-textfield class="pin">
                 <input
@@ -28,6 +28,7 @@
                     autocomplete="one-time-code"
                     placeholder="••••••"
                     [formControl]="code"
+                    (keydown.enter)="verifyCode()"
                 />
             </tui-textfield>
 
@@ -40,10 +41,11 @@
             <button
                 tuiButton
                 class="submit"
-                type="submit"
+                type="button"
                 size="l"
                 [disabled]="isLoading()"
                 [loading]="isLoading()"
+                (click)="verifyCode()"
             >
                 Подтвердить
             </button>

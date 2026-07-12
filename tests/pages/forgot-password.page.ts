@@ -20,7 +20,7 @@ export class ForgotPasswordPage {
     }
 
     private get successText() {
-        return this.page.locator('.forgot-password-form__success-text');
+        return this.page.locator('.success-text');
     }
 
     async open() {
