@@ -1,22 +1,20 @@
-<div class="create-account-form__wrapper">
-    <header class="create-account-form__header">
-        <h1 class="create-account-form__header-title">Создайте аккаунт</h1>
+<div class="wrapper">
+    <header class="header">
+        <h1 class="header-title">Создайте аккаунт</h1>
 
-        <p class="create-account-form__header-subtitle">
+        <p class="header-subtitle">
             Зарегистрируйтесь, чтобы использовать все сервисы Astusha
         </p>
     </header>
 
-    <main class="create-account-form__content">
+    <main class="content">
         <form
-            class="create-account-form__form"
+            class="form"
             [formGroup]="createAccountForm"
             (submit)="createAccount()"
         >
             <tui-textfield iconStart="@tui.user">
-                <label class="create-account-form__field-label" tuiLabel>
-                    Логин
-                </label>
+                <label tuiLabel> Логин </label>
 
                 <input
                     tuiInput
@@ -32,9 +30,7 @@
             />
 
             <tui-textfield iconStart="@tui.mail">
-                <label class="create-account-form__field-label" tuiLabel>
-                    Email
-                </label>
+                <label tuiLabel> Email </label>
 
                 <input
                     tuiInput
@@ -50,9 +46,7 @@
             />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
-                <label class="create-account-form__field-label" tuiLabel>
-                    Пароль
-                </label>
+                <label tuiLabel> Пароль </label>
 
                 <input
                     tuiInput
@@ -69,9 +63,7 @@
             />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
-                <label class="create-account-form__field-label" tuiLabel>
-                    Подтвердите пароль
-                </label>
+                <label tuiLabel> Подтвердите пароль </label>
 
                 <input
                     tuiInput
@@ -92,7 +84,7 @@
                 ]"
             />
 
-            <label class="create-account-form__agreement">
+            <label class="agreement">
                 <input
                     tuiCheckbox
                     type="checkbox"
@@ -100,35 +92,30 @@
                     formControlName="agreement"
                 />
 
-                <span class="create-account-form__agreement-text">
+                <span class="agreement-text">
                     Я принимаю условия использования и политику
                     конфиденциальности
                 </span>
             </label>
 
-            <button
-                tuiButton
-                class="create-account-form__submit"
-                type="submit"
-                size="l"
-            >
+            <button tuiButton class="submit-button" type="submit" size="l">
                 Создать аккаунт
             </button>
         </form>
     </main>
 
-    <footer class="create-account-form__footer">
-        <div class="create-account-form__divider">
-            <span class="create-account-form__divider-line"></span>
+    <footer class="footer">
+        <div class="divider">
+            <span class="divider-line"></span>
 
-            <p class="create-account-form__divider-text">или</p>
+            <p class="divider-text">или</p>
 
-            <span class="create-account-form__divider-line"></span>
+            <span class="divider-line"></span>
         </div>
 
         <button
             tuiButton
-            class="create-account-form__google"
+            class="google-button"
             type="button"
             appearance="outline"
             size="l"
@@ -137,16 +124,10 @@
             Создать аккаунт через Google
         </button>
 
-        <div class="create-account-form__login">
-            <span class="create-account-form__login-text">
-                Уже есть аккаунт?
-            </span>
+        <div class="login">
+            <span class="login-text"> Уже есть аккаунт? </span>
 
-            <a
-                tuiLink
-                class="create-account-form__login-link"
-                [routerLink]="['/auth', '/login']"
-            >
+            <a tuiLink class="login-link" [routerLink]="['/auth', '/login']">
                 Войти
             </a>
         </div>

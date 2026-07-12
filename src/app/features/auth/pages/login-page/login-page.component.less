@@ -3,142 +3,123 @@
     width: 100%;
 }
 
-.login-form {
-    &__wrapper {
-        width: 100%;
-        max-width: 440px;
-        margin: 0 auto;
-    }
+.wrapper {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+}
 
-    &__header {
-        margin-bottom: 32px;
-    }
+.header {
+    margin-bottom: 32px;
+}
 
-    &__header-title {
-        margin: 0;
-        color: var(--astusha-color-text-primary);
-        font: var(--tui-typography-heading-h3);
-    }
+.header-title {
+    margin: 0;
+    color: var(--astusha-color-text-primary);
+    font: var(--tui-typography-heading-h3);
+}
 
-    &__header-subtitle {
-        margin: 12px 0 0;
-        color: var(--astusha-color-text-secondary);
-        font: var(--tui-typography-body-l);
-    }
+.header-subtitle {
+    margin: 12px 0 0;
+    color: var(--astusha-color-text-secondary);
+    font: var(--tui-typography-body-l);
+}
 
-    &__content {
-        width: 100%;
-    }
+.content {
+    width: 100%;
+}
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-    &__field-label {
-        font: var(--tui-typography-body-m);
-    }
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 2px;
+}
 
-    &__options {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        margin-top: 2px;
-    }
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--astusha-color-text-control);
+    cursor: pointer;
+}
+.remember-text {
+    font: var(--tui-typography-body-s);
+}
 
-    &__remember {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--astusha-color-text-control);
-        cursor: pointer;
-    }
+.forgot-password {
+    white-space: nowrap;
+    font: var(--tui-typography-body-s);
+}
 
-    &__remember-text {
-        font: var(--tui-typography-body-s);
-    }
+.submit {
+    width: 100%;
+    margin-top: 8px;
+}
 
-    &__forgot-password {
-        white-space: nowrap;
-        font: var(--tui-typography-body-s);
-    }
+.footer {
+    margin-top: 28px;
+}
 
-    &__submit {
-        width: 100%;
-        margin-top: 8px;
-    }
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
 
-    &__footer {
-        margin-top: 28px;
-    }
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--astusha-color-divider);
+}
 
-    &__divider {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 20px;
-    }
+.divider-text {
+    margin: 0;
+    color: var(--astusha-color-text-muted);
+    font: var(--tui-typography-body-s);
+}
 
-    &__divider-line {
-        flex: 1;
-        height: 1px;
-        background: var(--astusha-color-divider);
-    }
+.google-button {
+    width: 100%;
+}
 
-    &__divider-text {
-        margin: 0;
-        color: var(--astusha-color-text-muted);
-        font: var(--tui-typography-body-s);
-    }
+.create-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 24px;
+    color: var(--astusha-color-text-secondary);
+}
 
-    &__google {
-        width: 100%;
-    }
+.create-account-text {
+    font: var(--tui-typography-body-s);
+}
 
-    &__create-account {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        margin-top: 24px;
-        color: var(--astusha-color-text-secondary);
-    }
-
-    &__create-account-text {
-        font: var(--tui-typography-body-s);
-    }
-
-    &__create-account-link {
-        font: var(--tui-typography-body-s);
-    }
+.create-account-link {
+    font: var(--tui-typography-body-s);
 }
 
 @media (max-width: 560px) {
-    .login-form {
-        &__wrapper {
-            padding: 28px 22px;
-        }
+    .header-title {
+        font: var(--tui-typography-heading-h3);
+    }
 
-        &__header-title {
-            font: var(--tui-typography-heading-h3);
-        }
+    .options {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
 
-        &__options {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        &__forgot-password {
-            white-space: normal;
-        }
-
-        &__create-account {
-            flex-direction: column;
-            gap: 4px;
-            text-align: center;
-        }
+    .forgot-password {
+        white-space: normal;
     }
 }

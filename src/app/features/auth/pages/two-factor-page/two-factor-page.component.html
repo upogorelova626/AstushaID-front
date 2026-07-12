@@ -1,15 +1,10 @@
-<tui-loader [loading]="isPageLoading()"></tui-loader>
-<div class="two-factor-form__wrapper">
-    <header class="two-factor-form__header">
-        <div
-            class="two-factor-form__icon"
-            tuiAvatar="@tui.mail"
-            appearance="info"
-        ></div>
+<div class="wrapper">
+    <header class="header">
+        <div class="icon" tuiAvatar="@tui.mail" appearance="info"></div>
 
-        <h1 class="two-factor-form__header-title">Подтверждение входа</h1>
+        <h1 class="header-title">Подтверждение входа</h1>
 
-        <p class="two-factor-form__header-subtitle">
+        <p class="header-subtitle">
             Мы отправили код подтверждения
             @if (email()) {
                 на {{ email() }}.
@@ -20,13 +15,11 @@
         </p>
     </header>
 
-    <main class="two-factor-form__content">
-        <form class="two-factor-form__form" (submit)="$event.preventDefault()">
-            <label class="two-factor-form__field-label" for="two-factor-code">
-                Код из письма
-            </label>
+    <main class="content">
+        <form class="form" (ngSubmit)="verifyCode()">
+            <label for="two-factor-code"> Код из письма </label>
 
-            <tui-textfield class="two-factor-form__pin">
+            <tui-textfield class="pin">
                 <input
                     id="two-factor-code"
                     tuiInputPin
@@ -35,36 +28,32 @@
                     autocomplete="one-time-code"
                     placeholder="••••••"
                     [formControl]="code"
-                    (keydown.enter)="verifyCode()"
                 />
             </tui-textfield>
 
             @if (code.touched && code.invalid) {
-                <p class="two-factor-form__error"> Введите 6 цифр из письма </p>
+                <p class="error">Введите 6 цифр из письма</p>
             } @else {
-                <p class="two-factor-form__hint"> Код действует 10 минут </p>
+                <p class="hint">Код действует 10 минут</p>
             }
 
             <button
                 tuiButton
-                class="two-factor-form__submit"
-                type="button"
+                class="submit"
+                type="submit"
                 size="l"
                 [disabled]="isLoading()"
-                (click)="verifyCode()"
                 [loading]="isLoading()"
             >
                 Подтвердить
             </button>
         </form>
 
-        <div class="two-factor-form__resend">
+        <div class="resend">
             <div>
-                <p class="two-factor-form__resend-title">
-                    Не получили письмо?
-                </p>
+                <p class="resend-title">Не получили письмо?</p>
 
-                <p class="two-factor-form__resend-text">
+                <p class="resend-text">
                     Проверьте папку «Спам» или вернитесь ко входу, чтобы
                     запросить новый код.
                 </p>
@@ -75,10 +64,10 @@
             </button>
         </div>
 
-        <footer class="two-factor-form__footer">
+        <footer class="footer">
             <a
                 tuiLink
-                class="two-factor-form__login-link"
+                class="login-link"
                 role="button"
                 tabindex="0"
                 (click)="backToLogin()"

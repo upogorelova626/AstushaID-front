@@ -3,121 +3,112 @@
     width: 100%;
 }
 
-.two-factor-form {
-    &__wrapper {
-        width: 100%;
-        max-width: 440px;
-        margin: 0 auto;
-    }
+.wrapper {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+}
 
-    &__header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 32px;
-        text-align: center;
-    }
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+    text-align: center;
+}
 
-    &__icon {
-        margin-bottom: 20px;
-        color: var(--color-primary);
-        background: var(--color-primary-soft);
-    }
+.icon {
+    margin-bottom: 20px;
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+}
 
-    &__header-title {
-        margin: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-heading-h3);
-    }
+.header-title {
+    margin: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-heading-h3);
+}
 
-    &__header-subtitle {
-        margin: 12px 0 0;
-        color: var(--color-text-muted);
-        font: var(--tui-typography-body-l);
-    }
+.header-subtitle {
+    margin: 12px 0 0;
+    color: var(--color-text-muted);
+    font: var(--tui-typography-body-l);
+}
 
-    &__content {
-        width: 100%;
-    }
+.content {
+    width: 100%;
+}
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
 
-    &__field-label {
-        color: var(--color-text-primary);
-        font: var(--tui-typography-body-m);
-    }
+.pin {
+    width: 100%;
+}
 
-    &__pin {
-        width: 100%;
-    }
+.hint {
+    margin: -4px 0 0;
+    color: var(--color-text-muted);
+    font: var(--tui-typography-body-s);
+}
 
-    &__hint {
-        margin: -4px 0 0;
-        color: var(--color-text-muted);
-        font: var(--tui-typography-body-s);
-    }
+.submit {
+    width: 100%;
+    margin-top: 8px;
+}
 
-    &__submit {
-        width: 100%;
-        margin-top: 8px;
-    }
+.resend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 28px;
+    padding: 18px;
+    border: 1px solid var(--color-card-border);
+    border-radius: 5px;
+    background: var(--color-card-bg-soft);
+}
 
-    &__resend {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        margin-top: 28px;
-        padding: 18px;
-        border: 1px solid var(--color-card-border);
-        border-radius: 5px;
-        background: var(--color-card-bg-soft);
-    }
+.resend-title {
+    margin: 0;
+    color: var(--color-text-primary);
+    font: var(--tui-typography-body-m);
+}
 
-    &__resend-title {
-        margin: 0;
-        color: var(--color-text-primary);
-        font: var(--tui-typography-body-m);
-    }
+.resend-text {
+    margin: 4px 0 0;
+    color: var(--color-text-muted);
+    font: var(--tui-typography-body-s);
+}
 
-    &__resend-text {
-        margin: 4px 0 0;
-        color: var(--color-text-muted);
-        font: var(--tui-typography-body-s);
-    }
+.footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+}
 
-    &__footer {
-        display: flex;
-        justify-content: center;
-        margin-top: 28px;
-    }
-
-    &__login-link {
-        font: var(--tui-typography-body-m);
-    }
+.login-link {
+    font: var(--tui-typography-body-m);
 }
 
 @media (max-width: 560px) {
-    .two-factor-form {
-        &__wrapper {
-            max-width: 100%;
-        }
+    .wrapper {
+        max-width: 100%;
+    }
 
-        &__header {
-            margin-bottom: 28px;
-        }
+    .header {
+        margin-bottom: 28px;
+    }
 
-        &__resend {
-            flex-direction: column;
-            align-items: flex-start;
-        }
+    .resend {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
-        &__footer {
-            margin-top: 24px;
-        }
+    .footer {
+        margin-top: 24px;
     }
 }

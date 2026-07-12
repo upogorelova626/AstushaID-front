@@ -37,7 +37,8 @@ import {catchError, EMPTY, tap} from 'rxjs';
         ReactiveFormsModule,
         TuiError,
         TuiPassword,
-        TuiIcon
+        TuiIcon,
+        TuiCheckbox
     ],
     templateUrl: './create-account-page.component.html',
     styleUrl: './create-account-page.component.less',

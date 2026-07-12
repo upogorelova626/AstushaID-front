@@ -1,22 +1,16 @@
-<div class="login-form__wrapper">
-    <header class="login-form__header">
-        <h1 class="login-form__header-title">Вход в аккаунт</h1>
+<div class="wrapper">
+    <header class="header">
+        <h1 class="header-title">Вход в аккаунт</h1>
 
-        <p class="login-form__header-subtitle">
+        <p class="header-subtitle">
             Продолжайте работать с сервисами AstushaApp
         </p>
     </header>
 
-    <main class="login-form__content">
-        <form
-            class="login-form__form"
-            [formGroup]="loginForm"
-            (ngSubmit)="login()"
-        >
+    <main class="content">
+        <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
             <tui-textfield iconStart="@tui.mail">
-                <label class="login-form__field-label" tuiLabel>
-                    Email или логин
-                </label>
+                <label tuiLabel> Email или логин </label>
 
                 <input
                     tuiInput
@@ -31,7 +25,7 @@
             />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
-                <label class="login-form__field-label" tuiLabel> Пароль </label>
+                <label tuiLabel> Пароль </label>
 
                 <input
                     tuiInput
@@ -43,42 +37,40 @@
             </tui-textfield>
             <tui-error formControlName="password" [order]="['required']" />
 
-            <div class="login-form__options">
-                <label class="login-form__remember">
+            <div class="options">
+                <label class="remember">
                     <input tuiCheckbox type="checkbox" size="m" />
 
-                    <span class="login-form__remember-text">
-                        Запомнить меня
-                    </span>
+                    <span class="remember-text"> Запомнить меня </span>
                 </label>
 
                 <a
                     tuiLink
-                    class="login-form__forgot-password"
+                    class="forgot-password"
                     routerLink="/auth/forgot-password"
                 >
                     Забыли пароль?
                 </a>
             </div>
 
-            <button tuiButton class="login-form__submit" type="submit" size="l">
+            <button tuiButton class="submit" type="submit" size="l">
                 Войти
             </button>
         </form>
     </main>
 
-    <footer class="login-form__footer">
-        <div class="login-form__divider">
-            <span class="login-form__divider-line"></span>
+    <footer class="footer">
+        <div class="divider">
+            <span class="divider-line"></span>
 
-            <p class="login-form__divider-text">или</p>
+            <p class="divider-text">или</p>
 
-            <span class="login-form__divider-line"></span>
+            <span class="divider-line"></span>
         </div>
 
         <button
             tuiButton
-            class="login-form__google"
+            class="google-button"
             type="button"
             appearance="outline"
             size="l"
@@ -87,12 +79,12 @@
             Войти через Google
         </button>
 
-        <div class="login-form__create-account">
-            <span class="login-form__create-account-text"> Нет аккаунта? </span>
+        <div class="create-account">
+            <span class="create-account-text"> Нет аккаунта? </span>
 
             <a
                 tuiLink
-                class="login-form__create-account-link"
+                class="create-account-link"
                 [routerLink]="['/auth', 'create-account']"
             >
                 Создать аккаунт
