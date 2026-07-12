@@ -126,6 +126,7 @@
                     <label tuiLabel for="firstName">Имя</label>
 
                     <input
+                        id="firstName"
                         tuiInput
                         placeholder="Введите имя"
                         formControlName="firstName"
@@ -137,6 +138,7 @@
                     <label tuiLabel for="lastName">Фамилия</label>
 
                     <input
+                        id="lastName"
                         tuiInput
                         placeholder="Введите фамилию"
                         formControlName="lastName"
@@ -151,6 +153,7 @@
 
                     <input
                         id="email"
+                        autocomplete="email"
                         tuiInput
                         placeholder="Введите email"
                         [value]="currentUser()?.email"
@@ -162,6 +165,7 @@
                     <label tuiLabel for="position">Должность</label>
 
                     <input
+                        id="position"
                         tuiInput
                         placeholder="Введите должность"
                         formControlName="position"
@@ -174,6 +178,7 @@
                 <label tuiLabel for="about">О себе</label>
 
                 <input
+                    id="about"
                     tuiInput
                     placeholder="Расскажите немного о себе"
                     formControlName="about"

@@ -105,6 +105,9 @@ export const routes: Routes = [
 
     {
         path: '**',
-        redirectTo: 'auth/login'
+        loadComponent: () =>
+            import('./shared/components/error-page/error-page.component').then(
+                ({ErrorPageComponent}) => ErrorPageComponent
+            )
     }
 ];
