@@ -35,6 +35,18 @@ export class SecurityPage {
         return this.page.getByRole('button', {name: 'Изменить пароль'});
     }
 
+    get showMoreRecentActivity() {
+        return this.page.getByRole('button', {name: 'Показать больше'});
+    }
+
+    get allActivitiesDialog() {
+        return this.page.getByRole('dialog', {name: 'Недавняя активность'});
+    }
+
+    get twoFactorSwitch() {
+        return this.page.getByRole('switch');
+    }
+
     async open() {
         await this.page.goto('/account/security');
     }

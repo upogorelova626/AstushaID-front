@@ -5,6 +5,13 @@ import {
     mockChangePasswordSuccess,
     mockChangePasswordFailed
 } from './mocks/security.mock';
+import {mockUserActivitySuccess} from './mocks/activity.mocks';
+import {
+    mockCurrentUserWithTwoFactorDisabled,
+    mockCurrentUserWithTwoFactorEnabled,
+    mockDisableTwoFactorSuccess,
+    mockEnableTwoFactorSuccess
+} from './mocks/two-factor.mocks';
 
 test.describe('Security', () => {
     test('should change password successfully', async ({page}) => {
@@ -39,5 +46,46 @@ test.describe('Security', () => {
             page.getByText('Не удалось изменить пароль')
         ).toBeVisible();
         await expect(page).toHaveURL('/account/security');
+    });
+
+    test('should open all recent activity', async ({page}) => {
+        await mockCurrentUserAuthorized(page);
+        await mockUserActivitySuccess(page);
+
+        const securityPage = new SecurityPage(page);
+
+        await securityPage.open();
+        await securityPage.showMoreRecentActivity.click();
+
+        await expect(page.getByText('Недавняя активность')).toBeVisible;
+        await expect(securityPage.allActivitiesDialog).toBeVisible();
+    });
+
+    test('should enable two-factor authentication', async ({page}) => {
+        await mockCurrentUserWithTwoFactorDisabled(page);
+        await mockEnableTwoFactorSuccess(page);
+
+        const securityPage = new SecurityPage(page);
+
+        await securityPage.open();
+        await securityPage.twoFactorSwitch.click();
+
+        await expect(
+            page.getByText('Двухфакторная аутентификация включена')
+        ).toBeVisible();
+    });
+
+    test('should disable two-factor authentication', async ({page}) => {
+        await mockCurrentUserWithTwoFactorEnabled(page);
+        await mockDisableTwoFactorSuccess(page);
+
+        const securityPage = new SecurityPage(page);
+
+        await securityPage.open();
+        await securityPage.twoFactorSwitch.click();
+
+        await expect(
+            page.getByText('Двухфакторная аутентификация выключена')
+        ).toBeVisible();
     });
 });
