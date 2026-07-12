@@ -13,11 +13,13 @@ import {
     TuiInput,
     TuiLabel,
     type TuiDialogContext,
-    TuiError
+    TuiError,
+    TuiNotificationService
 } from '@taiga-ui/core';
-import {finalize, tap} from 'rxjs';
+import {catchError, finalize, tap} from 'rxjs';
 import {injectContext} from '@taiga-ui/polymorpheus';
 import {TuiButtonLoading, TuiPassword} from '@taiga-ui/kit';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-delete-profile-dialog',
@@ -41,6 +43,8 @@ export class DeleteProfileDialogComponent {
     protected readonly context =
         injectContext<TuiDialogContext<boolean, string>>();
     private readonly usersService = inject(UsersService);
+    private readonly router = inject(Router);
+    private readonly alerts = inject(TuiNotificationService);
 
     protected readonly isDeleting = signal(false);
 
@@ -66,10 +70,18 @@ export class DeleteProfileDialogComponent {
                 tap(() => {
                     this.context.completeWith(true);
                 }),
+                catchError(() =>
+                    this.alerts.open('Не удалось удалить аккаунт', {
+                        label: 'Проверьте правильно ли вы ввели пароль или попробуйте позже',
+                        appearance: 'negative'
+                    })
+                ),
                 finalize(() => {
                     this.isDeleting.set(false);
                 })
             )
-            .subscribe();
+            .subscribe(() => {
+                this.router.navigate(['/auth/create-account']);
+            });
     }
 }

@@ -67,3 +67,13 @@ export async function mockDisableTwoFactorSuccess(page: Page) {
         });
     });
 }
+
+export async function mockUpdateTwoFactorError(page: Page) {
+    await page.route('**/users/me/two-factor/email', route => {
+        if (route.request().method() !== 'PATCH') {
+            return route.fallback();
+        }
+
+        return route.fulfill({status: 400});
+    });
+}

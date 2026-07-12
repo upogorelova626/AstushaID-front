@@ -10,8 +10,13 @@ import {
     mockCurrentUserWithTwoFactorDisabled,
     mockCurrentUserWithTwoFactorEnabled,
     mockDisableTwoFactorSuccess,
-    mockEnableTwoFactorSuccess
+    mockEnableTwoFactorSuccess,
+    mockUpdateTwoFactorError
 } from './mocks/two-factor.mocks';
+import {
+    mockDeleteAccountSuccess,
+    mockDeleteAccountFailed
+} from './mocks/delete-account.mocks';
 
 test.describe('Security', () => {
     test('should change password successfully', async ({page}) => {
@@ -55,10 +60,11 @@ test.describe('Security', () => {
         const securityPage = new SecurityPage(page);
 
         await securityPage.open();
-        await securityPage.showMoreRecentActivity.click();
+        await securityPage.showMoreRecentActivityButton.click();
 
-        await expect(page.getByText('Недавняя активность')).toBeVisible;
-        await expect(securityPage.allActivitiesDialog).toBeVisible();
+        await expect(
+            securityPage.allActivitiesDialog.getByText('Недавняя активность')
+        ).toBeVisible();
     });
 
     test('should enable two-factor authentication', async ({page}) => {
@@ -88,4 +94,70 @@ test.describe('Security', () => {
             page.getByText('Двухфакторная аутентификация выключена')
         ).toBeVisible();
     });
+
+    test('should show error when two-factor update fails', async ({page}) => {
+        await mockCurrentUserWithTwoFactorEnabled(page);
+        await mockUpdateTwoFactorError(page);
+
+        const securityPage = new SecurityPage(page);
+
+        await securityPage.open();
+        await securityPage.twoFactorSwitch.click();
+        await expect(
+            page.getByText(
+                'Не удалось изменить настройку двухфакторной аутентификации'
+            )
+        ).toBeVisible();
+    });
+
+    test('should open delete account dialog', async ({page}) => {
+        await mockCurrentUserAuthorized(page);
+
+        const securityPage = new SecurityPage(page);
+
+        await securityPage.open();
+        await securityPage.deleteAccountButton.click();
+        await expect(page.getByText('Удалить аккаунт?')).toBeVisible();
+    });
+
+    test('should delete account successfully', async ({page}) => {
+        await mockCurrentUserAuthorized(page);
+        await mockDeleteAccountSuccess(page);
+
+        const securityPage = new SecurityPage(page);
+
+        await securityPage.open();
+        await securityPage.deleteAccountButton.click();
+        await securityPage.confirmDeleteButton.click();
+        await securityPage.deleteAccountPasswordInput.fill('33333333');
+        await securityPage.deleteButton.click();
+
+        await expect(page).toHaveURL('/auth/create-account');
+    });
+
+    test('should show error when account deletion fails', async ({page}) => {
+        await mockCurrentUserAuthorized(page);
+        await mockDeleteAccountFailed(page);
+
+        const securityPage = new SecurityPage(page);
+
+        await securityPage.open();
+        await securityPage.deleteAccountButton.click();
+        await securityPage.confirmDeleteButton.click();
+        await securityPage.deleteAccountPasswordInput.fill('33333333');
+        await securityPage.deleteButton.click();
+
+        await expect(page).toHaveURL('/account/security');
+        await expect(
+            page.getByText('Не удалось удалить аккаунт')
+        ).toBeVisible();
+    });
+
+    // test('should display active sessions', async ({page}) => {});
+
+    // test('should terminate active session', async ({page}) => {});
+
+    // test('should show error when session termination fails', async ({
+    //     page
+    // }) => {});
 });
