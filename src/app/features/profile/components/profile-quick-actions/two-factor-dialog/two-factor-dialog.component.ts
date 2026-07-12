@@ -2,9 +2,10 @@ import {
     ChangeDetectionStrategy,
     Component,
     inject,
+    OnInit,
     signal
 } from '@angular/core';
-import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
+import {ReactiveFormsModule, FormControl} from '@angular/forms';
 import {
     type TuiDialogContext,
     TuiInput,
@@ -22,7 +23,7 @@ import {catchError, EMPTY, finalize, tap} from 'rxjs';
     styleUrl: './two-factor-dialog.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TwoFactorDialogComponent {
+export class TwoFactorDialogComponent implements OnInit {
     protected readonly context = injectContext<TuiDialogContext<void, void>>();
 
     private readonly usersService = inject(UsersService);

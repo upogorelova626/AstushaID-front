@@ -3,6 +3,7 @@ import {
     Component,
     computed,
     inject,
+    OnInit,
     signal
 } from '@angular/core';
 import {UserSessionsService} from '../../../../../shared/services/user-sessions.service';
@@ -20,7 +21,7 @@ import {injectContext} from '@taiga-ui/polymorpheus';
     styleUrl: './sessions-dialog.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SessionsDialogComponent {
+export class SessionsDialogComponent implements OnInit {
     protected readonly context = injectContext<TuiDialogContext<void, void>>();
 
     private readonly userSessionsService = inject(UserSessionsService);

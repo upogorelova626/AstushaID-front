@@ -10,9 +10,10 @@
     <main class="content">
         <form class="form" [formGroup]="loginForm" (ngSubmit)="login()">
             <tui-textfield iconStart="@tui.mail">
-                <label tuiLabel> Email или логин </label>
+                <label tuiLabel for="emailOrLogin"> Email или логин </label>
 
                 <input
+                    id="emailOrLogin"
                     tuiInput
                     type="text"
                     placeholder="Введите email или логин"
@@ -25,9 +26,10 @@
             />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
-                <label tuiLabel> Пароль </label>
+                <label tuiLabel for="password"> Пароль </label>
 
                 <input
+                    id="password"
                     tuiInput
                     type="password"
                     placeholder="Введите пароль"

@@ -1,27 +1,22 @@
-<div class="delete-account-dialog">
-    <header class="delete-account-dialog__header">
-        <div class="delete-account-dialog__icon-wrapper">
-            <tui-icon
-                class="delete-account-dialog__icon"
-                icon="@tui.triangle-alert"
-            />
+<div class="dialog">
+    <header class="header">
+        <div class="icon-wrapper">
+            <tui-icon class="icon" icon="@tui.triangle-alert" />
         </div>
 
-        <div class="delete-account-dialog__header-content">
-            <h2 class="delete-account-dialog__title"> Удаление аккаунта </h2>
+        <div class="header-content">
+            <h2 class="title"> Удаление аккаунта </h2>
 
-            <p class="delete-account-dialog__description">
+            <p class="description">
                 Введите пароль, чтобы подтвердить удаление аккаунта. Это
                 действие нельзя будет отменить.
             </p>
         </div>
     </header>
 
-    <div class="delete-account-dialog__content">
+    <div class="content">
         <tui-textfield iconStart="@tui.lock-keyhole">
-            <label tuiLabel class="delete-account-dialog__field-label">
-                Пароль
-            </label>
+            <label tuiLabel class="field-label" for="password"> Пароль </label>
 
             <input
                 tuiInput
@@ -36,7 +31,7 @@
         <tui-error [formControl]="password" [order]="['required']" />
     </div>
 
-    <footer class="delete-account-dialog__actions">
+    <footer class="actions">
         <button
             tuiButton
             type="button"

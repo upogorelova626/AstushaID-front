@@ -123,7 +123,7 @@
         <form class="form" [formGroup]="form">
             <div class="row">
                 <tui-textfield>
-                    <label tuiLabel>Имя</label>
+                    <label tuiLabel for="firstName">Имя</label>
 
                     <input
                         tuiInput
@@ -134,7 +134,7 @@
                 </tui-textfield>
 
                 <tui-textfield>
-                    <label tuiLabel>Фамилия</label>
+                    <label tuiLabel for="lastName">Фамилия</label>
 
                     <input
                         tuiInput
@@ -147,9 +147,10 @@
 
             <div class="row">
                 <tui-textfield>
-                    <label tuiLabel>Email</label>
+                    <label tuiLabel for="email">Email</label>
 
                     <input
+                        id="email"
                         tuiInput
                         placeholder="Введите email"
                         [value]="currentUser()?.email"
@@ -158,7 +159,7 @@
                 </tui-textfield>
 
                 <tui-textfield>
-                    <label tuiLabel>Должность</label>
+                    <label tuiLabel for="position">Должность</label>
 
                     <input
                         tuiInput
@@ -170,7 +171,7 @@
             </div>
 
             <tui-textfield>
-                <label tuiLabel>О себе</label>
+                <label tuiLabel for="about">О себе</label>
 
                 <input
                     tuiInput

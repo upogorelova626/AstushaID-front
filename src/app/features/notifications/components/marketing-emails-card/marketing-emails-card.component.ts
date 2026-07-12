@@ -14,7 +14,7 @@ import {ReactiveFormsModule, FormControl} from '@angular/forms';
 import {catchError, EMPTY, finalize, tap} from 'rxjs';
 
 @Component({
-    selector: 'marketing-emails-card',
+    selector: 'app-marketing-emails-card',
     imports: [
         TuiAvatar,
         TuiInput,

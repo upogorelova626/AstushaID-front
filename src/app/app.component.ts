@@ -1,4 +1,4 @@
-import {Component, computed, inject, signal} from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {TuiRoot} from '@taiga-ui/core';
 import {UsersService} from './features/auth/services/users.service';

@@ -1,17 +1,8 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    inject,
-    OnInit,
-    signal
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {EditProfileComponent} from '../../components/profile-info-card/edit-profile.component';
 import {ProfileSecurityBannerComponent} from '../../components/profile-security-banner/profile-security-banner.component';
 import {ProfileConnectedServicesComponent} from '../../components/profile-connected-services/profile-connected-services.component';
 import {ProfileQuickActionsComponent} from '../../components/profile-quick-actions/profile-quick-actions.component';
-import {UsersService} from '../../../auth/services/users.service';
-import {AstushaUser} from '../../../../shared/interfaces/user.interface';
-import {finalize} from 'rxjs';
 
 @Component({
     selector: 'app-profile-page',

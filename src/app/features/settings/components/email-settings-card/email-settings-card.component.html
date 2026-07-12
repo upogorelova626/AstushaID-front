@@ -14,9 +14,10 @@
 
     <div class="content">
         <tui-textfield>
-            <label tuiLabel>Email</label>
+            <label tuiLabel for="email">Email</label>
 
             <input
+                id="email"
                 tuiInput
                 disabled
                 [value]="currentUser()?.email"

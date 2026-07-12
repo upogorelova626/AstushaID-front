@@ -14,9 +14,10 @@
             (submit)="createAccount()"
         >
             <tui-textfield iconStart="@tui.user">
-                <label tuiLabel> Логин </label>
+                <label tuiLabel for="login">Логин</label>
 
                 <input
+                    id="login"
                     tuiInput
                     type="text"
                     autocomplete="username"
@@ -30,9 +31,10 @@
             />
 
             <tui-textfield iconStart="@tui.mail">
-                <label tuiLabel> Email </label>
+                <label tuiLabel for="email"> Email </label>
 
                 <input
+                    id="email"
                     tuiInput
                     type="email"
                     autocomplete="email"
@@ -46,9 +48,10 @@
             />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
-                <label tuiLabel> Пароль </label>
+                <label tuiLabel for="password"> Пароль </label>
 
                 <input
+                    id="password"
                     tuiInput
                     type="password"
                     placeholder="Введите пароль"
@@ -63,9 +66,10 @@
             />
 
             <tui-textfield iconStart="@tui.lock-keyhole">
-                <label tuiLabel> Подтвердите пароль </label>
+                <label tuiLabel for="password"> Подтвердите пароль </label>
 
                 <input
+                    id="password"
                     tuiInput
                     type="password"
                     placeholder="Повторите пароль"

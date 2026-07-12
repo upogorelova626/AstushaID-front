@@ -14,7 +14,7 @@ export class ProfileConnectedServicesComponent {
         window.location.href = 'http://localhost:4200/dashboard';
     }
 
-    protected goToAstushaBook() {}
+    // protected goToAstushaBook() {}
 
-    protected goToAstushaChat() {}
+    // protected goToAstushaChat() {}
 }
