@@ -1,8 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    effect,
     inject,
-    OnInit,
     signal
 } from '@angular/core';
 import {ReactiveFormsModule, FormControl} from '@angular/forms';
@@ -15,6 +15,7 @@ import {TuiAvatar, TuiSkeleton, TuiSwitch} from '@taiga-ui/kit';
 import {injectContext} from '@taiga-ui/polymorpheus';
 import {UsersService} from '../../../../auth/services/users.service';
 import {catchError, EMPTY, finalize, tap} from 'rxjs';
+import {toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-two-factor-dialog',
@@ -23,7 +24,7 @@ import {catchError, EMPTY, finalize, tap} from 'rxjs';
     styleUrl: './two-factor-dialog.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TwoFactorDialogComponent implements OnInit {
+export class TwoFactorDialogComponent {
     protected readonly context = injectContext<TuiDialogContext<void, void>>();
 
     private readonly usersService = inject(UsersService);
@@ -33,27 +34,21 @@ export class TwoFactorDialogComponent implements OnInit {
     protected readonly isLoading = signal(false);
     protected readonly isSaving = signal(false);
 
+    protected readonly currentUser = toSignal(this.usersService.currentUser$);
+
     protected readonly control = new FormControl(false, {nonNullable: true});
 
-    ngOnInit(): void {
-        this.isLoading.set(true);
-        this.control.disable({emitEvent: false});
+    constructor() {
+        effect(() => {
+            const currentUser = this.currentUser();
+            if (!currentUser) {
+                return;
+            }
 
-        this.usersService
-            .getMe()
-            .pipe(
-                tap(me => {
-                    this.isTwoFactorEnabled.set(me.emailTwoFactorEnabled);
-                    this.control.setValue(me.emailTwoFactorEnabled, {
-                        emitEvent: false
-                    });
-                }),
-                finalize(() => {
-                    this.isLoading.set(false);
-                    this.control.enable({emitEvent: false});
-                })
-            )
-            .subscribe();
+            this.control.setValue(currentUser.emailTwoFactorEnabled, {
+                emitEvent: false
+            });
+        });
     }
 
     protected toggleTwoFactor() {

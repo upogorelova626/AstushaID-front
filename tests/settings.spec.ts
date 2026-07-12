@@ -1,7 +1,6 @@
 import {test} from '@playwright/test';
 import {
     mockCurrentUserAuthorized,
-    updatedMockUser,
     mockUpdateProfileSuccess,
     mockUpdateProfileError
 } from './mocks/user.mocks';

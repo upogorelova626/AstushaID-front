@@ -22,10 +22,6 @@ export class UsersService {
 
     readonly currentUser$ = this.currentUserSubject.asObservable();
 
-    getMe(): Observable<AstushaUser> {
-        return this.http.get<AstushaUser>(`${this.baseApiUrl}/me`);
-    }
-
     loadCurrentUser() {
         return this.http.get<AstushaUser>(`${this.baseApiUrl}/me`).pipe(
             tap(user => {

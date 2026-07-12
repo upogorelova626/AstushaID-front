@@ -1,6 +1,5 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {UsersService} from '../../../features/auth/services/users.service';
 import {LayoutHeaderComponent} from '../../../shared/components/layout-header/layout-header.component';
 import {LayoutSidebarComponent} from '../../../shared/components/layout-sidebar/layout-sidebar.component';
 
@@ -11,10 +10,4 @@ import {LayoutSidebarComponent} from '../../../shared/components/layout-sidebar/
     styleUrl: './app-layout.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppLayoutComponent {
-    private readonly usersService = inject(UsersService);
-
-    constructor() {
-        this.usersService.loadCurrentUser().subscribe();
-    }
-}
+export class AppLayoutComponent {}

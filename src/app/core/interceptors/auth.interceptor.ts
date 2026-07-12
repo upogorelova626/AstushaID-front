@@ -1,5 +1,6 @@
 import {HttpErrorResponse, HttpInterceptorFn} from '@angular/common/http';
 import {inject} from '@angular/core';
+import {Router} from '@angular/router';
 import {
     catchError,
     finalize,
@@ -17,6 +18,7 @@ let refreshRequest$: Observable<unknown> | null = null;
 
 export const credentialsInterceptor: HttpInterceptorFn = (request, next) => {
     const authService = inject(AuthService);
+    const router = inject(Router);
 
     if (!request.url.startsWith(baseApiUrl)) {
         return next(request);
@@ -31,18 +33,18 @@ export const credentialsInterceptor: HttpInterceptorFn = (request, next) => {
             const isUnauthorized =
                 error instanceof HttpErrorResponse && error.status === 401;
 
-            const isCreateAccountRequest = request.url.includes(
-                '/auth/create-account'
-            );
             const isLoginRequest = request.url.includes('/auth/login');
             const isRefreshRequest = request.url.includes('/auth/refresh');
+            const isTwoFactorRequest = request.url.includes(
+                '/auth/two-factor/email/verify'
+            );
             const isLogoutRequest = request.url.includes('/auth/logout');
 
             if (
                 !isUnauthorized ||
-                isCreateAccountRequest ||
                 isLoginRequest ||
                 isRefreshRequest ||
+                isTwoFactorRequest ||
                 isLogoutRequest
             ) {
                 return throwError(() => error);
@@ -50,18 +52,20 @@ export const credentialsInterceptor: HttpInterceptorFn = (request, next) => {
 
             if (!refreshRequest$) {
                 refreshRequest$ = authService.refresh().pipe(
-                    shareReplay(1),
+                    catchError((refreshError: unknown) => {
+                        void router.navigate(['/auth/login']);
+
+                        return throwError(() => refreshError);
+                    }),
                     finalize(() => {
                         refreshRequest$ = null;
-                    })
+                    }),
+                    shareReplay(1)
                 );
             }
 
             return refreshRequest$.pipe(
-                switchMap(() => next(requestWithCredentials)),
-                catchError((refreshError: unknown) =>
-                    throwError(() => refreshError)
-                )
+                switchMap(() => next(requestWithCredentials))
             );
         })
     );

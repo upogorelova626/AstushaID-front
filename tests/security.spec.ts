@@ -17,10 +17,13 @@ import {
     mockDeleteAccountSuccess,
     mockDeleteAccountFailed
 } from './mocks/delete-account.mocks';
+import {mockUserSessionsSuccess} from './mocks/active-sessions.mock';
 
 test.describe('Security', () => {
     test('should change password successfully', async ({page}) => {
         await mockCurrentUserAuthorized(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockChangePasswordSuccess(page);
 
         const securityPage = new SecurityPage(page);
@@ -37,6 +40,8 @@ test.describe('Security', () => {
 
     test('should show error when password change fails', async ({page}) => {
         await mockCurrentUserAuthorized(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockChangePasswordFailed(page);
 
         const securityPage = new SecurityPage(page);
@@ -55,6 +60,8 @@ test.describe('Security', () => {
 
     test('should open all recent activity', async ({page}) => {
         await mockCurrentUserAuthorized(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockUserActivitySuccess(page);
 
         const securityPage = new SecurityPage(page);
@@ -69,6 +76,8 @@ test.describe('Security', () => {
 
     test('should enable two-factor authentication', async ({page}) => {
         await mockCurrentUserWithTwoFactorDisabled(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockEnableTwoFactorSuccess(page);
 
         const securityPage = new SecurityPage(page);
@@ -83,6 +92,8 @@ test.describe('Security', () => {
 
     test('should disable two-factor authentication', async ({page}) => {
         await mockCurrentUserWithTwoFactorEnabled(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockDisableTwoFactorSuccess(page);
 
         const securityPage = new SecurityPage(page);
@@ -97,6 +108,8 @@ test.describe('Security', () => {
 
     test('should show error when two-factor update fails', async ({page}) => {
         await mockCurrentUserWithTwoFactorEnabled(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockUpdateTwoFactorError(page);
 
         const securityPage = new SecurityPage(page);
@@ -112,6 +125,8 @@ test.describe('Security', () => {
 
     test('should open delete account dialog', async ({page}) => {
         await mockCurrentUserAuthorized(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
 
         const securityPage = new SecurityPage(page);
 
@@ -122,6 +137,8 @@ test.describe('Security', () => {
 
     test('should delete account successfully', async ({page}) => {
         await mockCurrentUserAuthorized(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockDeleteAccountSuccess(page);
 
         const securityPage = new SecurityPage(page);
@@ -137,6 +154,8 @@ test.describe('Security', () => {
 
     test('should show error when account deletion fails', async ({page}) => {
         await mockCurrentUserAuthorized(page);
+        await mockUserSessionsSuccess(page);
+        await mockUserActivitySuccess(page);
         await mockDeleteAccountFailed(page);
 
         const securityPage = new SecurityPage(page);
